@@ -21,3 +21,8 @@ Emailed Mikhail requirement spec requesting feedback
 Started putting all user stories into Taiga
 started creating a text file with all my entities
 worked more on the entities
+
+## 2014-12-16 coding
+
+
+
