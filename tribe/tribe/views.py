@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    return render(request, 'tribe/index.html')
+    return render(request, 'tribe/landing_page.html')
 
 def register(request):
     if request.method == 'POST':
@@ -29,4 +29,4 @@ def logout_view(request):
 
 @login_required 
 def mytribe(request):
-    return render(request, 'tribe/index.html')
+    return render(request, 'tribe/logged_in.html')
