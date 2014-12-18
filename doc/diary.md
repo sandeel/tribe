@@ -14,6 +14,7 @@ Put together a very rough demo of the application using Django
 ## 2014-12-13
 Presented the idea and received feedback from Eamonn
 
+
 ## 2014-12-14
 Worked on the requirement spec
 Submitted the requirement spec on Moodle
@@ -22,7 +23,18 @@ Started putting all user stories into Taiga
 started creating a text file with all my entities
 worked more on the entities
 
-## 2014-12-16 coding
+
+## 2014-12-16
+coding
 
 
+## 2014-12-17
+Coding
+researching Django REST Framework
+
+
+## 2014-12-18
+
+* started tutorial for Django Rest Framework. Completed [this section](http://www.django-rest-framework.org/tutorial/1-serialization/)
+* discovered [httpie](https://github.com/jakubroztocil/httpie)
 

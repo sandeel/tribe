@@ -11,7 +11,7 @@ admin.autodiscover()
 # change title for admin site
 admin.site.site_header = 'Tribe'
 
-router = routers.DefaultRouter()
+router = routers.SimpleRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 
@@ -21,7 +21,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', views.index, name='index'),
-    url(r'^register$', views.register, name='register'),
+    url(r'^accounts/register$', views.register, name='register'),
     url(r'^accounts/login/$', login),
     url(r'^logout/$', logout, {'next_page': '/'}),
     url(r'^mytribe/$', views.mytribe),
@@ -29,5 +29,6 @@ urlpatterns = patterns('',
 
     # API
     url(r'^api/v0.1/', include(router.urls)),
+    url(r'^api/v0.1/users/register',views.create_auth),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 )
