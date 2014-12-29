@@ -7,9 +7,11 @@
 * Created a project for tribe on Taiga.io
 * Created some user stories on Taiga
 
+
 ## 2014-12-12
 Created a powerpoint for the mid point presentation 
 Put together a very rough demo of the application using Django
+
 
 ## 2014-12-13
 Presented the idea and received feedback from Eamonn
@@ -38,3 +40,12 @@ researching Django REST Framework
 * started tutorial for Django Rest Framework. Completed [this section](http://www.django-rest-framework.org/tutorial/1-serialization/)
 * discovered [httpie](https://github.com/jakubroztocil/httpie)
 
+
+## 2014-12-28
+
+* mapped out 10 sprints on taiga.io leading up to project completion date
+* 
+
+## 2014-12-29
+* continued tutorial on Django Rest Framework
+* updated some project documentation
