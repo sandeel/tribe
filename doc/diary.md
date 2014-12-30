@@ -49,3 +49,7 @@ researching Django REST Framework
 ## 2014-12-29
 * continued tutorial on Django Rest Framework
 * updated some project documentation
+
+## 2014-12-30
+* continued tutorial on Django Rest Framework
+* Discovered [MkDocs](http://www.mkdocs.org/), which I may use for the documentation of the project
