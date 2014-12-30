@@ -53,3 +53,5 @@ researching Django REST Framework
 ## 2014-12-30
 * continued tutorial on Django Rest Framework
 * Discovered [MkDocs](http://www.mkdocs.org/), which I may use for the documentation of the project
+* [This page](http://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/) of DRF tutorial will be useful for user API auth
+* completed tutorial on DRF
