@@ -55,3 +55,8 @@ researching Django REST Framework
 * Discovered [MkDocs](http://www.mkdocs.org/), which I may use for the documentation of the project
 * [This page](http://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/) of DRF tutorial will be useful for user API auth
 * completed tutorial on DRF
+
+
+## 2014-12-31
+* Several hours working on permissions in the Django Rest Framework
+* Created permission for allowing unregistered users to create a new user (eg. register via mobile app)
