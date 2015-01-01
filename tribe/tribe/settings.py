@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'tribe',
     'points',
-    'rest_framework'
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -89,3 +89,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
             'rest_framework.permissions.IsAdminUser',)
 }
+
+AUTH_USER_MODEL = 'tribe.MyUser'

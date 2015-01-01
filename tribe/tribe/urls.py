@@ -28,4 +28,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^api/', include(router.urls)),
+
+    url(r'^api/register', 'tribe.views.api_register'),
 )
