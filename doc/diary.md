@@ -60,3 +60,11 @@ researching Django REST Framework
 ## 2014-12-31
 * Several hours working on permissions in the Django Rest Framework
 * Created permission for allowing unregistered users to create a new user (eg. register via mobile app)
+
+
+## 2014-01-01
+* Almost completed sign up by API
+
+
+## 2014-01-01
+* Completed sign up via API and also implemented creating a tribe via the API

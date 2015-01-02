@@ -85,9 +85,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
-    'PAGINATE_BY': 10,
+    'PAGINATE_BY': 100,
     'DEFAULT_PERMISSION_CLASSES': (
-            'rest_framework.permissions.IsAdminUser',)
+            'rest_framework.permissions.AllowAny',)
 }
 
-AUTH_USER_MODEL = 'tribe.MyUser'
+AUTH_USER_MODEL = 'tribe.TribeUser'

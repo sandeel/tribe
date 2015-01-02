@@ -4,7 +4,7 @@ from django.contrib.auth.models import (
 )
 
 
-class MyUserManager(BaseUserManager):
+class TribeUserManager(BaseUserManager):
     def create_user(self, email, password=None):
         """
         Creates and saves a User with the given email and password.
@@ -31,8 +31,10 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+class Tribe(models.Model):
+    name = models.CharField(max_length=30)
 
-class MyUser(AbstractBaseUser):
+class TribeUser(AbstractBaseUser):
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -41,10 +43,11 @@ class MyUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
-    objects = MyUserManager()
+    objects = TribeUserManager()
+
+    tribe = models.ForeignKey(Tribe, null=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['password']
 
     def get_full_name(self):
         # The user is identified by their email address
@@ -75,3 +78,5 @@ class MyUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+

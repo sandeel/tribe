@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth import get_user_model
 
-from tribe.models import MyUser
+from tribe.models import TribeUser
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
@@ -52,7 +52,7 @@ class UserChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 
-class MyUserAdmin(UserAdmin):
+class TribeUserAdmin(UserAdmin):
     # The forms to add and change user instances
     form = UserChangeForm
     add_form = UserCreationForm
@@ -79,7 +79,7 @@ class MyUserAdmin(UserAdmin):
     filter_horizontal = ()
 
 # Now register the new UserAdmin...
-admin.site.register(MyUser, MyUserAdmin)
+admin.site.register(TribeUser, TribeUserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
