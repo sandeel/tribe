@@ -1,0 +1,9 @@
+{% extends "tribe/base.html" %}
+{% block content %}
+{% include "tribe/logged_in.html" %}
+<h1>{{ user.tribe.name }}</h2>
+{% for user in user.tribe.tribeuser_set.all %}
+    <li><a href='/mytribe/{{ user.id }}/'>{{ user.email }}</a></li>
+{% endfor %}
+{% endblock %}
+</ul>

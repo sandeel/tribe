@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from tribe.models import Tribe
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
@@ -46,3 +47,21 @@ class RegistrationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class CreateTribeForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-exampleForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'create_tribe'
+
+        self.helper.add_input(Submit('submit', 'Submit'))
+        super(CreateTribeForm, self).__init__(*args, **kwargs)
+
+        name = forms.CharField(widget=forms.widgets.TextInput,label="Name")
+
+    class Meta:
+        model = Tribe
+        fields = ['name',]

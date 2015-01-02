@@ -3,7 +3,6 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 
-
 class TribeUserManager(BaseUserManager):
     def create_user(self, email, password=None):
         """
@@ -46,6 +45,7 @@ class TribeUser(AbstractBaseUser):
     objects = TribeUserManager()
 
     tribe = models.ForeignKey(Tribe, null=True)
+    leader_of = models.ForeignKey(Tribe, null=True, related_name='leaders')
 
     USERNAME_FIELD = 'email'
 

@@ -18,9 +18,16 @@ from rest_framework import permissions
 from rest_framework.decorators import detail_route
 from django.contrib.auth import get_user_model
 from tribe.forms import RegistrationForm
+from tribe.forms import CreateTribeForm
 from rest_framework import status
 from tribe.models import Tribe
 from tribe.models import TribeUser
+from django.contrib.auth.decorators import login_required
+from django.views.generic.detail import DetailView
+from django.utils import timezone
+from django.views.generic.edit import UpdateView
+from django.shortcuts import get_object_or_404
+
 
 def index(request):
     if request.method == 'POST':
@@ -46,13 +53,29 @@ def register(request):
         'form': form,
     })
 
+def create_tribe(request):
+    if request.method == 'POST':
+        form = CreateTribeForm(request.POST)
+        if form.is_valid():
+            new_tribe = form.save()
+            new_tribe.tribeuser_set.add(request.user)
+            new_tribe.leaders.add(request.user)
+            new_tribe.save()
+            return HttpResponseRedirect("/mytribe")
+    else:
+        form = CreateTribeForm()
+    return render(request, "tribe/create_tribe.html", {
+        'form': form,
+    })
+
 def logout_view(request):
     auth.logout(request)
     # Redirect to a success page.
     return HttpResponseRedirect("/")
 
+@login_required
 def mytribe(request):
-    return render(request, 'tribe/logged_in.html')
+    return render(request, 'tribe/my_tribe.html')
 
 
 
@@ -112,6 +135,7 @@ class TribeViewSet(viewsets.ModelViewSet):
                 **tribe_data
             )
             tribe.tribeuser_set.add(request.user)
+            tribe.leaders.add(request.user)
             tribe.save()
             print(tribe.tribeuser_set.all())
             return Response(TribeSerializer(instance=tribe, context={'request': request}).data, status=status.HTTP_201_CREATED)
@@ -125,3 +149,17 @@ class TribeViewSet(viewsets.ModelViewSet):
             return Tribe.objects.none()
         else:
             return Tribe.objects.filter(id = self.request.user.tribe.id)
+
+class TribeUpdate(UpdateView):
+    model = Tribe
+    fields = ['name']
+    template_name_suffix = '_update_form'
+
+    def get_object(self):
+        return get_object_or_404(Tribe, pk=self.request.user.tribe.id)
+
+class TribeUserDetailView(DetailView):
+
+    def get_queryset(self):
+        """Return the last five published questions."""
+        return TribeUser.objects.filter(pk__in=self.request.user.tribe.tribeuser_set.values_list('id',flat=True))
