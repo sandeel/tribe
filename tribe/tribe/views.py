@@ -23,14 +23,23 @@ from tribe.models import Tribe
 from tribe.models import TribeUser
 
 def index(request):
-    return render(request, 'tribe/landing_page.html')
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            return HttpResponseRedirect("/mytribe")
+    else:
+        form = RegistrationForm()
+    return render(request, "tribe/index.html", {
+        'form': form,
+    })
 
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/mytribe")
     else:
         form = RegistrationForm()
     return render(request, "registration/register.html", {
@@ -110,7 +119,7 @@ class TribeViewSet(viewsets.ModelViewSet):
             return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get_queryset(self):
-        if self.request.user.is_superuser():
+        if self.request.user.is_superuser:
             return Tribe.objects.all()
         elif self.request.user.tribe == None:
             return Tribe.objects.none()

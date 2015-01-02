@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'tribe',
     'points',
     'rest_framework',
+    'crispy_forms',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -91,3 +92,5 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'tribe.TribeUser'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

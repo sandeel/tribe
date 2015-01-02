@@ -60,6 +60,7 @@ class TribeUser(AbstractBaseUser):
     def __str__(self):              # __unicode__ on Python 2
         return self.email
 
+    @property
     def is_superuser(self):
         return self.is_admin
 

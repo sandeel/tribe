@@ -19,11 +19,7 @@ router.register(r'users', views.UserViewSet)
 router.register(r'tribes', views.TribeViewSet)
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'tribe.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
-    #url(r'^$', views.index, name='index'),
+    url(r'^$', views.index, name='index'),
     url(r'^accounts/register$', views.register, name='register'),
     url(r'^accounts/login/$', login),
     url(r'^logout/$', logout, {'next_page': '/'}),

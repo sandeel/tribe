@@ -1,15 +1,28 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 class RegistrationForm(forms.ModelForm):
     """
     Form for registering a new account.
     """
+
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-exampleForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'register'
+
+        self.helper.add_input(Submit('submit', 'Submit'))
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+
     email = forms.CharField(widget=forms.widgets.TextInput,label="Email")
     password1 = forms.CharField(widget=forms.widgets.PasswordInput,
                                 label="Password")
     password2 = forms.CharField(widget=forms.widgets.PasswordInput,
-                                label="Password (again)")
+                                label="Confirm Password")
 
     class Meta:
         model = get_user_model()

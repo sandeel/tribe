@@ -26,7 +26,7 @@ class TribeTests(APITestCase):
         data = {'name': 'new tribe'}
         user = get_user_model().objects.create_user(email="tester@test.com", password="password")
         user.save()
-        self.client.login(email='l@l.com', password='password')
+        self.client.login(email='tester@test.com', password='password')
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
