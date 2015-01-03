@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'points',
     'rest_framework',
     'crispy_forms',
+    #'guardian'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -94,3 +95,12 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'tribe.TribeUser'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+"""
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # default
+        'guardian.backends.ObjectPermissionBackend',
+        )
+
+ANONYMOUS_USER_ID = -1
+"""

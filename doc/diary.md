@@ -66,5 +66,6 @@ researching Django REST Framework
 * Almost completed sign up by API
 
 
-## 2014-01-01
+## 2014-01-02
 * Completed sign up via API and also implemented creating a tribe via the API
+

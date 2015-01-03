@@ -12,10 +12,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class TribeSerializer(serializers.HyperlinkedModelSerializer):
 
-    tribeuser_set = serializers.PrimaryKeyRelatedField(many=True, queryset=TribeUser.objects.all())
+    members = serializers.PrimaryKeyRelatedField(many=True, queryset=TribeUser.objects.filter())
 
     leaders = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Tribe
-        fields = ('id', 'name', 'tribeuser_set', 'leaders')
+        fields = ('id', 'name', 'members', 'leaders')
