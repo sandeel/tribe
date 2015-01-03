@@ -73,6 +73,9 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
 
     @property
     def is_leader(self):
+        if self.tribe == None:
+            return False
+
         return self.id in self.tribe.leaders.all().values_list('id',flat=True)
 
     def add_to_tribe(self, new_tribe):

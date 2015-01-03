@@ -149,7 +149,7 @@ class TribeViewSet(viewsets.ModelViewSet):
             tribe = Tribe.objects.create(
                 **tribe_data
             )
-            tribe.tribeuser_set.add(request.user)
+            tribe.members.add(request.user)
             tribe.leaders.add(request.user)
             tribe.save()
             return Response(TribeSerializer(instance=tribe, context={'request': request}).data, status=status.HTTP_201_CREATED)

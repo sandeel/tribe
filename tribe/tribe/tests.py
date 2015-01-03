@@ -13,8 +13,6 @@ class AccountTests(APITestCase):
         data = {'email': 'tester@test.com', 'password': 'password'}
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        expected_response = {'id': 1, 'email': 'tester@test.com'}
-        self.assertEqual(response.data, expected_response)
 
 class TribeTests(APITestCase):
 
@@ -23,7 +21,7 @@ class TribeTests(APITestCase):
         Ensure we can create a new tribe object
         """
         url = reverse('tribe-list')
-        data = {'name': 'new tribe'}
+        data = {'name': 'new tribe', 'members': ''}
         user = get_user_model().objects.create_user(email="tester@test.com", password="password")
         user.save()
         self.client.login(email='tester@test.com', password='password')
