@@ -2,8 +2,12 @@
 {% block content %}
 {% include "tribe/logged_in.html" %}
 <h1>{{ user.tribe.name }}</h2>
-{% for user in user.tribe.tribeuser_set.all %}
-    <li><a href='/mytribe/{{ user.id }}/'>{{ user.email }}</a></li>
+{% for user in user.tribe.members.all %}
+    <li>
+        {% if user.is_leader %}
+        Leader:
+        {% endif %}
+        <a href='/mytribe/{{ user.id }}/'>{{ user.email }}</a></li>
 {% endfor %}
 {% endblock %}
 </ul>

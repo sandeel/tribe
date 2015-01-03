@@ -70,3 +70,22 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+    @property
+    def is_leader(self):
+        return self.id in self.tribe.leaders.all().values_list('id',flat=True)
+
+    def add_to_tribe(self, new_tribe):
+        new_tribe.members.add(self)
+
+    def promote_to_leader(self):
+        if self.tribe == None:
+            return False
+
+        self.tribe.leaders.add(self)
+
+    def demote_from_leader(self):
+        if self.tribe == None:
+            return False
+
+        self.tribe.leaders.remove(self)

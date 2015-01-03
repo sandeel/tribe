@@ -7,7 +7,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('id', 'email', 'password')
+        fields = ('id', 'email', 'password', 'is_leader')
         extra_kwargs = {'password': {'write_only': True}}
 
 class TribeSerializer(serializers.HyperlinkedModelSerializer):
