@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
+from django.core.urlresolvers import reverse
 
 class TribeUserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -33,12 +34,21 @@ class TribeUserManager(BaseUserManager):
 class Tribe(models.Model):
     name = models.CharField(max_length=30)
 
+class InvitedEmail(models.Model):
+
+    def __unicode__(self):
+        return email
+
+    email = models.EmailField()
+    tribe = models.ForeignKey(Tribe, related_name='invited_emails')
+
 class TribeUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
         unique=True,
     )
+    name = models.CharField(max_length=40)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
@@ -70,6 +80,10 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+    @property
+    def url(self):
+        return reverse("tribemembers", args=[self.id])
 
     @property
     def is_leader(self):

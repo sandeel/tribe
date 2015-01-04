@@ -65,3 +65,25 @@ class CreateTribeForm(forms.ModelForm):
     class Meta:
         model = Tribe
         fields = ['name',]
+
+class InviteTribeMemberForm(forms.ModelForm):
+
+    class Meta:
+        model = get_user_model()
+
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_id = 'invite-tribe-member-form'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'invite'
+
+        self.helper.add_input(Submit('submit', 'Submit'))
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+
+    email = forms.CharField(widget=forms.widgets.TextInput,label="Email")
+
+    class Meta:
+        model = get_user_model()
+        fields = ['email']
+

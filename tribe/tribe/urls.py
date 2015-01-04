@@ -19,7 +19,7 @@ router.register(r'tribes', views.TribeViewSet)
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     url(r'^create_tribe/$', views.create_tribe, name='create_tribe'),
-    url(r'^mytribe/(?P<pk>\d+)/$', views.TribeUserDetailView.as_view(), name='detail'),
+    url(r'^tribemembers/(?P<pk>\d+)/$', views.TribeUserDetailView.as_view(), name='tribemembers'),
     url(r'^accounts/register$', views.register, name='register'),
     url(r'^accounts/login/$', login),
     url(r'^logout/$', logout, {'next_page': '/'}),

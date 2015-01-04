@@ -60,7 +60,7 @@ def create_tribe(request):
         form = CreateTribeForm(request.POST)
         if form.is_valid():
             new_tribe = form.save()
-            new_tribe.tribeuser_set.add(request.user)
+            new_tribe.members.add(request.user)
             new_tribe.leaders.add(request.user)
             new_tribe.save()
             return HttpResponseRedirect("/mytribe")
@@ -91,7 +91,7 @@ class TribeUserDetailView(DetailView):
 
     def get_queryset(self):
         """Return the last five published questions."""
-        return TribeUser.objects.filter(pk__in=self.request.user.tribe.tribeuser_set.values_list('id',flat=True))
+        return TribeUser.objects.filter(pk__in=self.request.user.tribe.members.values_list('id',flat=True))
 
 """
 API Views
@@ -100,6 +100,7 @@ API Views
 def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
+        'tribes': reverse('tribe-list', request=request, format=format),
         })
 
 class UserViewSet(viewsets.ModelViewSet):

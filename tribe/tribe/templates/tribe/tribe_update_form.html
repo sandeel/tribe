@@ -1,4 +1,20 @@
-<form action="" method="post">{% csrf_token %}
+{% extends "tribe/base.html" %}
+{% block content %}
+{% include "tribe/logged_in.html" %}
+<form action="" method="post">
     {{ form.as_p }}
+    {% csrf_token %}
     <input type="submit" value="Update" />
+</form>
+
+{% for member in object.members.all %}
+    <p><a href="{{ member.url }}">{{ member.name }}</a></p>
+    </form>
+{% endfor %}
+{% endblock %}
+
+<form action="" method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Invite" />
 </form>

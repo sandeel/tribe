@@ -16,6 +16,8 @@ class TribeSerializer(serializers.HyperlinkedModelSerializer):
 
     leaders = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
+    invited_emails = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Tribe
-        fields = ('id', 'name', 'members', 'leaders')
+        fields = ('id', 'name', 'members', 'leaders', 'invited_emails')
