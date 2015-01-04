@@ -69,3 +69,5 @@ researching Django REST Framework
 ## 2014-01-02
 * Completed sign up via API and also implemented creating a tribe via the API
 
+## 2014-01-04
+* Started to implement inviting new users.
