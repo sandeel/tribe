@@ -32,15 +32,22 @@ class TribeUserManager(BaseUserManager):
         return user
 
 class Tribe(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=255)
 
-class InvitedEmail(models.Model):
+    def __str__(self):
+        return self.name
 
-    def __unicode__(self):
+class InvitedUser(models.Model):
+
+    def __str(self):
         return email
 
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     tribe = models.ForeignKey(Tribe, related_name='invited_emails')
+
+    def save(self, *args, **kwargs):
+        super(InvitedUser, self).save(*args, **kwargs)
+        # now email the new user
 
 class TribeUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
@@ -54,7 +61,7 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
 
     objects = TribeUserManager()
 
-    tribe = models.ForeignKey(Tribe, null=True, related_name ='members')
+    tribe = models.ForeignKey(Tribe, null=True, related_name ='members', on_delete=models.SET_NULL)
     leader_of = models.ForeignKey(Tribe, null=True, related_name='leaders')
 
     USERNAME_FIELD = 'email'
@@ -69,6 +76,11 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):              # __unicode__ on Python 2
         return self.email
+
+    def has_perm(self, perm, obj=None):
+        "Does the user have a specific permission?"
+        # Simplest possible answer: Yes, always
+        return True
 
     def has_module_perms(self, app_label):
         "Does the user have permissions to view the app `app_label`?"

@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from tribe.models import Tribe
 from tribe.models import TribeUser
+from tribe.models import InvitedUser
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -12,12 +13,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class TribeSerializer(serializers.HyperlinkedModelSerializer):
 
-    members = serializers.PrimaryKeyRelatedField(many=True, queryset=TribeUser.objects.filter())
-
-    leaders = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-
-    invited_emails = serializers.StringRelatedField(many=True)
-
     class Meta:
         model = Tribe
-        fields = ('id', 'name', 'members', 'leaders', 'invited_emails')
+        fields = ('id', 'name', 'invited_users', 'members', 'leaders')
+
+class InvitedUserSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = InvitedUser
+        fields = ('id', 'email', 'tribe')
+

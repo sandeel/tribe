@@ -15,6 +15,7 @@ admin.site.site_header = 'Tribe'
 router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'tribes', views.TribeViewSet)
+router.register(r'invited_users', views.InvitedUserViewSet)
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),

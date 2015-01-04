@@ -14,6 +14,7 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from tribe.serializers import UserSerializer
 from tribe.serializers import TribeSerializer
+from tribe.serializers import InvitedUserSerializer
 from rest_framework import permissions
 from rest_framework.decorators import detail_route
 from django.contrib.auth import get_user_model
@@ -29,6 +30,7 @@ from django.views.generic.edit import UpdateView
 from django.shortcuts import get_object_or_404
 from rest_framework import filters
 from tribe.permissions import CustomObjectPermissions
+from tribe.models import InvitedUser
 
 
 def index(request):
@@ -162,3 +164,10 @@ class TribeViewSet(viewsets.ModelViewSet):
             return Tribe.objects.none()
         else:
             return Tribe.objects.filter(pk=self.request.user.tribe.id)
+
+class InvitedUserViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides 'list' and 'detail' actions.
+    """
+    queryset = InvitedUser.objects.all()
+    serializer_class = InvitedUserSerializer

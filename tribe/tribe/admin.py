@@ -6,6 +6,8 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth import get_user_model
 
 from tribe.models import TribeUser
+from tribe.models import Tribe
+from tribe.models import InvitedUser
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
@@ -63,7 +65,7 @@ class TribeUserAdmin(UserAdmin):
     list_display = ('email', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        (None, {'fields': ('email', 'password', 'tribe')}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -71,15 +73,13 @@ class TribeUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2')}
+            'fields': ('email', 'password1', 'password2', 'tribe')}
         ),
     )
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
 
-# Now register the new UserAdmin...
 admin.site.register(TribeUser, TribeUserAdmin)
-# ... and, since we're not using Django's built-in permissions,
-# unregister the Group model from admin.
-admin.site.unregister(Group)
+admin.site.register(Tribe)
+admin.site.register(InvitedUser)
