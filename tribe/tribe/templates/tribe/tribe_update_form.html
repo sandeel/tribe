@@ -1,20 +1,21 @@
 {% extends "tribe/base.html" %}
 {% block content %}
 {% include "tribe/logged_in.html" %}
+{% load crispy_forms_tags %}
 <form action="" method="post">
     {{ form.as_p }}
     {% csrf_token %}
     <input type="submit" value="Update" />
 </form>
 
-{% for member in object.members.all %}
-    <p><a href="{{ member.url }}">{{ member.name }}</a></p>
+<h2> Invited emails </h2>
+{% for invited_user in invited_users %}
+    <p>{{ invited_user.email }}</p>
     </form>
 {% endfor %}
-{% endblock %}
 
-<form action="" method="post">
-    {{ form.as_p }}
+<form action="invite new user" method="post">
+    {% crispy invite_form %}
     {% csrf_token %}
-    <input type="submit" value="Invite" />
 </form>
+{% endblock %}

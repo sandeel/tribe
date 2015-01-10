@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from tribe.models import Tribe
+from tribe.models import InvitedUser
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
@@ -65,3 +66,21 @@ class CreateTribeForm(forms.ModelForm):
     class Meta:
         model = Tribe
         fields = ['name',]
+
+class InviteToTribeForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-exampleForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'create_tribe'
+
+        self.helper.add_input(Submit('submit', 'Submit'))
+        super(InviteToTribeForm, self).__init__(*args, **kwargs)
+
+        email = forms.CharField(widget=forms.widgets.TextInput,label="Email address")
+
+    class Meta:
+        model = InvitedUser
+        fields = ['email',]

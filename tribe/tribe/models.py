@@ -43,7 +43,7 @@ class InvitedUser(models.Model):
         return email
 
     email = models.EmailField(unique=True)
-    tribe = models.ForeignKey(Tribe, related_name='invited_emails')
+    tribe = models.ForeignKey(Tribe, related_name='invited_users')
 
     def save(self, *args, **kwargs):
         super(InvitedUser, self).save(*args, **kwargs)

@@ -20,6 +20,7 @@ from rest_framework.decorators import detail_route
 from django.contrib.auth import get_user_model
 from tribe.forms import RegistrationForm
 from tribe.forms import CreateTribeForm
+from tribe.forms import InviteToTribeForm
 from rest_framework import status
 from tribe.models import Tribe
 from tribe.models import TribeUser
@@ -88,6 +89,12 @@ class TribeUpdate(UpdateView):
 
     def get_object(self):
         return get_object_or_404(Tribe, pk=self.request.user.tribe.id)
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateView, self).get_context_data(**kwargs)
+        context['invited_users'] = InvitedUser.objects.all()
+        context['invite_form'] = InviteToTribeForm()
+        return context
 
 class TribeUserDetailView(DetailView):
 
