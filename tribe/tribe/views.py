@@ -32,6 +32,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import filters
 from tribe.permissions import CustomObjectPermissions
 from tribe.models import InvitedUser
+from django.views.generic.edit import CreateView
 
 
 def index(request):
@@ -102,6 +103,10 @@ class TribeUserDetailView(DetailView):
         """Return the last five published questions."""
         return TribeUser.objects.filter(pk__in=self.request.user.tribe.members.values_list('id',flat=True))
 
+class InvitedUserCreate(CreateView):
+    model = InvitedUser
+    fields = ['email', 'tribe']
+
 """
 API Views
 """
@@ -118,8 +123,6 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
-    #filter_backends = (filters.DjangoObjectPermissionsFilter,)
-    #permission_classes = (CustomObjectPermissions,)
 
     def create(self, request):
         VALID_USER_FIELDS = [f.name for f in get_user_model()._meta.fields]
@@ -167,7 +170,9 @@ class TribeViewSet(viewsets.ModelViewSet):
             return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get_queryset(self):
-        if self.request.user.tribe == None:
+        if self.request.user.is_superuser:
+            return Tribe.objects.all()
+        elif self.request.user.tribe == None:
             return Tribe.objects.none()
         else:
             return Tribe.objects.filter(pk=self.request.user.tribe.id)

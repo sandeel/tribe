@@ -5,20 +5,6 @@ from django.contrib.auth.models import (
 from django.core.urlresolvers import reverse
 
 class TribeUserManager(BaseUserManager):
-    def create_user(self, email, password=None):
-        """
-        Creates and saves a User with the given email and password.
-        """
-        if not email:
-            raise ValueError('Users must have an email address')
-
-        user = self.model(
-            email=self.normalize_email(email),
-        )
-
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
 
     def create_superuser(self, email, password):
         """
@@ -28,11 +14,12 @@ class TribeUserManager(BaseUserManager):
             password=password,
         )
         user.is_admin = True
+        user.is_superuser = True
         user.save(using=self._db)
         return user
 
 class Tribe(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         return self.name
@@ -65,6 +52,22 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
     leader_of = models.ForeignKey(Tribe, null=True, related_name='leaders')
 
     USERNAME_FIELD = 'email'
+
+    def save(self, *args, **kwargs):
+        print("here DID IT")
+        if not self.pk:
+            #This code only happens if the objects is
+            #not in the database yet. Otherwise it would
+            #have pk
+            # handle adding to a tribe
+            invited_emails = InvitedUser.objects.values_list('email', flat=True)
+            if (self.email in invited_emails):
+                invitedUser = InvitedUser.objects.get(email=self.email)
+                self.tribe = invitedUser.tribe
+                invitedUser.delete()
+            
+            super(TribeUser, self).save(*args, **kwargs)
+
 
     def get_full_name(self):
         # The user is identified by their email address

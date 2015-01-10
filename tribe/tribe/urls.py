@@ -19,13 +19,22 @@ router.register(r'invited_users', views.InvitedUserViewSet)
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
+
     url(r'^create_tribe/$', views.create_tribe, name='create_tribe'),
+
+    url(r'^create_invited_user/$',
+        views.InvitedUserCreate.as_view(success_url="/mytribe/"),
+        name='create_invited_user'),
+
     url(r'^tribemembers/(?P<pk>\d+)/$', views.TribeUserDetailView.as_view(), name='tribemembers'),
+
     url(r'^accounts/register$', views.register, name='register'),
     url(r'^accounts/login/$', login),
     url(r'^logout/$', logout, {'next_page': '/'}),
+
     url(r'^mytribe/$', views.mytribe),
     url(r'^mytribe/edit/$', views.TribeUpdate.as_view(success_url='/mytribe/')),
+
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^api/', include(router.urls)),
