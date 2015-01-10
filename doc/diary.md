@@ -62,12 +62,17 @@ researching Django REST Framework
 * Created permission for allowing unregistered users to create a new user (eg. register via mobile app)
 
 
-## 2014-01-01
+## 2015-01-01
 * Almost completed sign up by API
 
 
-## 2014-01-02
+## 2015-01-02
 * Completed sign up via API and also implemented creating a tribe via the API
 
-## 2014-01-04
+## 2015-01-04
 * Started to implement inviting new users.
+
+
+## 2015-01-10
+* Working for few hours on adding new users to your tribe via the edit tribe page. Almost ready for test.
+* uploaded December diary to Moodle

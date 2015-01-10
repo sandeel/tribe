@@ -22,7 +22,7 @@ urlpatterns = patterns('',
 
     url(r'^create_tribe/$', views.create_tribe, name='create_tribe'),
 
-    url(r'^create_invited_user/$',
+    url(r'^mytribe/invite/$',
         views.InvitedUserCreate.as_view(success_url="/mytribe/"),
         name='create_invited_user'),
 
