@@ -20,7 +20,7 @@ from rest_framework.decorators import detail_route
 from django.contrib.auth import get_user_model
 from tribe.forms import RegistrationForm
 from tribe.forms import CreateTribeForm
-from tribe.forms import InviteToTribeForm
+from tribe.forms import InvitedUserForm
 from rest_framework import status
 from tribe.models import Tribe
 from tribe.models import TribeUser
@@ -94,7 +94,7 @@ class TribeUpdate(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(UpdateView, self).get_context_data(**kwargs)
         context['invited_users'] = InvitedUser.objects.all()
-        context['invite_form'] = InviteToTribeForm()
+        context['invite_form'] = InvitedUserForm()
         return context
 
 class TribeUserDetailView(DetailView):
@@ -105,7 +105,11 @@ class TribeUserDetailView(DetailView):
 
 class InvitedUserCreate(CreateView):
     model = InvitedUser
-    fields = ['email', 'tribe']
+    fields = ['email']
+
+    def form_valid(self, form):
+        form.instance.tribe = self.request.user.tribe
+        return super(InvitedUserCreate, self).form_valid(form)
 
 """
 API Views

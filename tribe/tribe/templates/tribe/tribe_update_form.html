@@ -14,7 +14,7 @@
     </form>
 {% endfor %}
 
-<form action="invite new user" method="post">
+<form action="/mytribe/invite/" method="post">
     {% crispy invite_form %}
     {% csrf_token %}
 </form>
