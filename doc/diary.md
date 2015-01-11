@@ -76,3 +76,8 @@ researching Django REST Framework
 ## 2015-01-10
 * Working for few hours on adding new users to your tribe via the edit tribe page. Almost ready for test.
 * uploaded December diary to Moodle
+
+
+## 2015-01-11
+* Finished form for adding a new tribe member to your tribe
+* Wrote unit test for above functionality
