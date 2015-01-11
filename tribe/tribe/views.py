@@ -137,7 +137,7 @@ class UserViewSet(viewsets.ModelViewSet):
         if serialized.is_valid():
             user_data = {field: data for (field, data) in request.DATA.items() if field in VALID_USER_FIELDS}
             user_data.update(DEFAULTS)
-            user = get_user_model().objects.create_user(
+            user = get_user_model().objects.create(
                 **user_data
             )
             return Response(UserSerializer(instance=user).data, status=status.HTTP_201_CREATED)

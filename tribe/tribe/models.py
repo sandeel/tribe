@@ -6,6 +6,19 @@ from django.core.urlresolvers import reverse
 
 class TribeUserManager(BaseUserManager):
 
+    def create(self, email, password=None):
+
+        if not email:
+            raise ValueError('Users must have an email address')
+
+        user = self.model(
+            email=self.normalize_email(email),
+        )
+
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
     def create_superuser(self, email, password):
         """
         Creates and saves a superuser with the given email and password.
@@ -54,7 +67,6 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
 
     def save(self, *args, **kwargs):
-        print("here DID IT")
         if not self.pk:
             #This code only happens if the objects is
             #not in the database yet. Otherwise it would
