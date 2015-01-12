@@ -5,6 +5,7 @@ from tribe.models import TribeUser
 from django.contrib import admin
 from django.contrib.auth.views import login, logout
 from django.conf.urls import include
+import points
 
 admin.autodiscover()
 
@@ -25,6 +26,8 @@ urlpatterns = patterns('',
     url(r'^mytribe/invite/$',
         views.InvitedUserCreate.as_view(success_url="/mytribe/"),
         name='create_invited_user'),
+
+    url(r'mytribe/tasks/$', include('points.urls')),
 
     url(r'^tribemembers/(?P<pk>\d+)/$', views.TribeUserDetailView.as_view(), name='tribemembers'),
 

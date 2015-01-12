@@ -79,7 +79,7 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
                 self.tribe = invitedUser.tribe
                 invitedUser.delete()
             
-            super(TribeUser, self).save(*args, **kwargs)
+        super(TribeUser, self).save(*args, **kwargs)
 
 
     def get_full_name(self):

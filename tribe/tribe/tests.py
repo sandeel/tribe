@@ -17,6 +17,8 @@ class AccountTests(APITestCase):
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    ### TEST MAKE SURE DON'T ALLOW DUPLICATE EMAILS
+
     def test_create_tribe(self):
         """
         Ensure we can create a new tribe object
@@ -33,6 +35,8 @@ class AccountTests(APITestCase):
         self.client.login(email='tester@test.com', password='password')
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    #### TEST NOT LOGGED IN TRYING TO CREATE A TRIBE AND MAKE SURE IT FAILS
 
     def test_invited_user_gets_added_to_correct_tribe(self):
         tribe = Tribe(name="Celtic Tribe")
