@@ -23,7 +23,7 @@ class TribeUserManager(BaseUserManager):
         """
         Creates and saves a superuser with the given email and password.
         """
-        user = self.create_user(email,
+        user = self.create(email,
             password=password,
         )
         user.is_admin = True
@@ -71,6 +71,7 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
             #This code only happens if the objects is
             #not in the database yet. Otherwise it would
             #have pk
+
             # handle adding to a tribe
             invited_emails = InvitedUser.objects.values_list('email', flat=True)
             if (self.email in invited_emails):
@@ -89,7 +90,7 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
         # The user is identified by their email address
         return self.email
 
-    def __str__(self):              # __unicode__ on Python 2
+    def __str__(self):
         return self.email
 
     def has_perm(self, perm, obj=None):
