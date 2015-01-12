@@ -34,7 +34,6 @@ from tribe.permissions import CustomObjectPermissions
 from tribe.models import InvitedUser
 from django.views.generic.edit import CreateView
 
-
 def index(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
