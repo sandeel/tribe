@@ -81,3 +81,8 @@ researching Django REST Framework
 ## 2015-01-11
 * Finished form for adding a new tribe member to your tribe
 * Wrote unit test for above functionality
+
+
+## 2015-01-12
+* Added models for TaskTemplates and Categories.
+* Added a view for viewing Task templates
