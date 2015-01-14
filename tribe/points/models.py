@@ -19,3 +19,5 @@ class TaskTemplate(models.Model):
     category = models.ForeignKey(Category)
     tribe = models.ForeignKey(Tribe, related_name="task_templates")
     description = models.CharField(max_length=200)
+    recurring_strategy = models.CharField(max_length=200)
+    points_reward = models.IntegerField()

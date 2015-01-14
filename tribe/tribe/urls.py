@@ -29,6 +29,10 @@ urlpatterns = patterns('',
 
     url(r'mytribe/tasks/$', include('points.urls')),
 
+    url(r'^mytribe/tasks/new/$',
+        views.TaskTemplateCreate.as_view(success_url="/mytribe/tasks/"),
+        name='tasktemplate_create'),
+
     url(r'^tribemembers/(?P<pk>\d+)/$', views.TribeUserDetailView.as_view(), name='tribemembers'),
 
     url(r'^accounts/register$', views.register, name='register'),

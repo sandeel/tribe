@@ -32,6 +32,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import filters
 from tribe.permissions import CustomObjectPermissions
 from tribe.models import InvitedUser
+from points.models import TaskTemplate
 from django.views.generic.edit import CreateView
 
 def index(request):
@@ -109,6 +110,14 @@ class InvitedUserCreate(CreateView):
     def form_valid(self, form):
         form.instance.tribe = self.request.user.tribe
         return super(InvitedUserCreate, self).form_valid(form)
+
+class TaskTemplateCreate(CreateView):
+    model = TaskTemplate
+    fields = ['name', 'category', 'description']
+
+    def form_valid(self, form):
+        form.instance.tribe = self.request.user.tribe
+        return super(TaskTemplateCreate, self).form_valid(form)
 
 """
 API Views

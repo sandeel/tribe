@@ -29,7 +29,6 @@
 * recurring strategy
 * location
 * number of points rewarded
-* active
 
 
 ***

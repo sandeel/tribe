@@ -86,3 +86,7 @@ researching Django REST Framework
 ## 2015-01-12
 * Added models for TaskTemplates and Categories.
 * Added a view for viewing Task templates
+
+
+## 2015-01-13
+* Working on the models/database tables for TaskTemplates
