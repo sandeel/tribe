@@ -1,6 +1,13 @@
 {% extends "tribe/base.html" %}
 {% block content %}
 {% include "tribe/logged_in.html" %}
-<h1>{{ object.email }}</h1>
+<h1>{{ object.name }}</h1>
+<div class="panel panel-primary">
+  <div class="panel-body">
+      {{ object.name }}
+  </div>
+      <div class="panel-footer">Panel footer</div>
+</div>
+<div class="well">...</div>
 
 {% endblock %}

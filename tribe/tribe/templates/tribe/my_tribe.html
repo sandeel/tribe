@@ -7,7 +7,7 @@
         {% if user.is_leader %}
         Leader:
         {% endif %}
-        <a href='/mytribe/{{ user.id }}/'>{{ user.email }}</a></li>
+        <a href='/mytribe/{{ user.id }}/'>{{ user.name }}</a></li>
 {% endfor %}
 {% endblock %}
 </ul>

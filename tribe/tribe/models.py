@@ -55,7 +55,7 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
         max_length=255,
         unique=True,
     )
-    name = models.CharField(max_length=40)
+    name = models.CharField(max_length=40,null=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 

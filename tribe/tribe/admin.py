@@ -65,7 +65,7 @@ class TribeUserAdmin(UserAdmin):
     list_display = ('email', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'tribe')}),
+        (None, {'fields': ('email', 'password', 'name', 'tribe')}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
