@@ -88,5 +88,9 @@ researching Django REST Framework
 * Added a view for viewing Task templates
 
 
-## 2015-01-13
+## 2015-01-14
 * Working on the models/database tables for TaskTemplates
+* Form for new TaskTemplate
+
+## 2015-01-14
+* Forms for editing TaskTemplates and viewing details.
