@@ -19,7 +19,7 @@ router.register(r'tribes', views.TribeViewSet)
 router.register(r'invited_users', views.InvitedUserViewSet)
 
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='index'),
+    url(r'^/?$', views.index, name='index'),
 
     url(r'^create_tribe/$', views.create_tribe, name='create_tribe'),
 
@@ -27,11 +27,7 @@ urlpatterns = patterns('',
         views.InvitedUserCreate.as_view(success_url="/mytribe/"),
         name='create_invited_user'),
 
-    url(r'mytribe/tasks/$', include('points.urls')),
-
-    url(r'^mytribe/tasks/new/$',
-        views.TaskTemplateCreate.as_view(success_url="/mytribe/tasks/"),
-        name='tasktemplate_create'),
+    url(r'mytribe/tasks/', include('points.urls')),
 
     url(r'^tribemembers/(?P<pk>\d+)/$', views.TribeUserDetailView.as_view(), name='tribemembers'),
 

@@ -4,7 +4,11 @@
 <h1>Tasks</h1>
 <ul>
 {% for task in object_list %}
-    <li>{{ task.name }} - {{ task.description }}</li>
+    <li>
+       <a href="{{ task.id }}">
+            {{ task.name }}
+        </a>
+    </li>
 {% empty %}
     <li>No tasks yet.</li>
 {% endfor %}
