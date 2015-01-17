@@ -1,13 +1,20 @@
-from django.shortcuts import render
-from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from points.models import TaskTemplate
+from points.models import Task
 
 class TaskTemplateCreate(CreateView):
     model = TaskTemplate
-    fields = ['name', 'category', 'description']
+    fields = [
+                'name',
+                'category',
+                'description',
+                'points_reward',
+                'assigned_users',
+                'recurring_strategy',
+             ]
 
     def form_valid(self, form):
         form.instance.tribe = self.request.user.tribe
@@ -17,15 +24,21 @@ class TaskTemplateDetail(DetailView):
     model = TaskTemplate
 
 class TaskTemplateList(ListView):
-
     model = TaskTemplate
-
-    def get_queryset(self):
-        if (not self.request.user.tribe):
-            return TaskTemplate.objects.none()
-
-        return TaskTemplate.objects.filter(tribe=self.request.user.tribe)
 
 class TaskTemplateUpdate(UpdateView):
     model = TaskTemplate
-    fields = ['name', 'category', 'description']
+
+class TaskUpdate(UpdateView):
+    model = Task
+    fields = ['marked_done']
+
+class TaskList(ListView):
+    model = Task
+
+    def get_queryset(self):
+        id = self.request.user.id
+        return Task.objects.filter(task_template__assigned_users__id=id)
+
+
+
