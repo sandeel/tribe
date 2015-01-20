@@ -1,0 +1,16 @@
+{% extends "tribe/base.html" %}
+{% block content %}
+{% include "tribe/logged_in.html" %}
+<h2>Task Categories</h2>
+<ul>
+{% for category in object_list %}
+    <li>
+       <a href="{{ category.id }}">
+            {{ category.name }}
+        </a>
+    </li>
+{% empty %}
+    <li>No tasks yet.</li>
+{% endfor %}
+</ul>
+{% endblock %}

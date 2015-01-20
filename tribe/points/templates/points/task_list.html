@@ -1,8 +1,7 @@
 {% extends "tribe/base.html" %}
 {% block content %}
 {% include "tribe/logged_in.html" %}
-<h1>My Task Backlog</h1>
-<h2>Not completed tasks</h2>
+<h2>Available Tasks</h2>
 {% for task in object_list %}
     {% if not task.marked_done %}
         <div class="panel panel-default">

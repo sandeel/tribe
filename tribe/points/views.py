@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from points.models import TaskTemplate
 from points.models import Task
+from points.models import Category
 
 class TaskTemplateCreate(CreateView):
     model = TaskTemplate
@@ -41,4 +42,10 @@ class TaskList(ListView):
         return Task.objects.filter(task_template__assigned_users__id=id)
 
 
+# Categories
+class CategoryList(ListView):
+    model = Category
+
+class CategoryDetail(DetailView):
+    model = Category
 
