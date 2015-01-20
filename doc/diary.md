@@ -40,6 +40,7 @@ researching Django REST Framework
 * started tutorial for Django Rest Framework. Completed [this section](http://www.django-rest-framework.org/tutorial/1-serialization/)
 * discovered [httpie](https://github.com/jakubroztocil/httpie)
 
+# Sprint 1
 
 ## 2014-12-28
 
@@ -83,6 +84,11 @@ researching Django REST Framework
 * Wrote unit test for above functionality
 
 
+
+
+# Sprint 2
+
+
 ## 2015-01-12
 * Added models for TaskTemplates and Categories.
 * Added a view for viewing Task templates
@@ -94,3 +100,9 @@ researching Django REST Framework
 
 ## 2015-01-14
 * Forms for editing TaskTemplates and viewing details.
+
+
+## 2015-01-20
+* Added models, forms, views etc. for Categories
+* Added some more user stories to [Taiga.io](https://www.taiga.io) project
+* Got most of the user stories laid out in sprints in Taiga.io
