@@ -13,6 +13,10 @@ urlpatterns = patterns('',
         views.CategoryDetail.as_view(),
         name='category-detail'),
 
+    url(r'categories/new$',
+        views.CategoryCreate.as_view(success_url="/mytribe/tasks/categories/"),
+        name='category-create'),
+
 
 
     # Task Templates
@@ -20,7 +24,7 @@ urlpatterns = patterns('',
 
     url(r'task_templates/new$',
         views.TaskTemplateCreate.as_view(success_url="/mytribe/tasks/task_templates/"),
-        name='tasktemplate_create'),
+        name='tasktemplate-create'),
 
     url(r'task_templates/(?P<pk>\d+)$', views.TaskTemplateDetail.as_view(), name='tasktemplate-detail'),
 

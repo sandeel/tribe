@@ -49,3 +49,14 @@ class CategoryList(ListView):
 class CategoryDetail(DetailView):
     model = Category
 
+class CategoryCreate(CreateView):
+    model = Category
+
+    fields = [
+                'name',
+                'description',
+             ]
+
+    def form_valid(self, form):
+        form.instance.tribe = self.request.user.tribe
+        return super(CategoryCreate, self).form_valid(form)
