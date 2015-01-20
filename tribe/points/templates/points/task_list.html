@@ -2,15 +2,34 @@
 {% block content %}
 {% include "tribe/logged_in.html" %}
 <h1>My Task Backlog</h1>
+<h2>Not completed tasks</h2>
+{% for task in object_list %}
+    {% if not task.marked_done %}
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <a href="/mytribe/tasks/{{ task.id }}">
+            {{ task.task_template.name }}
+            </a>
+          </div>
+          <div class="panel-footer">
+          {{ task.task_template.description }}
+          </div>
+        </div>
+    {% endif %}
+{% empty %}
+    <li>No tasks yet.</li>
+{% endfor %}
+<h2>Completed tasks</h2>
 <ul>
 {% for task in object_list %}
+    {% if task.marked_done %}
     <li>
        <a href="/mytribe/tasks/{{ task.id }}">
             {{ task.task_template.name }}
         </a>
     </li>
+    {% endif %}
 {% empty %}
     <li>No tasks yet.</li>
 {% endfor %}
-</ul>
 {% endblock %}
