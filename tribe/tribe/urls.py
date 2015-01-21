@@ -6,6 +6,7 @@ from django.contrib import admin
 from django.contrib.auth.views import login, logout
 from django.conf.urls import include
 import points
+from points.views import CategoryViewSet
 
 admin.autodiscover()
 
@@ -17,6 +18,7 @@ router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'tribes', views.TribeViewSet)
 router.register(r'invited_users', views.InvitedUserViewSet)
+router.register(r'categories', CategoryViewSet)
 
 urlpatterns = patterns('',
     url(r'/?^$', views.index, name='index'),

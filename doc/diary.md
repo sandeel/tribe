@@ -106,3 +106,8 @@ researching Django REST Framework
 * Added models, forms, views etc. for Categories
 * Added some more user stories to [Taiga.io](https://www.taiga.io) project
 * Got most of the user stories laid out in sprints in Taiga.io
+
+## 2015-01-21
+* Created a serialer for Categories
+* Created API endpoint for creating and viewing categories
+* Wrote tests for creating Categories via API

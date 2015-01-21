@@ -5,6 +5,11 @@ from django.views.generic.detail import DetailView
 from points.models import TaskTemplate
 from points.models import Task
 from points.models import Category
+from points.serializers import CategorySerializer
+from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 class TaskTemplateCreate(CreateView):
     model = TaskTemplate
@@ -60,3 +65,26 @@ class CategoryCreate(CreateView):
     def form_valid(self, form):
         form.instance.tribe = self.request.user.tribe
         return super(CategoryCreate, self).form_valid(form)
+
+## API views
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticated]
+
+
+    def create(self, request):
+        serialized = CategorySerializer(data = request.data)
+        if serialized.is_valid():
+            category = Category.objects.create(name = request.DATA.get('name'),
+                                               tribe = request.user.tribe)
+            category.tribe = request.user.tribe
+            category.save()
+                
+            return Response(CategorySerializer(instance=category, context={'request': request}).data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get_queryset(self):
+        the_users_tribe_id = self.request.user.tribe.id
+        return Category.objects.filter(tribe__id = the_users_tribe_id)
