@@ -7,11 +7,11 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <a href="/mytribe/tasks/{{ task.id }}">
-            {{ task.task_template.name }}
+            {{ task.name }}
             </a>
           </div>
           <div class="panel-footer">
-          {{ task.task_template.description }}
+          {{ task.description }}
           </div>
         </div>
     {% endif %}
@@ -24,7 +24,7 @@
     {% if task.marked_done %}
     <li>
        <a href="/mytribe/tasks/{{ task.id }}">
-            {{ task.task_template.name }}
+            {{ task.name }}
         </a>
     </li>
     {% endif %}

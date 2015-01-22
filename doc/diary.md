@@ -108,6 +108,14 @@ researching Django REST Framework
 * Got most of the user stories laid out in sprints in Taiga.io
 
 ## 2015-01-21
-* Created a serialer for Categories
+* Created a serializer for Categories
 * Created API endpoint for creating and viewing categories
 * Wrote tests for creating Categories via API
+
+
+## 2015-01-22
+* Created a serializer for Task
+* Created API endpoints for task.
+* Need to write tests for this next
+
+
