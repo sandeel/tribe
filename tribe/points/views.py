@@ -10,6 +10,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import redirect
 
 class TaskCreate(CreateView):
     model = Task
@@ -22,6 +23,15 @@ class TaskCreate(CreateView):
                 'recurring_strategy',
                 'assigned_users',
              ]
+
+    def form_valid(self, form):
+        """
+        If the form is **valid** send the data to the API
+        and redirect to the tasks list
+        """
+        TaskViewSet.as_view({'post': 'create',})(self.request)
+        return redirect('/mytribe/tasks')
+
 
 class TaskDetail(DetailView):
     model = Task

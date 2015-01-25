@@ -4,32 +4,11 @@
 {% load crispy_forms_tags %}
 
 <div id="wrapper">
-<form action="http://localhost:8000/api/tasks/?format=json" method="post" name="form" id="form">
+<form action="" method="post" name="form" id="form">
     {{ form.as_p }}
     {% csrf_token %}
     <input type="submit" value="Update" />
 </form>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#form').submit(function() { // catch the form's submit event
-            $.ajax({ // create an j
-                data: $(this).serialize(), // get the form data
-                type: $(this).attr('method'), // GET or POST
-                url: $(this).attr('action'), // the file to call
-                success: function(response) { // on success..
-                    $('#wrapper').html(response); // update the DIV
-                    window.location.href = "http://localhost:8000/mytribe/tasks/"
-                },
-                error: function(response) { // on success..
-                    alert("FAILURE!")
-                }
-            });
-            return false;
-        });
-    });
-</script>
-
 
 {% endblock %}
