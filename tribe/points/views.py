@@ -20,11 +20,8 @@ class TaskCreate(CreateView):
                 'points_reward',
                 'assigned_users',
                 'recurring_strategy',
+                'assigned_users',
              ]
-
-    def form_valid(self, form):
-        form.instance.tribe = self.request.user.tribe
-        return super(TaskCreate, self).form_valid(form)
 
 class TaskDetail(DetailView):
     model = Task
@@ -88,18 +85,6 @@ class TaskViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
 
-
-    def create(self, request):
-        serialized = TaslSerializer(data = request.data)
-        if serialized.is_valid():
-            task = Task.objects.create(name = request.DATA.get('name'),
-                                               tribe = request.user.tribe)
-            task.tribe = request.user.tribe
-            task.save()
-                
-            return Response(TaskSerializer(instance=task, context={'request': request}).data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get_queryset(self):
         the_users_tribe_id = self.request.user.tribe.id
