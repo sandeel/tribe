@@ -1,6 +1,7 @@
 from django.db import models
 from tribe.models import Tribe
 from tribe.models import TribeUser
+import datetime
 
 class Category(models.Model):
     
@@ -33,11 +34,39 @@ class Task(models.Model):
     sunday = models.BooleanField(default=False)
 
     #Available from/to
-    time_available_from = models.TimeField()
-    time_available_to = models.TimeField()
+    time_available_from = models.TimeField(null=True)
+    time_available_to = models.TimeField(null=True)
 
     #Available date
-    date_available = models.DateField()
+    date_available = models.DateField(null=True)
+
+    def checkIfAvailable(self,date):
+
+        if self.date_available:
+            if self.date_available != date:
+                return False
+            ## check time
+            return True
+
+        # below happens if no date_available set
+
+        day_of_week_of_date= date.weekday()
+        
+        days = {
+            0: self.monday,
+            1: self.tuesday,
+            2: self.wednesday,
+            3: self.thursday,
+            4: self.friday,
+            5: self.saturday,
+            6: self.sunday,
+        }
+
+        if days[day_of_week_of_date] == True:
+            return True
+
+        return False
+        
     
 
 class CheckIn(models.Model):

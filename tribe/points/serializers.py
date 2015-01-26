@@ -39,6 +39,9 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = ('id', 'name', 'description', 'category',
                   'points_reward', 'assigned_users',
+                  'date_available',
+                  'time_available_from',
+                  'time_available_to',
                   'monday',
                   'tuesday',
                   'wednesday',

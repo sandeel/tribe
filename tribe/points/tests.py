@@ -3,7 +3,40 @@ from rest_framework.test import APITestCase
 from rest_framework.reverse import reverse
 from tribe.models import Tribe
 from tribe.models import TribeUser
+from points.models import Task
 from rest_framework import status
+import datetime
+
+class TaskTests(TestCase):
+
+    def test_check_if_available_by_date(self):
+
+        todays_date = datetime.datetime.today().date()
+        task = Task()
+
+        assert(not task.checkIfAvailable(todays_date))
+
+        task.date_available=todays_date
+        assert(task.checkIfAvailable(todays_date))
+
+    def test_check_if_available_by_day_of_week(self):
+        
+        todays_date = datetime.datetime.today()
+
+        task = Task()
+
+        assert(not task.checkIfAvailable(todays_date))
+
+        task.monday=True
+        task.tuesday=True
+        task.wednesday=True
+        task.thursday=True
+        task.friday=True
+        task.saturday=True
+        task.sunday=True
+
+        assert(task.checkIfAvailable(todays_date))
+        
 
 # API Tests
 class CategoryTests(APITestCase):
