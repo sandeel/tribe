@@ -119,3 +119,5 @@ researching Django REST Framework
 * Need to write tests for this next
 
 
+## 2015-01-25
+* Today I started refactoring the code so that the forms use the app's own API
