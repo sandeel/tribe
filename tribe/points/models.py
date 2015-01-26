@@ -34,11 +34,11 @@ class Task(models.Model):
     sunday = models.BooleanField(default=False)
 
     #Available from/to
-    time_available_from = models.TimeField(null=True)
-    time_available_to = models.TimeField(null=True)
+    time_available_from = models.TimeField(null=True, blank=True)
+    time_available_to = models.TimeField(null=True, blank=True)
 
     #Available date
-    date_available = models.DateField(null=True)
+    date_available = models.DateField(null=True, blank=True)
 
     def checkIfAvailable(self,date):
 
