@@ -22,8 +22,6 @@ class TaskCreate(CreateView):
                 'description',
                 'points_reward',
                 'assigned_users',
-                'recurring_strategy',
-                'assigned_users',
              ]
 
     def form_valid(self, form):

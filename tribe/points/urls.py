@@ -20,19 +20,16 @@ urlpatterns = patterns('',
 
 
     # Tasks
-    url(r'tasks/$', views.TaskList.as_view(), name='task-list'),
+    url(r'/?^$', views.TaskList.as_view(), name='task-list'),
 
-    url(r'tasks/new$',
+    url(r'new/$',
         views.TaskCreate.as_view(success_url="/mytribe/tasks/tasks/"),
         name='tasks-create'),
 
-    url(r'(?P<pk>\d+)$', views.TaskDetail.as_view(), name='task-detail'),
+    url(r'(?P<pk>\d+)/$', views.TaskDetail.as_view(), name='task-detail'),
 
-    url(r'tasks/(?P<pk>\d+)/update/$',
+    url(r'(?P<pk>\d+)/update/$',
         views.TaskUpdate.as_view(success_url="/mytribe/tasks/tasks")
        ),
-
-
-    url(r'/?^$', views.TaskList.as_view(), name='task-list'),
 
 )
