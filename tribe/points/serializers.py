@@ -2,6 +2,7 @@ from rest_framework import serializers
 from points.models import Category
 from points.models import Task
 from points.models import TribeUser
+from points.models import CheckIn
 
 class CategorySerializer(serializers.ModelSerializer):
 
@@ -9,6 +10,12 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ('id', 'name')
 
+
+class CheckInSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CheckIn
+        fields = ('id', 'task', 'date', 'time')
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -30,5 +37,12 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ('id', 'name', 'description', 'category', 'recurring_strategy',
-                  'points_reward', 'assigned_users')
+        fields = ('id', 'name', 'description', 'category',
+                  'points_reward', 'assigned_users',
+                  'monday',
+                  'tuesday',
+                  'wednesday',
+                  'thursday',
+                  'friday',
+                  'saturday',
+                  'sunday')

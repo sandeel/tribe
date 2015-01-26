@@ -4,8 +4,10 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from points.models import Task
 from points.models import Category
+from points.models import CheckIn
 from points.serializers import CategorySerializer
 from points.serializers import TaskSerializer
+from points.serializers import CheckInSerializer
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
@@ -91,7 +93,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 
 class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all()
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
 
@@ -99,3 +100,9 @@ class TaskViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         the_users_tribe_id = self.request.user.tribe.id
         return Task.objects.filter(tribe__id = the_users_tribe_id)
+
+
+class CheckInViewSet(viewsets.ModelViewSet):
+    serializer_class = CheckInSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = CheckIn.objects.all()

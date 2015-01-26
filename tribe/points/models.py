@@ -18,8 +18,31 @@ class Task(models.Model):
 
     name = models.CharField(max_length=200)
     category = models.ForeignKey(Category)
-    tribe = models.ForeignKey(Tribe, related_name="task_templates", null=True)
+    tribe = models.ForeignKey(Tribe, related_name="tasks", null=True)
     description = models.CharField(max_length=200)
-    recurring_strategy = models.CharField(max_length=200)
     points_reward = models.IntegerField()
-    assigned_users = models.ManyToManyField(TribeUser, related_name="task_templates")
+    assigned_users = models.ManyToManyField(TribeUser, related_name="tasks")
+
+    #Available days
+    monday = models.BooleanField(default=False)
+    tuesday = models.BooleanField(default=False)
+    wednesday = models.BooleanField(default=False)
+    thursday = models.BooleanField(default=False)
+    friday = models.BooleanField(default=False)
+    saturday = models.BooleanField(default=False)
+    sunday = models.BooleanField(default=False)
+
+    #Available from/to
+    time_available_from = models.TimeField()
+    time_available_to = models.TimeField()
+
+    #Available date
+    date_available = models.DateField()
+    
+
+class CheckIn(models.Model):
+    task = models.ForeignKey(Task, related_name="checkins")
+    date = models.DateField()
+    time = models.TimeField()
+
+

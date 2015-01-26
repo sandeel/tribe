@@ -8,6 +8,7 @@ from django.conf.urls import include
 import points
 from points.views import CategoryViewSet
 from points.views import TaskViewSet
+from points.views import CheckInViewSet
 
 admin.autodiscover()
 
@@ -20,7 +21,8 @@ router.register(r'users', views.UserViewSet)
 router.register(r'tribes', views.TribeViewSet)
 router.register(r'invited_users', views.InvitedUserViewSet)
 router.register(r'categories', CategoryViewSet)
-router.register(r'tasks', TaskViewSet)
+router.register(r'tasks', TaskViewSet, base_name='task')
+router.register(r'checkins', CheckInViewSet)
 
 urlpatterns = patterns('',
     url(r'/?^$', views.index, name='index'),
