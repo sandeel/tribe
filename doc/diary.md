@@ -125,3 +125,7 @@ researching Django REST Framework
 
 ## 2015-01-26
 * Created CheckIn class. There will now be no TaskTemplate, instead the Task will be a monolithic object which has available times and a CheckIn will refer to an instance of marking a task as done. This is to give more flexibility to different types of tasks eg. family dinners.
+
+
+## 2015-01-28
+* Added a "Check In" button to tasks which creates an instance of a check in for a user on that task and awards points. This uses the API in the background.
