@@ -66,12 +66,9 @@ class Task(models.Model):
             return True
 
         return False
-        
-    
 
 class CheckIn(models.Model):
+    user = models.ForeignKey(TribeUser, related_name="checkins")
     task = models.ForeignKey(Task, related_name="checkins")
     date = models.DateField()
-    time = models.TimeField()
-
-
+    points_awarded = models.IntegerField()

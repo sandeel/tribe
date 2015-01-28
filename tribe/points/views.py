@@ -68,10 +68,8 @@ class CategoryCreate(CreateView):
 
 ## API views
 class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
-
 
     def create(self, request):
         serialized = CategorySerializer(data = request.data)
@@ -86,14 +84,12 @@ class CategoryViewSet(viewsets.ModelViewSet):
             return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get_queryset(self):
-        the_users_tribe_id = self.request.user.tribe.id
-        return Category.objects.filter(tribe__id = the_users_tribe_id)
+        return self.request.user.tribe.categories.all()
 
 
 class TaskViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
-
 
     def get_queryset(self):
         the_users_tribe_id = self.request.user.tribe.id

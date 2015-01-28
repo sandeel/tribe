@@ -72,3 +72,4 @@ class CategoryTests(APITestCase):
                 }
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+

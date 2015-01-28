@@ -13,9 +13,21 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class CheckInSerializer(serializers.ModelSerializer):
 
+    def create(self, validated_data):
+        checkin = CheckIn.objects.create(
+                               user = self.context['request'].user,
+                               task = validated_data['task'],
+                               date = validated_data['date'],
+                               points_awarded = validated_data['task'].points_reward
+        )
+
+
+        return checkin
+
     class Meta:
         model = CheckIn
-        fields = ('id', 'task', 'date', 'time')
+        fields = ('id', 'user', 'task', 'date', 'points_awarded')
+        extra_kwargs = {'user': {'read_only': True}}
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -30,7 +42,6 @@ class TaskSerializer(serializers.ModelSerializer):
                                points_reward = validated_data['points_reward'],
         )
 
-        print(task.category)
         task.assigned_users = validated_data['assigned_users']
 
         return task

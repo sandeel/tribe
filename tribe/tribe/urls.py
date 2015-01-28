@@ -20,7 +20,7 @@ router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'tribes', views.TribeViewSet)
 router.register(r'invited_users', views.InvitedUserViewSet)
-router.register(r'categories', CategoryViewSet)
+router.register(r'categories', CategoryViewSet, base_name='category')
 router.register(r'tasks', TaskViewSet, base_name='task')
 router.register(r'checkins', CheckInViewSet)
 
