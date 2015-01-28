@@ -70,5 +70,5 @@ class Task(models.Model):
 class CheckIn(models.Model):
     user = models.ForeignKey(TribeUser, related_name="checkins")
     task = models.ForeignKey(Task, related_name="checkins")
-    date = models.DateField()
+    date = models.DateTimeField()
     points_awarded = models.IntegerField()

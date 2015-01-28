@@ -2,6 +2,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import FormView
 from points.models import Task
 from points.models import Category
 from points.models import CheckIn
@@ -13,6 +14,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import redirect
+from points.forms import CheckInForm
 
 class TaskCreate(CreateView):
     model = Task
@@ -33,8 +35,18 @@ class TaskCreate(CreateView):
         return redirect('/mytribe/tasks')
 
 
-class TaskDetail(DetailView):
+class TaskDetail(DetailView, FormView):
     model = Task
+
+    def get_context_data(self, **kwargs):
+        context = super(DetailView, self).get_context_data(**kwargs)
+        context['form'] = CheckInForm() 
+        return context
+
+    def post(self, request, *args, **kwargs):
+
+        CheckInViewSet.as_view({'post': 'create',})(self.request)
+        return redirect('/mytribe/tasks')
 
 class TaskUpdate(UpdateView):
     model = Task

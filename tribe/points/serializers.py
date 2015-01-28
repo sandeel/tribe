@@ -3,6 +3,7 @@ from points.models import Category
 from points.models import Task
 from points.models import TribeUser
 from points.models import CheckIn
+import datetime
 
 class CategorySerializer(serializers.ModelSerializer):
 
@@ -17,7 +18,7 @@ class CheckInSerializer(serializers.ModelSerializer):
         checkin = CheckIn.objects.create(
                                user = self.context['request'].user,
                                task = validated_data['task'],
-                               date = validated_data['date'],
+                               date = datetime.datetime.today(),
                                points_awarded = validated_data['task'].points_reward
         )
 
@@ -27,7 +28,10 @@ class CheckInSerializer(serializers.ModelSerializer):
     class Meta:
         model = CheckIn
         fields = ('id', 'user', 'task', 'date', 'points_awarded')
-        extra_kwargs = {'user': {'read_only': True}}
+        extra_kwargs = {'user': {'read_only': True},
+                        'date': {'read_only': True},
+                        'points_awarded': {'read_only': True}
+        }
 
 
 class TaskSerializer(serializers.ModelSerializer):
