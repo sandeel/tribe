@@ -40,7 +40,14 @@ class Task(models.Model):
     #Available date
     date_available = models.DateField(null=True, blank=True)
 
+    @property
+    def available_now(self):
+        return self.checkIfAvailable(datetime.datetime.today())
+
     def checkIfAvailable(self,date):
+
+        if CheckIn.objects.filter(task=self):
+            return False
 
         if self.date_available:
             if self.date_available != date:
@@ -50,7 +57,8 @@ class Task(models.Model):
 
         # below happens if no date_available set
 
-        day_of_week_of_date= date.weekday()
+        day_of_week_of_date=date.weekday()
+        print("date:",day_of_week_of_date)
         
         days = {
             0: self.monday,

@@ -4,14 +4,9 @@
 <h1>{{ object.name }}</h1>
 {{ object.description }}
 
+{% if object.available_now %}
 {% load crispy_forms_tags %}
-
-<div class="row row-centered">
-                <div class="col-md-4 col-centered"></div>
-                <div class="col-md-4 col-centered">
-                    {% crispy form %}
-                </div>
-                <div class="col-md-4 col-centered"></div>
-</div>
+{% crispy form %}
+{% endif %}
 
 {% endblock %}

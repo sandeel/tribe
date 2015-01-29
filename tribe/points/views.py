@@ -15,16 +15,10 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import redirect
 from points.forms import CheckInForm
+from rest_framework import reverse
 
 class TaskCreate(CreateView):
     model = Task
-    fields = [
-                'name',
-                'category',
-                'description',
-                'points_reward',
-                'assigned_users',
-             ]
 
     def form_valid(self, form):
         """
@@ -46,7 +40,7 @@ class TaskDetail(DetailView, FormView):
     def post(self, request, *args, **kwargs):
 
         CheckInViewSet.as_view({'post': 'create',})(self.request)
-        return redirect('/mytribe/tasks')
+        return redirect('/mytribe/tasks/')
 
 class TaskUpdate(UpdateView):
     model = Task

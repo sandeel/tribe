@@ -29,7 +29,6 @@ urlpatterns = patterns('',
     url(r'(?P<pk>\d+)/$', views.TaskDetail.as_view(), name='task-detail'),
 
     url(r'(?P<pk>\d+)/update/$',
-        views.TaskUpdate.as_view(success_url="/mytribe/tasks/")
+        views.TaskUpdate.as_view(success_url="/mytribe/tasks/%(id)s/")
        ),
-
 )
