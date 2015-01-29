@@ -18,17 +18,4 @@
 {% empty %}
     <li>No tasks yet.</li>
 {% endfor %}
-<h2>Completed tasks</h2>
-<ul>
-{% for task in object_list %}
-    {% if task.marked_done %}
-    <li>
-       <a href="/mytribe/tasks/{{ task.id }}">
-            {{ task.name }}
-        </a>
-    </li>
-    {% endif %}
-{% empty %}
-    <li>No tasks yet.</li>
-{% endfor %}
 {% endblock %}

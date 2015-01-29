@@ -47,10 +47,14 @@ class TaskUpdate(UpdateView):
 
 class TaskList(ListView):
     model = Task
+    template_name = "points/task_list.html"
+
 
     def get_queryset(self):
         id = self.request.user.id
-        return Task.objects.filter(assigned_users__id=id)
+        tasks = Task.objects.filter(assigned_users__id=id)
+        filtered_by_available = (x for x in tasks if x.available_now)
+        return filtered_by_available
 
 
 # Categories
