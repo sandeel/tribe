@@ -15,7 +15,18 @@ class TribeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tribe
-        fields = ('id', 'name', 'invited_users', 'members', 'leaders')
+        fields = ('id', 'name', 'members', 'leaders')
+        extra_kwargs = {'members': {'read_only': True}}
+        extra_kwargs = {'leaders': {'read_only': True}}
+
+    def create(self, validated_data):
+        tribe = Tribe.objects.create(
+                               members = [self.context['request'].user,],
+                               leaders = [self.context['request'].user,],
+                               name = validated_data['name'],
+        )
+
+        return tribe
 
 class InvitedUserSerializer(serializers.ModelSerializer):
 
