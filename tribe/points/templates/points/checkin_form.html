@@ -1,0 +1,7 @@
+{% extends "tribe/base.html" %}
+{% block content %}
+{% include "tribe/logged_in.html" %}
+{% load crispy_forms_tags %}
+{% crispy form %}
+
+{% endblock %}

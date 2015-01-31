@@ -6,15 +6,18 @@ from django.views.generic.edit import FormView
 from points.models import Task
 from points.models import Category
 from points.models import CheckIn
+from points.models import Approval
 from points.serializers import CategorySerializer
 from points.serializers import TaskSerializer
 from points.serializers import CheckInSerializer
+from points.serializers import ApprovalSerializer
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import redirect
 from points.forms import CheckInForm
+from points.forms import ApprovalForm
 from rest_framework import reverse
 
 class TaskCreate(CreateView):
@@ -66,8 +69,9 @@ class TaskList(ListView):
     def get_queryset(self):
         id = self.request.user.id
         tasks = Task.objects.filter(assigned_users__id=id)
-        filtered_by_available = (x for x in tasks if x.available_now)
-        return filtered_by_available
+        return tasks
+        # filtered_by_available = (x for x in tasks if x.available_now)
+        # return filtered_by_available
 
 
 # Categories
@@ -88,6 +92,36 @@ class CategoryCreate(CreateView):
     def form_valid(self, form):
         form.instance.tribe = self.request.user.tribe
         return super(CategoryCreate, self).form_valid(form)
+
+class CategoryUpdate(UpdateView):
+    model = Category
+    
+    fields = [
+                'name',
+                'description',
+             ]
+
+
+# CheckIns
+class CheckInUpdate(UpdateView):
+    model = CheckIn
+    form_class = ApprovalForm
+    
+    def post(self, form, *args, **kwargs):
+        """
+        If the form is **valid** send the data to the API
+        """
+        ApprovalViewSet.as_view({'post': 'create',})(self.request)
+        return redirect('/mytribe/tasks/')
+
+class CheckInList(ListView):
+    model = CheckIn
+
+    def get_queryset(self):
+        return Task.objects.get(id = self.kwargs['pk']).checkins.all()
+
+
+
 
 ## API views
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -123,3 +157,8 @@ class CheckInViewSet(viewsets.ModelViewSet):
     serializer_class = CheckInSerializer
     permission_classes = [IsAuthenticated]
     queryset = CheckIn.objects.all()
+
+class ApprovalViewSet(viewsets.ModelViewSet):
+    serializer_class = ApprovalSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Approval.objects.all()

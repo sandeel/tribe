@@ -2,8 +2,9 @@
 {% block content %}
 {% include "tribe/logged_in.html" %}
 <h2>Available Tasks</h2>
+<ul>
 {% for task in object_list %}
-    {% if not task.marked_done %}
+    {% if not task.has_been_checked_in_on %}
         <div class="panel panel-default">
           <div class="panel-body">
             <a href="/mytribe/tasks/{{ task.id }}">
@@ -18,6 +19,32 @@
 {% empty %}
     <li>No tasks yet.</li>
 {% endfor %}
+</ul>
+
+
+
+<h2>Awaiting Approval</h2>
+<ul>
+{% for task in object_list %}
+    {% if task.has_been_checked_in_on %}
+        <ul>
+            {% for checkin in task.checkins.all %}
+                {% if not checkin.has_been_approved %}
+                    <li>
+                        <a href="/mytribe/tasks/{{ task.id }}/checkins/">
+                            {{ checkin.task.name }}<br />
+                        </a>
+                        {{ checkin.date }} <br />
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% empty %}
+    <li>No tasks yet.</li>
+{% endfor %}
+</ul>
+
 {% if user.is_leader %}
     <a href="/mytribe/tasks/new">
         <button type="button" class="btn btn-default">
@@ -25,4 +52,5 @@
         </button>
     </a>
 {% endif %}
+
 {% endblock %}

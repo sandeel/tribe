@@ -9,8 +9,15 @@
             {{ category.name }}
         </a>
     </li>
-{% empty %}
-    <li>No tasks yet.</li>
 {% endfor %}
 </ul>
+
+{% if user.is_leader %}
+    <a href="/mytribe/tasks/categories/new/">
+        <button type="button" class="btn btn-default">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Category
+        </button>
+    </a>
+{% endif %}
+
 {% endblock %}

@@ -77,8 +77,31 @@ class Task(models.Model):
 
         return False
 
+    @property
+    def has_been_checked_in_on(self):
+
+        if self.checkins.all():
+            return True
+
+        return False
+
+
 class CheckIn(models.Model):
     user = models.ForeignKey(TribeUser, related_name="checkins")
     task = models.ForeignKey(Task, related_name="checkins")
     date = models.DateTimeField()
     points_awarded = models.IntegerField()
+
+    @property
+    def has_been_approved(self):
+
+        if self.approval:
+            return True
+
+        return False
+        
+
+class Approval(models.Model):
+    checkin = models.OneToOneField(CheckIn, related_name="approval")
+    approver = models.ForeignKey(TribeUser, related_name = "approvals")
+    

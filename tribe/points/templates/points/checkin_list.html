@@ -1,0 +1,16 @@
+{% extends "tribe/base.html" %}
+{% block content %}
+{% include "tribe/logged_in.html" %}
+<ul>
+<h1>Check-ins for {{ object_list.0.task.name }}</h2>
+{% for checkin in object_list %}
+    <li>
+       <a href="/mytribe/tasks/checkins/{{ checkin.id }}">
+            {{ checkin.user.name }}
+            {{ checkin.date }}
+        </a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

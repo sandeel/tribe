@@ -24,3 +24,25 @@ class CheckInForm(forms.ModelForm):
     class Meta:
         model = CheckIn
         fields = []
+
+class ApprovalForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(ApprovalForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+
+        self.helper.form_id = 'id-exampleForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = ''
+
+        self.helper.layout.append(
+            Hidden('checkin','{{ object.id }}')
+        )
+
+        self.helper.add_input(Submit('approve', 'Approve'))
+
+
+    class Meta:
+        model = CheckIn

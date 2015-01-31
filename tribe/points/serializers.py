@@ -3,6 +3,7 @@ from points.models import Category
 from points.models import Task
 from points.models import TribeUser
 from points.models import CheckIn
+from points.models import Approval
 import datetime
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -32,6 +33,21 @@ class CheckInSerializer(serializers.ModelSerializer):
                         'date': {'read_only': True},
                         'points_awarded': {'read_only': True}
         }
+
+class ApprovalSerializer(serializers.ModelSerializer):
+
+    def create(self, validated_data):
+        approval = Approval.objects.create(
+                               approver = self.context['request'].user,
+                               checkin = validated_data['checkin'],
+        )
+
+
+        return approval
+
+    class Meta:
+        model = Approval
+        fields = ('id', 'checkin')
 
 class FormToSerializerBooleanField(serializers.BooleanField):
     ''' workaround to convert django form field to serializer form field
