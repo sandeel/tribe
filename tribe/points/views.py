@@ -20,6 +20,19 @@ from rest_framework import reverse
 class TaskCreate(CreateView):
     model = Task
 
+    fields = ('id', 'name', 'description', 'category',
+              'points_reward', 'assigned_users',
+              'date_available',
+              'time_available_from',
+              'time_available_to',
+              'monday',
+              'tuesday',
+              'wednesday',
+              'thursday',
+              'friday',
+              'saturday',
+              'sunday')
+
     def form_valid(self, form):
         """
         If the form is **valid** send the data to the API
