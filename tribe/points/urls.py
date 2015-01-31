@@ -23,7 +23,7 @@ urlpatterns = patterns('',
     url(r'/?^$', views.TaskList.as_view(), name='task-list'),
 
     url(r'new/$',
-        views.TaskCreate.as_view(success_url="/mytribe/tasks/"),
+        views.TaskCreate.as_view(),
         name='tasks-create'),
 
     url(r'(?P<pk>\d+)/$', views.TaskDetail.as_view(), name='task-detail'),

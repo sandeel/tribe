@@ -9,4 +9,8 @@
 {% crispy form %}
 {% endif %}
 
+{% if request.user.is_tribe_leader %}
+<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out
+{% endif %}
+
 {% endblock %}

@@ -33,9 +33,23 @@ class CheckInSerializer(serializers.ModelSerializer):
                         'points_awarded': {'read_only': True}
         }
 
+class FormToSerializerBooleanField(serializers.BooleanField):
+    ''' workaround to convert django form field to serializer form field
+    see the issue https://github.com/tomchristie/django-rest-framework/issues/2394
+    '''
+    TRUE_VALUES = set(('t', 'T', 'true', 'True', 'TRUE', '1', 1, True,'On','on','ON'))
+    FALSE_VALUES = set(('f', 'F', 'false', 'False', 'FALSE', '0', 0, 0.0, False,'Off','off','OFF'))
+
 
 class TaskSerializer(serializers.ModelSerializer):
 
+    monday = FormToSerializerBooleanField()
+    tuesday = FormToSerializerBooleanField()
+    wednesday = FormToSerializerBooleanField()
+    thursday = FormToSerializerBooleanField()
+    friday = FormToSerializerBooleanField()
+    saturday = FormToSerializerBooleanField()
+    sunday = FormToSerializerBooleanField()
 
     def create(self, validated_data):
         task = Task.objects.create(
@@ -44,6 +58,14 @@ class TaskSerializer(serializers.ModelSerializer):
                                tribe = self.context['request'].user.tribe,
                                category = validated_data['category'],
                                points_reward = validated_data['points_reward'],
+
+                               monday = validated_data['monday'],
+                               tuesday = validated_data['tuesday'],
+                               wednesday = validated_data['wednesday'],
+                               thursday = validated_data['thursday'],
+                               friday = validated_data['friday'],
+                               saturday = validated_data['saturday'],
+                               sunday = validated_data['sunday'],
         )
 
         task.assigned_users = validated_data['assigned_users']

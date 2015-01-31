@@ -1,7 +1,9 @@
-from django.db import models
 from tribe.models import Tribe
 from tribe.models import TribeUser
 import datetime
+from django.db import models
+
+
 
 class Category(models.Model):
     

@@ -18,4 +18,11 @@
 {% empty %}
     <li>No tasks yet.</li>
 {% endfor %}
+{% if user.is_leader %}
+    <a href="/mytribe/tasks/new">
+        <button type="button" class="btn btn-default">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Task
+        </button>
+    </a>
+{% endif %}
 {% endblock %}
