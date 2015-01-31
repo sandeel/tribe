@@ -7,6 +7,7 @@ from points.models import Task
 from points.models import Category
 from points.models import CheckIn
 from points.models import Approval
+from tribe.models import TribeUser
 from points.serializers import CategorySerializer
 from points.serializers import TaskSerializer
 from points.serializers import CheckInSerializer
@@ -43,6 +44,11 @@ class TaskCreate(CreateView):
         """
         TaskViewSet.as_view({'post': 'create',})(self.request)
         return redirect('/mytribe/tasks')
+
+    def get_context_data(self, **kwargs):
+            context = super(TaskCreate, self).get_context_data(**kwargs)
+            context['form'].fields['assigned_users'].queryset = TribeUser.objects.filter(tribe=self.request.user.tribe)
+            return context
 
 
 class TaskDetail(DetailView, FormView):

@@ -1,5 +1,7 @@
 from django import forms
 from points.models import CheckIn
+from points.models import TribeUser
+from points.models import Task
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from crispy_forms.layout import Layout

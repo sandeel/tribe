@@ -24,7 +24,10 @@ class Task(models.Model):
     tribe = models.ForeignKey(Tribe, related_name="tasks", null=True)
     description = models.CharField(max_length=200)
     points_reward = models.IntegerField()
-    assigned_users = models.ManyToManyField(TribeUser, related_name="tasks")
+    assigned_users = models.ManyToManyField(
+                                        TribeUser,
+                                        related_name="tasks",
+                                        )
 
     #Available days
     monday = models.BooleanField(default=False)
