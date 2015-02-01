@@ -17,6 +17,21 @@ class AccountTests(APITestCase):
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    def test_dont_allow_duplicate_emails(self):
+        """
+        Ensure new user can't use same email as a user which already
+        exists
+        """
+        url = reverse('tribeuser-list')
+        data1 = {'email': 'tester@test.com', 'password': 'password'}
+        data2 = {'email': 'tester@test.com', 'password': 'password'}
+
+        response1 = self.client.post(url, data1, format="json")
+        self.assertEqual(response1.status_code, status.HTTP_201_CREATED)
+
+        response2 = self.client.post(url, data2, format="json")
+        self.assertEqual(response2.status_code, status.HTTP_400_BAD_REQUEST)
+
     ### TEST MAKE SURE DON'T ALLOW DUPLICATE EMAILS
 
     def test_create_tribe(self):
@@ -36,7 +51,19 @@ class AccountTests(APITestCase):
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    #### TEST NOT LOGGED IN TRYING TO CREATE A TRIBE AND MAKE SURE IT FAILS
+    def test_create_tribe_when_not_authenticated(self):
+        url = reverse('tribe-list')
+        data = {
+                    "name": "New Tribe", 
+                    "invited_users": [], 
+                    "members": [], 
+                    "leaders": []
+                }
+        user = TribeUser.objects.create(email="tester@test.com", password="password")
+        user.save()
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        
 
     def test_invited_user_gets_added_to_correct_tribe(self):
         tribe = Tribe(name="Celtic Tribe")

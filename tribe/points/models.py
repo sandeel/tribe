@@ -14,6 +14,7 @@ class Category(models.Model):
     description = models.CharField(max_length=200)
     tribe = models.ForeignKey(Tribe, related_name="categories")
 
+
 class Task(models.Model):
 
     def __str__(self):
@@ -49,21 +50,20 @@ class Task(models.Model):
     def available_now(self):
         return self.checkIfAvailable(datetime.datetime.today())
 
-    def checkIfAvailable(self,date):
+    def checkIfAvailable(self,datetime):
 
         if CheckIn.objects.filter(task=self):
             return False
 
         if self.date_available:
-            if self.date_available != date:
+            if self.date_available != datetime:
                 return False
             ## check time
             return True
 
         # below happens if no date_available set
 
-        day_of_week_of_date=date.weekday()
-        print("date:",day_of_week_of_date)
+        day_of_week_of_date=datetime.weekday()
         
         days = {
             0: self.monday,
@@ -89,11 +89,16 @@ class Task(models.Model):
         return False
 
 
+class Approval(models.Model):
+    approver = models.ForeignKey(TribeUser, related_name = "approvals")
+
+
 class CheckIn(models.Model):
     user = models.ForeignKey(TribeUser, related_name="checkins")
     task = models.ForeignKey(Task, related_name="checkins")
     date = models.DateTimeField()
     points_awarded = models.IntegerField()
+    approval = models.OneToOneField(Approval, null=True)
 
     @property
     def has_been_approved(self):
@@ -104,7 +109,4 @@ class CheckIn(models.Model):
         return False
         
 
-class Approval(models.Model):
-    checkin = models.OneToOneField(CheckIn, related_name="approval")
-    approver = models.ForeignKey(TribeUser, related_name = "approvals")
     

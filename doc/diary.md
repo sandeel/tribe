@@ -129,3 +129,9 @@ researching Django REST Framework
 
 ## 2015-01-28
 * Added a "Check In" button to tasks which creates an instance of a check in for a user on that task and awards points. This uses the API in the background.
+
+
+## 2015-01-31
+* Created an approvals system for tribe leaders to approve tasks
+* Started working on some test data
+
