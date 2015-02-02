@@ -2,23 +2,7 @@
 
 {% block content %}
 
-<button type="submit" onClick="$('#about').scrollTo();">jump</button>
-
-
-<script type="text/javascript">
-jQuery.fn.extend({
-  scrollTo : function(speed, easing) {
-    return this.each(function() {
-      var targetOffset = $(this).offset().top;
-      $('html,body').animate({scrollTop: targetOffset}, speed, easing);
-    });
-  }
-});
-</script>
-
-
-<div id="about">
-here
-</div>
+<a href="/accounts/register/" class="btn btn-primary btn-lg" role="button">Register</a>
+<a href="/accounts/login" class="btn btn-primary btn-lg" role="button">Sign In</a>
 
 {% endblock %}

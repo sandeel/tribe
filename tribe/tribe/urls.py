@@ -39,7 +39,7 @@ urlpatterns = patterns('',
 
     url(r'^mytribe/(?P<pk>\d+)/$', views.TribeUserDetailView.as_view(), name='tribemembers'),
 
-    url(r'^accounts/register$', views.register, name='register'),
+    url(r'^accounts/register/$', views.register, name='register'),
     url(r'^accounts/login/$', login),
     url(r'^logout/$', logout, {'next_page': '/'}),
 

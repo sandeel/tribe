@@ -1,0 +1,73 @@
+## 2015-01-01
+* Almost completed sign up by API
+
+## 2015-01-02
+* Completed sign up via API and also implemented creating a tribe via the API
+
+## 2015-01-04
+* Started to implement inviting new users.
+
+
+## 2015-01-10
+* Working for few hours on adding new users to your tribe via the edit tribe page. Almost ready for test.
+* uploaded December diary to Moodle
+
+
+## 2015-01-11
+* Finished form for adding a new tribe member to your tribe
+* Wrote unit test for above functionality
+
+
+
+
+# Sprint 2 (12th Jan 2015 - 25th Jan 2015)
+
+
+## 2015-01-12
+* Added models for TaskTemplates and Categories.
+* Added a view for viewing Task templates
+
+
+## 2015-01-14
+* Working on the models/database tables for TaskTemplates
+* Form for new TaskTemplate
+
+## 2015-01-14
+* Forms for editing TaskTemplates and viewing details.
+
+
+## 2015-01-20
+* Added models, forms, views etc. for Categories
+* Added some more user stories to [Taiga.io](https://www.taiga.io) project
+* Got most of the user stories laid out in sprints in Taiga.io
+
+## 2015-01-21
+* Created a serializer for Categories
+* Created API endpoint for creating and viewing categories
+* Wrote tests for creating Categories via API
+
+
+## 2015-01-22
+* Created a serializer for Task
+* Created API endpoints for task.
+* Need to write tests for this next
+
+
+## 2015-01-25
+* Today I started refactoring the code so that the forms use the app's own API
+
+
+
+# Sprint 3 (26th Jan 2015 - 08th Feb 2015)
+
+## 2015-01-26
+* Created CheckIn class. There will now be no TaskTemplate, instead the Task will be a monolithic object which has available times and a CheckIn will refer to an instance of marking a task as done. This is to give more flexibility to different types of tasks eg. family dinners.
+
+
+## 2015-01-28
+* Added a "Check In" button to tasks which creates an instance of a check in for a user on that task and awards points. This uses the API in the background.
+
+
+## 2015-01-31
+* Created an approvals system for tribe leaders to approve tasks
+* Started working on some test data

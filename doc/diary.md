@@ -66,7 +66,6 @@ researching Django REST Framework
 ## 2015-01-01
 * Almost completed sign up by API
 
-
 ## 2015-01-02
 * Completed sign up via API and also implemented creating a tribe via the API
 
@@ -86,7 +85,7 @@ researching Django REST Framework
 
 
 
-# Sprint 2
+# Sprint 2 (12th Jan 2015 - 25th Jan 2015)
 
 
 ## 2015-01-12
@@ -123,6 +122,9 @@ researching Django REST Framework
 * Today I started refactoring the code so that the forms use the app's own API
 
 
+
+# Sprint 3 (26th Jan 2015 - 08th Feb 2015)
+
 ## 2015-01-26
 * Created CheckIn class. There will now be no TaskTemplate, instead the Task will be a monolithic object which has available times and a CheckIn will refer to an instance of marking a task as done. This is to give more flexibility to different types of tasks eg. family dinners.
 
@@ -135,3 +137,9 @@ researching Django REST Framework
 * Created an approvals system for tribe leaders to approve tasks
 * Started working on some test data
 
+## 2015-02-01
+* Wrote lots of tests today
+
+## 2015-02-02
+* wrote more tests
+* Investigating and reading about Apache Cordova
