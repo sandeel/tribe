@@ -20,6 +20,8 @@ from django.shortcuts import redirect
 from points.forms import CheckInForm
 from points.forms import ApprovalForm
 from rest_framework import reverse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 class TaskCreate(CreateView):
     model = Task
@@ -36,6 +38,10 @@ class TaskCreate(CreateView):
               'friday',
               'saturday',
               'sunday')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CreateView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         """

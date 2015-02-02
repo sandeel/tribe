@@ -27,6 +27,24 @@ class TaskTests(TestCase):
         self.user = TribeUser.objects.create(email="user@tests.com",password="password",)
         self.user.save()
 
+        self.data = {
+                    "name": "Test task",
+                    "description": "Task created by unit test",
+                    "category": self.category.id,
+                    "points_reward": 1000,
+                    "assigned_users": [self.user.id,],
+                    "date_available": "",
+                    "time_available_from": "",
+                    "time_available_to": "",
+                    "monday": False,
+                    "tuesday": False,
+                    "wednesday": False,
+                    "thursday": False,
+                    "friday": False,
+                    "saturday": False,
+                    "sunday": False,
+                }
+
     def test_check_if_available_by_date(self):
 
         todays_date = timezone.now().date()
@@ -72,33 +90,31 @@ class TaskTests(TestCase):
         Ensure we can create a new task object via API
         """
         url = reverse('task-list')
-        data = {
-                    "name": "Test task",
-                    "description": "Task created by unit test",
-                    "category": self.category.id,
-                    "points_reward": 1000,
-                    "assigned_users": [self.user.id,],
-                    "date_available": "",
-                    "time_available_from": "",
-                    "time_available_to": "",
-                    "monday": False,
-                    "tuesday": False,
-                    "wednesday": False,
-                    "thursday": False,
-                    "friday": False,
-                    "saturday": False,
-                    "sunday": False,
-                }
         self.client.login(email=self.user.email, password='password')
-        response = self.client.post(url, data, format="json")
+        response = self.client.post(url, self.data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        """
+        Ensure redirects to login when not authenticated
+        """
+        self.client.logout()
+        response = self.client.post(url, self.data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_task_create_via_form(self):
+        """
+        Ensure we can create a new task object via form
+        """
+        url = reverse('task-create')
+        
+
 
         """
         Ensure forbidden when not authenticated
         """
         self.client.logout()
-        response = self.client.post(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        response = self.client.post(url, self.data, format="json")
+        self.assertRedirects(response, "/accounts/login/?next=/mytribe/tasks/new/", status_code=302, target_status_code=200, msg_prefix='')
 
 
 class CheckInTests(TestCase):

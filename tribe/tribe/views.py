@@ -30,7 +30,7 @@ from django.utils import timezone
 from django.views.generic.edit import UpdateView
 from django.shortcuts import get_object_or_404
 from rest_framework import filters
-from tribe.permissions import CustomObjectPermissions
+from tribe.permissions import IsAuthenticatedOrPost
 from tribe.models import InvitedUser
 from django.views.generic.edit import CreateView
 
@@ -125,6 +125,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsAuthenticatedOrPost,]
 
     def create(self, request):
         VALID_USER_FIELDS = [f.name for f in get_user_model()._meta.fields]

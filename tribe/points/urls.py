@@ -36,7 +36,7 @@ urlpatterns = patterns('',
 
     url(r'new/$',
         views.TaskCreate.as_view(),
-        name='tasks-create'),
+        name='task-create'),
 
     url(r'(?P<pk>\d+)/$', views.TaskDetail.as_view(), name='task-detail'),
 

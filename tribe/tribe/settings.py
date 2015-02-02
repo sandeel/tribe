@@ -89,18 +89,10 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'PAGINATE_BY': 100,
     'DEFAULT_PERMISSION_CLASSES': (
-            'rest_framework.permissions.AllowAny',)
+            'rest_framework.permissions.IsAuthenticated',)
 }
 
 AUTH_USER_MODEL = 'tribe.TribeUser'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-"""
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend', # default
-        'guardian.backends.ObjectPermissionBackend',
-        )
-
-ANONYMOUS_USER_ID = -1
-"""
