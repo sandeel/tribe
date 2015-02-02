@@ -106,8 +106,9 @@ class TaskTests(TestCase):
         Ensure we can create a new task object via form
         """
         url = reverse('task-create')
-        
-
+        self.client.login(email=self.user.email, password='password')
+        response = self.client.post(url, self.data, format="json")
+        self.assertRedirects(response, "/mytribe/tasks/")
 
         """
         Ensure forbidden when not authenticated
@@ -155,35 +156,48 @@ class CheckInTests(TestCase):
         
 class CategoryTests(TestCase):
 
+    def setUp(self):
+        self.data = {
+                    "name": "New Category Created For Test", 
+                    "description": "New Category Created For Test", 
+                }
+
+        tribe = Tribe(name="A New Test Tribe")
+        tribe.save()
+
+        self.user = TribeUser.objects.create(email="tester@test.com", password="password")
+        self.user.tribe = tribe
+        self.user.save()
+
+    def test_create_new_category_via_form(self):
+        url = reverse('category-create')
+        self.client.login(email='tester@test.com', password='password')
+        response = self.client.post(url, self.data, format="json")
+        self.assertRedirects(response, "/mytribe/tasks/categories/")
+
+        """
+        Ensure forbidden when not authenticated
+        """
+        self.client.logout()
+        response = self.client.post(url, self.data, format="json")
+        self.assertRedirects(response, "/accounts/login/?next=/mytribe/tasks/categories/new/", status_code=302, target_status_code=200, msg_prefix='')
+
 
     def test_create_category_via_api_when_authenticated(self):
         """
         Ensure we can create a new category object via API
         """
         url = reverse('category-list')
-        data = {
-                    "name": "New Category Created For Test", 
-                }
-        tribe = Tribe(name="A New Test Tribe")
-        tribe.save()
-        user = TribeUser.objects.create(email="tester@test.com", password="password")
-        user.tribe = tribe
-        user.save()
         
-        tribe.save()
         self.client.login(email='tester@test.com', password='password')
-        response = self.client.post(url, data, format="json")
+        response = self.client.post(url, self.data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 
-    def test_create_category_via_api_when_not_authenticated(self):
         """
         Ensure creating a Category object fails if not logged in
         """
-        url = reverse('category-list')
-        data = {
-                    "name": "New Category Created For Test", 
-                }
-        response = self.client.post(url, data, format="json")
+        self.client.logout()
+        response = self.client.post(url, self.data, format="json")
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 

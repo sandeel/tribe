@@ -41,7 +41,7 @@ class TaskCreate(CreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(CreateView, self).dispatch(*args, **kwargs)
+        return super(TaskCreate, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         """
@@ -49,7 +49,7 @@ class TaskCreate(CreateView):
         and redirect to the tasks list
         """
         TaskViewSet.as_view({'post': 'create',})(self.request)
-        return redirect('/mytribe/tasks')
+        return redirect('/mytribe/tasks/')
 
     def get_context_data(self, **kwargs):
             context = super(TaskCreate, self).get_context_data(**kwargs)
@@ -69,6 +69,10 @@ class TaskDetail(DetailView, FormView):
 
         CheckInViewSet.as_view({'post': 'create',})(self.request)
         return redirect('/mytribe/tasks/')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TaskDetail, self).dispatch(*args, **kwargs)
 
 class TaskUpdate(UpdateView):
     model = Task
@@ -104,6 +108,13 @@ class CategoryCreate(CreateView):
     def form_valid(self, form):
         form.instance.tribe = self.request.user.tribe
         return super(CategoryCreate, self).form_valid(form)
+
+    """
+    Prevent unauthorized access
+    """
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CategoryCreate, self).dispatch(*args, **kwargs)
 
 class CategoryUpdate(UpdateView):
     model = Category
