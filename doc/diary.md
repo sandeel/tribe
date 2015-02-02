@@ -143,3 +143,5 @@ researching Django REST Framework
 ## 2015-02-02
 * wrote more tests
 * Investigating and reading about Apache Cordova
+* Started working on the mobile app.
+* Using ngrok to publicly host the site for the app to communicate with.
