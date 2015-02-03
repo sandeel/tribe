@@ -3,6 +3,7 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
 from django.core.urlresolvers import reverse
+from points.models import Approval
 
 class TribeUserManager(BaseUserManager):
 
@@ -134,3 +135,14 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
             return False
 
         self.tribe.leaders.remove(self)
+
+    @property
+    def points(self):
+        approvals = Approval.objects.all()
+
+        points = 0
+
+        for approval in approvals:
+            points += approval.checkin.points_awarded
+
+        return points

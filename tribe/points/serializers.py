@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from points.models import Category
 from points.models import Task
-from points.models import TribeUser
 from points.models import CheckIn
 from points.models import Approval
 import datetime

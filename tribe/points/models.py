@@ -1,5 +1,3 @@
-from tribe.models import Tribe
-from tribe.models import TribeUser
 import datetime
 from django.db import models
 
@@ -12,7 +10,7 @@ class Category(models.Model):
 
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
-    tribe = models.ForeignKey(Tribe, related_name="categories")
+    tribe = models.ForeignKey('tribe.Tribe', related_name="categories")
 
 
 class Task(models.Model):
@@ -22,11 +20,11 @@ class Task(models.Model):
 
     name = models.CharField(max_length=200)
     category = models.ForeignKey(Category)
-    tribe = models.ForeignKey(Tribe, related_name="tasks", null=True)
+    tribe = models.ForeignKey('tribe.Tribe', related_name="tasks", null=True)
     description = models.CharField(max_length=200)
     points_reward = models.IntegerField()
     assigned_users = models.ManyToManyField(
-                                        TribeUser,
+                                        'tribe.TribeUser',
                                         related_name="tasks",
                                         )
 
@@ -90,11 +88,11 @@ class Task(models.Model):
 
 
 class Approval(models.Model):
-    approver = models.ForeignKey(TribeUser, related_name = "approvals")
+    approver = models.ForeignKey('tribe.TribeUser', related_name = "approvals")
 
 
 class CheckIn(models.Model):
-    user = models.ForeignKey(TribeUser, related_name="checkins")
+    user = models.ForeignKey('tribe.TribeUser', related_name="checkins")
     task = models.ForeignKey(Task, related_name="checkins")
     date = models.DateTimeField()
     points_awarded = models.IntegerField()
