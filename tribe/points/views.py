@@ -126,14 +126,10 @@ class CategoryUpdate(UpdateView):
 
 
 # CheckIns
-class CheckInUpdate(UpdateView):
+class CheckInDetail(DetailView):
     model = CheckIn
-    form_class = ApprovalForm
     
     def post(self, form, *args, **kwargs):
-        """
-        If the form is **valid** send the data to the API
-        """
         ApprovalViewSet.as_view({'post': 'create',})(self.request)
         return redirect('/mytribe/tasks/')
 

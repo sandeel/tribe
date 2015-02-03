@@ -39,9 +39,10 @@ class ApprovalSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         approval = Approval.objects.create(
                                approver = self.context['request'].user,
-                               checkin = validated_data['checkin'],
         )
-
+        checkin = validated_data['checkin']
+        checkin.approval = approval
+        checkin.save()
 
         return approval
 

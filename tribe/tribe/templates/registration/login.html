@@ -2,20 +2,39 @@
 
 {% block content %}
 
-  {% if form.errors %}
-    <p class="error">Sorry, that's not a valid username or password</p>
-  {% endif %}
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 text-center">
 
   <form action="" method="post">
     {% csrf_token %}
+
+    <div class="row">
     <label for="username">User name:</label>
     <input type="text" name="username" value="" id="username">
+    </div>
+
+    <div class="row">
     <label for="password">Password:</label>
     <input type="password" name="password" value="" id="password">
+    </div>
 
     <input type="submit" value="login" />
     <input type="hidden" name="next" value="/mytribe" />
 
   </form>
+
+        </div>
+        </div>
+        </div>
+
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 text-center">
+  {% if form.errors %}
+    <p class="error">Sorry, that's not a valid email or password</p>
+  {% endif %}
+
+      <div class="col-md-4"></div>
 
 {% endblock %}
