@@ -145,3 +145,8 @@ researching Django REST Framework
 * Investigating and reading about Apache Cordova
 * Started working on the mobile app.
 * Using ngrok to publicly host the site for the app to communicate with.
+
+
+## 2015-02-03
+* Working more on the mobile app and working on styling to ensure site looks ok on both mobile and desktop
+* Added basic points calculation for users (done by counting up the points awarded for each checkin which has been approved)
