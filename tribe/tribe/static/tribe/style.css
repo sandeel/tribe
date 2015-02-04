@@ -1,0 +1,45 @@
+html,body{height:100%;}
+
+body {
+    background-color: #535353;
+    font-family: roboto;
+}
+
+.navbar {
+    font-family: 'Syncopate', sans-serif;
+}
+
+h1 {
+    color: black;
+    font-size: 600%;
+    font-family: 'Syncopate', sans-serif;
+}
+
+h2 {
+    color: gray;
+    font-size: 200%;
+    font-family: 'Syncopate', sans-serif;
+}
+
+.header-image-container {
+    height:79%;
+    width:100%;
+}
+
+.fill{
+    background-color: #E6D6BD;
+    width:100%;
+    height:100%;
+    padding:10px;
+    color:#efefef;
+}
+
+.buttons {
+   padding: 1%;
+   margin-bottom: 3%;
+}
+
+input[type='text'],input[type="password"],textarea {
+    font-family: roboto;
+    font-size: 150%;
+}

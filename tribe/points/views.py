@@ -59,6 +59,7 @@ class TaskCreate(CreateView):
 
 class TaskDetail(DetailView, FormView):
     model = Task
+    permission_classes = [IsAuthenticated]
 
     def get_context_data(self, **kwargs):
         context = super(DetailView, self).get_context_data(**kwargs)
@@ -77,9 +78,17 @@ class TaskDetail(DetailView, FormView):
 class TaskUpdate(UpdateView):
     model = Task
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TaskUpdate, self).dispatch(*args, **kwargs)
+
 class TaskList(ListView):
     model = Task
     template_name = "points/task_list.html"
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TaskList, self).dispatch(*args, **kwargs)
 
 
     def get_queryset(self):
@@ -123,6 +132,13 @@ class CategoryUpdate(UpdateView):
                 'name',
                 'description',
              ]
+
+    """
+    Prevent unauthorized access
+    """
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CategoryCreate, self).dispatch(*args, **kwargs)
 
 
 # CheckIns

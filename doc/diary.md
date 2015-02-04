@@ -150,3 +150,7 @@ researching Django REST Framework
 ## 2015-02-03
 * Working more on the mobile app and working on styling to ensure site looks ok on both mobile and desktop
 * Added basic points calculation for users (done by counting up the points awarded for each checkin which has been approved)
+
+## 2015-02-04
+* Redesigned home page and user interface (prototype design for finished product). Started CSS style sheet for site.
+* Changed permissions for some views eg. Task list.
