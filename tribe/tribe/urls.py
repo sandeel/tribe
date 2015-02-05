@@ -30,7 +30,7 @@ urlpatterns = patterns('',
     url(r'/?^$', views.index, name='index'),
 
     url(r'^create_tribe/$', views.create_tribe, name='create_tribe'),
-    url(r'^invite_tribe_members/$', views.InvitedUserList.as_view(), name='invite_tribe_members'),
+    url(r'^mytribe/invite_tribe_members/$', views.InvitedUserList.as_view(), name='invite_tribe_members'),
 
     url(r'^mytribe/tasks/', include('points.urls')),
 
@@ -41,7 +41,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', logout, {'next_page': '/'}),
 
     url(r'^mytribe/$', views.mytribe),
-    url(r'^mytribe/edit/$', views.TribeUpdate.as_view(success_url='/mytribe/')),
+    url(r'^mytribe/update/$', views.TribeUpdate.as_view(success_url='/mytribe/')),
 
     url(r'^admin/', include(admin.site.urls)),
 

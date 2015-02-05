@@ -2,17 +2,23 @@
 {% block content %}
 {% include "tribe/logged_in.html" %}
 <h1>Invitees</h2>
-<ul>
-{% for invitee in invitees %}
-    <li>
-        {{ invitee.email }}
-    </li>
-{% endfor %}
-</ul>
+<div class="container" style="width:50%">
 
-{% if user.is_leader %}
-    {% load crispy_forms_tags %}
-    {% crispy form %}
-{% endif %}
+    <ul style="list-style: none;">
+    {% for invitee in invitees %}
+        <li>
+            <div class="well">
+                {{ invitee.email }} <span class="bg-info" style="float:right"> Pending </span>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+
+    {% if user.is_leader %}
+        {% load crispy_forms_tags %}
+        {% crispy form %}
+    {% endif %}
+
+</div>
 
 {% endblock %}

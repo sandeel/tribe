@@ -1,14 +1,37 @@
 {% extends "tribe/base.html" %}
 {% block content %}
 {% include "tribe/logged_in.html" %}
+
 <h1>{{ user.tribe.name }}</h2>
-{% for user in user.tribe.members.all %}
-    <li>
-        {% if user.is_leader %}
-        Leader:
-        {% endif %}
-        <a href='/mytribe/{{ user.id }}/'>{% if user.name %}{{user.name}}{% else %}{{ user.email }}{%endif%}</a>
-    </li>
-{% endfor %}
+
+{% if user.is_leader %}
+
+<div class="dropdown">
+  <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    Leader Options
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/mytribe/update/">Edit</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/mytribe/invite_tribe_members/">Invite New Members</a></li>
+  </ul>
+</div>
+
+{% endif %}
+
+
+<div class="container">
+    <ul>
+    {% for u in user.tribe.members.all %}
+        <li>
+            {% if u.is_leader %}
+            Leader:
+            {% endif %}
+            <a href='/mytribe/{{ u.id }}/'>{% if u.name %}{{u.name}}{% else %}{{ u.email }}{%endif%}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
 {% endblock %}
-</ul>
+

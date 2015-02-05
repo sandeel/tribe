@@ -8,14 +8,4 @@
     <input type="submit" value="Update" />
 </form>
 
-<h2> Invited emails </h2>
-{% for invited_user in invited_users %}
-    <p>{{ invited_user.email }}</p>
-    </form>
-{% endfor %}
-
-<form action="/mytribe/invite/" method="post">
-    {% crispy invite_form %}
-    {% csrf_token %}
-</form>
 {% endblock %}

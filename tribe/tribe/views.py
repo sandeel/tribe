@@ -35,6 +35,7 @@ from tribe.models import InvitedUser
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.shortcuts import redirect
+from django.utils.decorators import method_decorator
 
 def index(request):
     if request.method == 'POST':
@@ -120,7 +121,11 @@ class InvitedUserList(CreateView):
     def form_valid(self, form):
 
         InvitedUserViewSet.as_view({'post': 'create',})(self.request)
-        return redirect('/invite_tribe_members/')
+        return redirect('/mytribe/invite_tribe_members/')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(InvitedUserList, self).dispatch(*args, **kwargs)
 
 """
 API Views
