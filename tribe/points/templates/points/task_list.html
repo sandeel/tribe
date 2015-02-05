@@ -2,7 +2,6 @@
 {% block content %}
 {% include "tribe/logged_in.html" %}
 <h2>Available Tasks</h2>
-<ul>
 {% for task in object_list %}
     {% if not task.has_been_checked_in_on %}
         <div class="panel panel-default">
@@ -19,7 +18,6 @@
 {% empty %}
     <li>No tasks yet.</li>
 {% endfor %}
-</ul>
 
 
 
