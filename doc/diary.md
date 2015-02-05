@@ -154,3 +154,9 @@ researching Django REST Framework
 ## 2015-02-04
 * Redesigned home page and user interface (prototype design for finished product). Started CSS style sheet for site.
 * Changed permissions for some views eg. Task list.
+
+
+## 2015-02-05
+* Investigated continuous integration service Travis CI.
+* Created account with travis and config file to tell it how to test my code
+* Builds passing. Added small button to my project's github page to indicated if builds are passing or not.
