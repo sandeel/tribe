@@ -160,3 +160,4 @@ researching Django REST Framework
 * Investigated continuous integration service Travis CI.
 * Created account with travis and config file to tell it how to test my code
 * Builds passing. Added small button to my project's github page to indicated if builds are passing or not.
+* Added a collapsible navigation sidebar to the site. Ensured it also works on mobile
