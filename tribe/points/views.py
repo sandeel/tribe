@@ -127,6 +127,7 @@ class CategoryCreate(CreateView):
 
 class CategoryUpdate(UpdateView):
     model = Category
+    template_name = "points/category_update.html"
     
     fields = [
                 'name',
