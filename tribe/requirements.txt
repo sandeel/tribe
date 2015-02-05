@@ -1,0 +1,4 @@
+django
+httpie
+django_crispy_forms
+djangorestframework

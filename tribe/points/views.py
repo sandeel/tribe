@@ -138,7 +138,7 @@ class CategoryUpdate(UpdateView):
     """
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(CategoryCreate, self).dispatch(*args, **kwargs)
+        return super(CategoryUpdate, self).dispatch(*args, **kwargs)
 
 
 # CheckIns
