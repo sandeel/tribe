@@ -33,6 +33,8 @@ from rest_framework import filters
 from tribe.permissions import IsAuthenticatedOrPost
 from tribe.models import InvitedUser
 from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
+from django.shortcuts import redirect
 
 def index(request):
     if request.method == 'POST':
@@ -103,13 +105,22 @@ class TribeUserDetailView(DetailView):
     def get_queryset(self):
         return TribeUser.objects.filter(pk__in=self.request.user.tribe.members.values_list('id',flat=True))
 
-class InvitedUserCreate(CreateView):
+
+class InvitedUserList(CreateView):
     model = InvitedUser
     fields = ['email']
+    template_name = "tribe/inviteduser_list.html"
+    form_class = InvitedUserForm
+
+    def get_context_data(self, **kwargs):
+        context = super(InvitedUserList, self).get_context_data(**kwargs)
+        context['invitees'] = self.request.user.tribe.invited_users.all()
+        return context
 
     def form_valid(self, form):
-        form.instance.tribe = self.request.user.tribe
-        return super(InvitedUserCreate, self).form_valid(form)
+
+        InvitedUserViewSet.as_view({'post': 'create',})(self.request)
+        return redirect('/invite_tribe_members/')
 
 """
 API Views

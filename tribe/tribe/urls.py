@@ -30,10 +30,7 @@ urlpatterns = patterns('',
     url(r'/?^$', views.index, name='index'),
 
     url(r'^create_tribe/$', views.create_tribe, name='create_tribe'),
-
-    url(r'^mytribe/invite/$',
-        views.InvitedUserCreate.as_view(success_url="/mytribe/"),
-        name='create_invited_user'),
+    url(r'^invite_tribe_members/$', views.InvitedUserList.as_view(), name='invite_tribe_members'),
 
     url(r'^mytribe/tasks/', include('points.urls')),
 

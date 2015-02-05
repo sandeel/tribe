@@ -1,0 +1,18 @@
+{% extends "tribe/base.html" %}
+{% block content %}
+{% include "tribe/logged_in.html" %}
+<h1>Invitees</h2>
+<ul>
+{% for invitee in invitees %}
+    <li>
+        {{ invitee.email }}
+    </li>
+{% endfor %}
+</ul>
+
+{% if user.is_leader %}
+    {% load crispy_forms_tags %}
+    {% crispy form %}
+{% endif %}
+
+{% endblock %}

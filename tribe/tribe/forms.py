@@ -70,14 +70,14 @@ class CreateTribeForm(forms.ModelForm):
 class InvitedUserForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
+        super(InvitedUserForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = 'id-exampleForm'
         self.helper.form_class = 'blueForms'
         self.helper.form_method = 'post'
-        self.helper.form_action = 'create_tribe'
+        self.helper.form_action = ''
 
         self.helper.add_input(Submit('submit', 'Submit'))
-        super(InvitedUserForm, self).__init__(*args, **kwargs)
 
         email = forms.CharField(widget=forms.widgets.TextInput,label="Email address")
 
