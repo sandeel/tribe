@@ -36,14 +36,17 @@ class TaskTests(TestCase):
                     "date_available": "",
                     "time_available_from": "",
                     "time_available_to": "",
-                    "monday": False,
-                    "tuesday": False,
-                    "wednesday": False,
-                    "thursday": False,
-                    "friday": False,
-                    "saturday": False,
-                    "sunday": False,
+                    "monday": True,
+                    "tuesday": True,
+                    "wednesday": True,
+                    "thursday": True,
+                    "friday": True,
+                    "saturday": True,
+                    "sunday": True,
                 }
+
+        self.task = Task(points_reward=1000, category=self.category)
+        task = self.task.save()
 
     def test_check_if_available_by_date(self):
 
@@ -74,16 +77,14 @@ class TaskTests(TestCase):
         assert(task.checkIfAvailable(todays_date))
 
     def test_has_been_checked_in_on(self):
-        task = Task(points_reward=1000, category=self.category)
-        task.save()
-        assert(not task.has_been_checked_in_on)
+        assert(not self.task.has_been_checked_in_on)
 
-        checkin = CheckIn(task=task,
+        checkin = CheckIn(task=self.task,
                           user=self.user,
                           date=timezone.now(),
                           points_awarded=1000)
         checkin.save()
-        assert(task.has_been_checked_in_on)
+        assert(self.task.has_been_checked_in_on)
         
     def test_create_task_via_api(self):
         """
@@ -116,6 +117,16 @@ class TaskTests(TestCase):
         self.client.logout()
         response = self.client.post(url, self.data, format="json")
         self.assertRedirects(response, "/accounts/login/?next=/mytribe/tasks/new/", status_code=302, target_status_code=200, msg_prefix='')
+
+    def test_create_checkin(self):
+        url = '/api/checkins/'
+        self.client.login(email=self.user.email, password='password')
+        data = {
+                    "task": self.task.id
+               }
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
 
 
 class CheckInTests(TestCase):
@@ -151,7 +162,6 @@ class CheckInTests(TestCase):
         checkin.approval = approval
         checkin.save()
         assert(checkin.has_been_approved)
-        
 
         
 class CategoryTests(TestCase):

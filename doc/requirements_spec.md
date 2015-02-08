@@ -1,18 +1,25 @@
-Requirement Specification: Tribe
-================================
+Proposal
+========
 
-# Overview
+
+
+
+
+Requirement Specification
+=========================
+
+## Overview
 
 Tribe is an application for efficient families.
 
 Each member of the family uses Tribe. Family members complete daily tasks to earn points which unlock rewards. Achievements can also be unlocked by users which earn more points.
 
-## The Problem
+### The Problem
 * Kids need motivation to do homework and do tasks like cleaning their bedrooms
 * Families are busy and find it hard to keep track of what other family members are doing and when
 * Family members spend their days in different locations
 
-## Aims of Tribe
+### Aims of Tribe
 
 **Motivation**
 Create motivation for family members to work together on completing day-to-day tasks.
@@ -29,7 +36,7 @@ Encourage the family to spend time together and co-operate.
 **Fun**
 Give a sense of satisfaction and joint achievement and add a fun element to day-to-day tasks.
 
-# How it works
+## How it works
 
 Each member of the family who is signed up to Tribe becomes a "tribe member".
 
@@ -191,7 +198,7 @@ The points are displayed on a graph showing how close tribe is to the next rewar
 ***
 
 
-**As a tribe member I want to see a graph of how many points the tribe has accumulated on a per-week and category basis so far because I want to see if we are making and improvement or disprovement**
+**As a tribe member I want to see a graph of how many points the tribe has accumulated on a per-week and category basis so far because I want to see if we are making an improvement or disprovement**
 
 Points are displayed on a graph showing weekly totals. Task categories can be toggled on and off.
 
@@ -211,7 +218,7 @@ Details entered are
 ***
 
 
-**As a tribe leader I want to set the rewards for a given week for each level because I want to decide what each tribe member will receive when the points are acieved.**
+**As a tribe leader I want to set the rewards for a given week for each level because I want to decide what each tribe member will receive when the points are achieved.**
 
 The rewards for each tribe member at a specific level are entered.
 
@@ -280,3 +287,18 @@ Profile page shows
 **As a tribe leader I want to see what rewards are owed to a tribe member in real life and mark them as complete once they have been awarded in real life**
 
 The rewards which are owed to which tribe member are visible and marked as pending or complete (meaning the reward has been physically given to the tribe member).
+
+
+
+
+
+
+
+Technical Report
+================
+
+
+
+
+User Manual
+===========
