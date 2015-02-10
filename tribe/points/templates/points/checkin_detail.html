@@ -1,6 +1,7 @@
-{% extends "tribe/base.html" %}
+{% extends "tribe/logged_in.html" %}
+
 {% block content %}
-{% include "tribe/logged_in.html" %}
+
 <h1>{{ object.task.name }}</h1>
 {{ object.date }}
 {{ object.user }}

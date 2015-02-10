@@ -1,6 +1,9 @@
-{% extends "tribe/base.html" %}
+{% extends "tribe/logged_in.html" %}
+
+
 {% block content %}
-{% include "tribe/logged_in.html" %}
+<h2>Create new task</h2>
+
 {% load crispy_forms_tags %}
 
 <div id="wrapper">

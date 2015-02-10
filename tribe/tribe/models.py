@@ -31,12 +31,24 @@ class TribeUserManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
+        
 
 class Tribe(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         return self.name
+
+    @property
+    def total_points(self):
+        approvals = Approval.objects.filter(checkin__user__tribe=self)
+
+        points = 0
+
+        for approval in approvals:
+            points += approval.checkin.points_awarded
+
+        return points
 
 class InvitedUser(models.Model):
 
@@ -138,7 +150,7 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
 
     @property
     def points(self):
-        approvals = Approval.objects.all()
+        approvals = Approval.objects.filter(user=self)
 
         points = 0
 

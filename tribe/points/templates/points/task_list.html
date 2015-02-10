@@ -1,13 +1,13 @@
-{% extends "tribe/base.html" %}
+{% extends "tribe/logged_in.html" %}
+
 {% block content %}
-{% include "tribe/logged_in.html" %}
 <h2>Available Tasks</h2>
 {% for task in object_list %}
     {% if not task.has_been_checked_in_on %}
         <div class="panel panel-default">
           <div class="panel-body">
             <a href="/mytribe/tasks/{{ task.id }}">
-            {{ task.name }}
+            <h3>{{ task.name }}</h3>
             </a>
           </div>
           <div class="panel-footer">

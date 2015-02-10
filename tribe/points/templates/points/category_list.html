@@ -1,23 +1,36 @@
-{% extends "tribe/base.html" %}
+{% extends "tribe/logged_in.html" %}
+
 {% block content %}
-{% include "tribe/logged_in.html" %}
+
 <h2>Task Categories</h2>
-<ul>
-{% for category in object_list %}
-    <li>
-       <a href="{{ category.id }}">
-            {{ category.name }}
+
+<div class="row">
+  <div class="col-md-6">
+
+    <ul>
+    {% for category in object_list %}
+        <li>
+           <a href="{{ category.id }}">
+                <h3>{{ category.name }}</h3>
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+
+  </div>
+
+  <div class="col-md-6">
+    {% if user.is_leader %}
+        <a href="/mytribe/tasks/categories/new/">
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Category
+            </button>
         </a>
-    </li>
-{% endfor %}
-</ul>
+    {% endif %}
+   </div>
 
-{% if user.is_leader %}
-    <a href="/mytribe/tasks/categories/new/">
-        <button type="button" class="btn btn-default">
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Category
-        </button>
-    </a>
-{% endif %}
 
+
+
+</div>
 {% endblock %}
