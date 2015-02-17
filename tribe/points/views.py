@@ -22,6 +22,9 @@ from points.forms import ApprovalForm
 from rest_framework import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.views.generic import View
+from django.http import HttpResponse
+from django.shortcuts import render
 
 class TaskCreate(CreateView):
     model = Task
@@ -198,3 +201,11 @@ class ApprovalViewSet(viewsets.ModelViewSet):
     serializer_class = ApprovalSerializer
     permission_classes = [IsAuthenticated]
     queryset = Approval.objects.all()
+
+
+class PointsView(View):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, "points/points.html", {
+                    })
+

@@ -47,7 +47,7 @@ class ApprovalSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Approval
-        fields = ('id', 'checkin')
+        fields = ('id', 'checkin', 'date_approved')
 
 class FormToSerializerBooleanField(serializers.BooleanField):
     ''' workaround to convert django form field to serializer form field

@@ -89,6 +89,7 @@ class Task(models.Model):
 
 class Approval(models.Model):
     approver = models.ForeignKey('tribe.TribeUser', related_name = "approvals")
+    date_approved = models.DateField(auto_now=True)
 
 
 class CheckIn(models.Model):

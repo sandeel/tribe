@@ -7,6 +7,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
+    url(r'points/$', views.PointsView.as_view(), name='points'),
+
     # Categories
     url(r'categories/$', views.CategoryList.as_view(), name='category-list'),
 

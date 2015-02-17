@@ -82,9 +82,13 @@ input[type='text'],input[type="password"],textarea {
 }
 
 #page-content-wrapper h2 {
-    padding-top: 40px;
+    padding-top: 5%;
+    padding-bottom: 1%;
+    padding-left: 1%;
     background-color: #E6D6BD;
     width: 100%;
+    border-radius: 6px;
+    color: black;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -159,6 +163,7 @@ input[type='text'],input[type="password"],textarea {
 
     #page-content-wrapper {
         padding-left: 10%;
+        padding-right: 10%;
         position: relative;
     }
 

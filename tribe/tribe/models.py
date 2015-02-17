@@ -4,6 +4,7 @@ from django.contrib.auth.models import (
 )
 from django.core.urlresolvers import reverse
 from points.models import Approval
+import datetime
 
 class TribeUserManager(BaseUserManager):
 
@@ -47,6 +48,32 @@ class Tribe(models.Model):
 
         for approval in approvals:
             points += approval.checkin.points_awarded
+
+        return points
+
+    def points_on_date(self, date):
+        approvals = Approval.objects.filter(checkin__user__tribe=self, date_approved=date)
+
+        points = 0
+
+        for approval in approvals:
+            points += approval.checkin.points_awarded
+
+        return points
+
+    @property
+    def points_for_week_so_far(self):
+        today = datetime.date.today()
+
+        the_last_monday = today - datetime.timedelta(days=today.weekday())
+
+        points = []
+
+        for x in range(0,7):
+            date = the_last_monday + datetime.timedelta(days=x)
+            points_on_date = self.points_on_date(date)
+            points.append(points_on_date)
+
 
         return points
 
