@@ -161,3 +161,13 @@ researching Django REST Framework
 * Created account with travis and config file to tell it how to test my code
 * Builds passing. Added small button to my project's github page to indicated if builds are passing or not.
 * Added a collapsible navigation sidebar to the site. Ensured it also works on mobile
+
+
+# Sprint 4 "Points"
+## 10th February - 22nd February 2015
+
+
+# 2015-02-17
+* Created calculation methods for total points for a Tribe. (still need to write
+tests for these)
+* Created a display for these points on a per-day basis on the points page
