@@ -106,8 +106,22 @@ class TaskList(ListView):
 class CategoryList(ListView):
     model = Category
 
+    """
+    Prevent unauthorized access
+    """
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CategoryList, self).dispatch(*args, **kwargs)
+
 class CategoryDetail(DetailView):
     model = Category
+
+    """
+    Prevent unauthorized access
+    """
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CategoryDetail, self).dispatch(*args, **kwargs)
 
 class CategoryCreate(CreateView):
     model = Category
@@ -209,3 +223,9 @@ class PointsView(View):
         return render(request, "points/points.html", {
                     })
 
+    """
+    Prevent unauthorized access
+    """
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(PointsView, self).dispatch(*args, **kwargs)
