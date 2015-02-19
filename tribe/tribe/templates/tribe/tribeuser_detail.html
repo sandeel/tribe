@@ -1,9 +1,12 @@
 {% extends "tribe/logged_in.html" %}
+
 {% block content %}
-<h1>{{ object.name }}</h1>
+
+<h2>{{ object.name }}</h2>
+
 <div class="panel panel-primary">
   <div class="panel-body">
-      {{ object.name }}
+      {{ object.email }}
       {{ object.points }}
   </div>
       <div class="panel-footer">Panel footer</div>

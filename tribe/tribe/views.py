@@ -102,6 +102,8 @@ class TribeUpdate(UpdateView):
         return context
 
 class TribeUserDetailView(DetailView):
+    model = TribeUser
+    template_name = "tribe/tribeuser_detail.html"
 
     def get_queryset(self):
         return TribeUser.objects.filter(pk__in=self.request.user.tribe.members.values_list('id',flat=True))

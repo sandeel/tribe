@@ -1,8 +1,7 @@
-html,body{height:100%;}
-
-body {
+html, body {
     background-color: #535353;
     font-family: roboto;
+    height: 100%;
 }
 
 .navbar {
@@ -46,7 +45,6 @@ input[type='text'],input[type="password"],textarea {
 
 
 #wrapper {
-    top:40px;
     padding-left: 0;
     transition: all 0.5s ease;
 }
@@ -78,7 +76,7 @@ input[type='text'],input[type="password"],textarea {
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-    padding: 15px;
+    padding-left: 0;
 }
 
 #page-content-wrapper h2 {
@@ -87,9 +85,11 @@ input[type='text'],input[type="password"],textarea {
     padding-left: 1%;
     background-color: #E6D6BD;
     width: 100%;
-    border-radius: 6px;
     color: black;
+    margin-left: 0%;
     margin-bottom: 2%;
+    margin-top: 0%;
+    text-align: center;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -163,8 +163,7 @@ input[type='text'],input[type="password"],textarea {
     }
 
     #page-content-wrapper {
-        padding-left: 10%;
-        padding-right: 10%;
+        padding-left: 4%;
         position: relative;
     }
 

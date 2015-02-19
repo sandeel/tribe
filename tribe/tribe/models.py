@@ -8,13 +8,14 @@ import datetime
 
 class TribeUserManager(BaseUserManager):
 
-    def create(self, email, password=None):
+    def create(self, email, password=None, name="User"):
 
         if not email:
             raise ValueError('Users must have an email address')
 
         user = self.model(
             email=self.normalize_email(email),
+            name=name
         )
 
         user.set_password(password)
@@ -27,6 +28,7 @@ class TribeUserManager(BaseUserManager):
         """
         user = self.create(email,
             password=password,
+            name = name
         )
         user.is_admin = True
         user.is_superuser = True
@@ -95,7 +97,7 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
         max_length=255,
         unique=True,
     )
-    name = models.CharField(max_length=40,null=False)
+    name = models.CharField(max_length=40,null=False,default="User")
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
@@ -177,7 +179,7 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
 
     @property
     def points(self):
-        approvals = Approval.objects.filter(user=self)
+        approvals = Approval.objects.filter(checkin__user=self)
 
         points = 0
 
