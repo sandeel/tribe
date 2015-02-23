@@ -171,3 +171,9 @@ researching Django REST Framework
 * Created calculation methods for total points for a Tribe. (still need to write
 tests for these)
 * Created a display for these points on a per-day basis on the points page
+
+
+# Sprint 5 "Rewards"
+* Created a model for a reward
+* Created serializer for a reward
+* Created views for adding and editing rewards

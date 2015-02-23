@@ -8,10 +8,12 @@ from points.models import Category
 from points.models import CheckIn
 from points.models import Approval
 from tribe.models import TribeUser
+from points.models import Reward
 from points.serializers import CategorySerializer
 from points.serializers import TaskSerializer
 from points.serializers import CheckInSerializer
 from points.serializers import ApprovalSerializer
+from points.serializers import RewardSerializer
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
@@ -142,6 +144,8 @@ class CategoryCreate(CreateView):
     def dispatch(self, *args, **kwargs):
         return super(CategoryCreate, self).dispatch(*args, **kwargs)
 
+
+
 class CategoryUpdate(UpdateView):
     model = Category
     template_name = "points/category_update.html"
@@ -157,6 +161,21 @@ class CategoryUpdate(UpdateView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(CategoryUpdate, self).dispatch(*args, **kwargs)
+
+
+
+# Rewards
+class RewardCreate(CreateView):
+    model = Reward
+
+class RewardList(ListView):
+    model = Reward
+
+class RewardDetail(DetailView):
+    model = Reward
+
+class RewardUpdate(UpdateView):
+    model = Reward
 
 
 # CheckIns
@@ -215,6 +234,13 @@ class ApprovalViewSet(viewsets.ModelViewSet):
     serializer_class = ApprovalSerializer
     permission_classes = [IsAuthenticated]
     queryset = Approval.objects.all()
+
+class RewardViewSet(viewsets.ModelViewSet):
+    serializer_class = RewardSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Reward.objects.filter(tribe = self.request.user.tribe)
 
 
 class PointsView(View):

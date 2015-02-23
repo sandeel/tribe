@@ -108,4 +108,9 @@ class CheckIn(models.Model):
         return False
         
 
+class Reward(models.Model):
     
+    tribe = models.ForeignKey('tribe.Tribe', related_name = "rewards")
+    name = models.CharField(max_length = 20)
+    description = models.CharField(max_length = 200)
+

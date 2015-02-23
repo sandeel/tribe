@@ -10,6 +10,7 @@ from points.views import CategoryViewSet
 from points.views import TaskViewSet
 from points.views import CheckInViewSet
 from points.views import ApprovalViewSet
+from points.views import RewardViewSet
 
 admin.autodiscover()
 
@@ -25,6 +26,7 @@ router.register(r'categories', CategoryViewSet, base_name='category')
 router.register(r'tasks', TaskViewSet, base_name='task')
 router.register(r'checkins', CheckInViewSet)
 router.register(r'approvals', ApprovalViewSet)
+router.register(r'rewards', RewardViewSet, base_name='reward')
 
 urlpatterns = patterns('',
     url(r'/?^$', views.index, name='index'),

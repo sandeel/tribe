@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'points/$', views.PointsView.as_view(), name='points'),
 
     # Categories
+
     url(r'categories/$', views.CategoryList.as_view(), name='category-list'),
 
     url(r'categories/(?P<pk>\d+)/$',
@@ -23,6 +24,26 @@ urlpatterns = patterns('',
     url(r'categories/(?P<pk>\d+)/update/$',
         views.CategoryUpdate.as_view(success_url="/mytribe/tasks/categories/%(id)s/")
        ),
+
+
+
+    # Rewards
+    url(r'rewards/$', views.RewardList.as_view(), name='reward-list'),
+
+    url(r'rewards/(?P<pk>\d+)/$',
+        views.RewardDetail.as_view(),
+        name='reward-detail'),
+
+    url(r'rewards/new/$',
+        views.RewardCreate.as_view(success_url="/mytribe/tasks/rewards/"),
+        name='reward-create'),
+
+    url(r'rewards/(?P<pk>\d+)/update/$',
+        views.RewardUpdate.as_view(success_url="/mytribe/tasks/rewards/%(id)s/")
+       ),
+
+
+
     
     url(r'checkins/(?P<pk>\d+)/$',
         views.CheckInDetail.as_view()

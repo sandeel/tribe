@@ -2,6 +2,7 @@ from rest_framework import serializers
 from points.models import Category
 from points.models import Task
 from points.models import CheckIn
+from points.models import Reward
 from points.models import Approval
 import datetime
 
@@ -102,3 +103,10 @@ class TaskSerializer(serializers.ModelSerializer):
                   'friday',
                   'saturday',
                   'sunday')
+
+class RewardSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Reward
+        fields = ('id', 'tribe', 'name', 'description')
+
