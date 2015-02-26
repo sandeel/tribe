@@ -177,6 +177,11 @@ class RewardDetail(DetailView):
 class RewardUpdate(UpdateView):
     model = Reward
 
+    fields = [
+                'name',
+                'description',
+             ]
+
 
 # CheckIns
 class CheckInDetail(DetailView):

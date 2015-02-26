@@ -1,0 +1,37 @@
+{% extends "tribe/logged_in.html" %}
+
+{% block content %}
+
+<h2>Rewards</h2>
+
+<div class="row">
+  <div class="col-md-6">
+
+    <ul>
+    {% for reward in object_list %}
+        <li>
+           <a href="{{ reward.id }}">
+                <h3>{{ reward.name }}</h3>
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+
+  </div>
+
+  <div class="col-md-6">
+    {% if user.is_leader %}
+        <a href="/mytribe/tasks/rewards/new/">
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Reward
+            </button>
+        </a>
+    {% endif %}
+   </div>
+
+
+
+
+</div>
+{% endblock %}
+
