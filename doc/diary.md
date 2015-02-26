@@ -167,13 +167,21 @@ researching Django REST Framework
 ## 10th February - 22nd February 2015
 
 
-# 2015-02-17
+## 2015-02-17
 * Created calculation methods for total points for a Tribe. (still need to write
 tests for these)
 * Created a display for these points on a per-day basis on the points page
 
 
 # Sprint 5 "Rewards"
+
+## 2015-02-24
 * Created a model for a reward
 * Created serializer for a reward
-* Created views for adding and editing rewards
+* Created views for adding rewards
+
+## 2015-02-26
+* Created views for editing rewards
+* Researching drawing graphs in HTML5
+* Researching the native Progress element in HTML5
+* Added a basic progress bar for weekly points using bootstrap for the styles
