@@ -113,4 +113,15 @@ class Reward(models.Model):
     tribe = models.ForeignKey('tribe.Tribe', related_name = "rewards")
     name = models.CharField(max_length = 20)
     description = models.CharField(max_length = 200)
+    available_to = models.ManyToManyField(
+                                        'tribe.TribeUser',
+                                        related_name="available_rewards",
+                                        )
+    points_required = models.IntegerField()
+
+class WonReward(models.Model):
+
+    reward = models.ForeignKey('tribe.Tribe', related_name = "wins")
+    datetime=models.DateTimeField(auto_now=True)
+    user = models.ForeignKey('tribe.TribeUser', related_name="rewards_won")
 

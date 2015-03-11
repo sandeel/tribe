@@ -185,3 +185,6 @@ tests for these)
 * Researching drawing graphs in HTML5
 * Researching the native Progress element in HTML5
 * Added a basic progress bar for weekly points using bootstrap for the styles
+
+#2015-03-10
+* Revamped the UI

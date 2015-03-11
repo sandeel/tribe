@@ -168,8 +168,23 @@ class CategoryUpdate(UpdateView):
 class RewardCreate(CreateView):
     model = Reward
 
+    fields = [
+                'name',
+                'description',
+                'available_to',
+                'points_required',
+             ]
+
+    def post(self, request, *args, **kwargs):
+
+        RewardViewSet.as_view({'post': 'create',})(self.request)
+        return redirect('/mytribe/tasks/rewards/')
+
 class RewardList(ListView):
     model = Reward
+
+    def get_queryset(self):
+        return self.request.user.tribe.rewards.all()
 
 class RewardDetail(DetailView):
     model = Reward
@@ -180,6 +195,8 @@ class RewardUpdate(UpdateView):
     fields = [
                 'name',
                 'description',
+                'available_to',
+                'points_required',
              ]
 
 
@@ -245,7 +262,7 @@ class RewardViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Reward.objects.filter(tribe = self.request.user.tribe)
+        return self.request.user.tribe.rewards.all()
 
 
 class PointsView(View):

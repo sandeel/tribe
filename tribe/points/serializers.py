@@ -106,7 +106,20 @@ class TaskSerializer(serializers.ModelSerializer):
 
 class RewardSerializer(serializers.ModelSerializer):
     
+    def create(self, validated_data):
+
+        reward = Reward.objects.create(
+                               name = validated_data['name'],
+                               description = validated_data['description'],
+                               tribe = self.context['request'].user.tribe,
+                               points_required = validated_data['points_required'],
+                               )
+        reward.available_to = validated_data['available_to']
+        reward.save()
+
+        return reward
+
     class Meta:
         model = Reward
-        fields = ('id', 'tribe', 'name', 'description')
+        fields = ('id', 'name', 'description', 'points_required', 'available_to')
 
