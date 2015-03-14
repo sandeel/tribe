@@ -198,3 +198,5 @@ tests for these)
 #2015-03-14
 * Changes to the user model. New users now need a Name
 * Added tests to ensure new users have names and get a default tribe created
+* Researched testing JSON responses
+* Started to create a test family which gets created by a script (for test data)
