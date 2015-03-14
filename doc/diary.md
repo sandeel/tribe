@@ -188,3 +188,13 @@ tests for these)
 
 #2015-03-10
 * Revamped the UI
+
+
+#2015-03-11
+* Working on rewards and points required for rewards
+* rewards can now be assigned to users
+
+
+#2015-03-14
+* Changes to the user model. New users now need a Name
+* Added tests to ensure new users have names and get a default tribe created

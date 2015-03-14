@@ -7,5 +7,3 @@ http -a tester@http.com:password POST http://localhost:8000/api/invited_users/  
 http POST http://localhost:8000/api/users/  email=tester2@http.com password=password
 
 
-http -a tester2@http.com:password POST http://localhost:8000/api/tasks/ name="new Task"
-

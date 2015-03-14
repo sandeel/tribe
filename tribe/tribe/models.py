@@ -79,6 +79,7 @@ class Tribe(models.Model):
 
         return points
 
+
 class InvitedUser(models.Model):
 
     def __str(self):
@@ -91,19 +92,20 @@ class InvitedUser(models.Model):
         super(InvitedUser, self).save(*args, **kwargs)
         # now email the new user
 
+
 class TribeUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
         unique=True,
     )
-    name = models.CharField(max_length=40,null=False,default="User")
+    name = models.CharField(max_length=40,null=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
     objects = TribeUserManager()
 
-    tribe = models.ForeignKey(Tribe, null=True, related_name ='members', on_delete=models.SET_NULL)
+    tribe = models.ForeignKey(Tribe, null=False, related_name ='members')
     leader_of = models.ForeignKey(Tribe, null=True, related_name='leaders')
 
     USERNAME_FIELD = 'email'
@@ -120,6 +122,9 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
                 invitedUser = InvitedUser.objects.get(email=self.email)
                 self.tribe = invitedUser.tribe
                 invitedUser.delete()
+            else:
+                tribe_name = (self.name + "'s tribe")
+                self.tribe = Tribe.objects.create(name=tribe_name)
             
         super(TribeUser, self).save(*args, **kwargs)
 

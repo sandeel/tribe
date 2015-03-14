@@ -1,11 +1,6 @@
 html, body {
-    background-color: #535353;
     font-family: roboto;
     height: 100%;
-}
-
-.navbar {
-    font-family: 'Syncopate', sans-serif;
 }
 
 h1 {
@@ -66,7 +61,6 @@ input[type='text'],input[type="password"],textarea {
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    font-family: 'Syncopate', sans-serif;
 }
 
 #wrapper.toggled #sidebar-wrapper {

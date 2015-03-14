@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from tribe.models import Tribe
 from tribe.models import TribeUser
 from tribe.models import InvitedUser
+import json
 
 class AccountTests(APITestCase):
 
@@ -13,9 +14,21 @@ class AccountTests(APITestCase):
         Ensure we can create a new account object.
         """
         url = reverse('tribeuser-list')
-        data = {'email': 'tester@test.com', 'password': 'password'}
+        data = {'email': 'tester@test.com', 'password': 'password', 'name': 'Test'}
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        """
+        Ensure that a tribe was created for the user with the correct name
+        """
+        url = reverse('tribe-list')
+        self.client.login(email='tester@test.com', password='password')
+        response = self.client.get(url,  {}, HTTP_X_REQUESTED='XMLHttpRequest')
+        json_string = response.content.decode()
+        data = json.loads(json_string)
+        self.assertEqual(data["results"][0]["name"], "Test\'s tribe")
+        
+
 
     def test_dont_allow_duplicate_emails(self):
         """
@@ -23,8 +36,8 @@ class AccountTests(APITestCase):
         exists
         """
         url = reverse('tribeuser-list')
-        data1 = {'email': 'tester@test.com', 'password': 'password'}
-        data2 = {'email': 'tester@test.com', 'password': 'password'}
+        data1 = {'email': 'tester@test.com', 'password': 'password', 'name': 'Test1'}
+        data2 = {'email': 'tester@test.com', 'password': 'password', 'name': 'Test2'}
 
         response1 = self.client.post(url, data1, format="json")
         self.assertEqual(response1.status_code, status.HTTP_201_CREATED)
