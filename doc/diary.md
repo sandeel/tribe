@@ -200,3 +200,5 @@ tests for these)
 * Added tests to ensure new users have names and get a default tribe created
 * Researched testing JSON responses
 * Started to create a test family which gets created by a script (for test data)
+* Worked a lot on created test data. To do this I had to make tweaks to some models
+* Redesigning the tasks page
