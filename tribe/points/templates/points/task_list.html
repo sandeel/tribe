@@ -1,47 +1,60 @@
 {% extends "tribe/logged_in.html" %}
 
 {% block content %}
-<h2>Available Tasks</h2>
-{% for task in object_list %}
-    {% if not task.has_been_checked_in_on %}
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <a href="/mytribe/tasks/{{ task.id }}">
-            <p>{{ task.name }}</p>
-            </a>
-          </div>
-          <div class="panel-footer">
-          {{ task.description }}
-          </div>
-        </div>
-    {% endif %}
-{% empty %}
-    <li>No tasks yet.</li>
-{% endfor %}
 
 
 
-<h2>Awaiting Approval</h2>
-<ul>
-{% for task in object_list %}
-    {% if task.has_been_checked_in_on %}
-        <ul>
-            {% for checkin in task.checkins.all %}
-                {% if not checkin.has_been_approved %}
-                    <li>
-                        <a href="/mytribe/tasks/{{ task.id }}/checkins/">
-                            {{ checkin.task.name }}<br />
-                        </a>
-                        {{ checkin.date }} <br />
-                    </li>
-                {% endif %}
-            {% endfor %}
+
+<div class="row" style="text-align: center">
+
+  <div class="col-md-4">
+    <h2>Available Tasks</h2>
+        {% for task in object_list %}
+            {% if not task.has_been_checked_in_on %}
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <a href="/mytribe/tasks/{{ task.id }}">
+                    <p>{{ task.name }}</p>
+                    </a>
+                  </div>
+                  <div class="panel-footer">
+                  {{ task.description }}
+                  </div>
+                </div>
+            {% endif %}
+        {% empty %}
+            <p>No tasks yet.</p>
+        {% endfor %}
+  </div>
+
+  <div class="col-md-4">
+    <h2>Awaiting Approval</h2>
+        {% for task in object_list %}
+            {% if task.has_been_checked_in_on %}
+                    {% for checkin in task.checkins.all %}
+                        {% if not checkin.has_been_approved %}
+                                <a href="/mytribe/tasks/{{ task.id }}/checkins/">
+                                    {{ checkin.task.name }}<br />
+                                </a>
+                                {{ checkin.date }} <br />
+                        {% endif %}
+                    {% endfor %}
+            {% endif %}
+        {% empty %}
+            <p>No tasks yet.</p>
+        {% endfor %}
         </ul>
-    {% endif %}
-{% empty %}
-    <li>No tasks yet.</li>
-{% endfor %}
-</ul>
+  </div>
+
+  <div class="col-md-4">
+    <h2>Complete!</h2>
+  </div>
+</div>
+
+
+
+
+
 
 {% if user.is_leader %}
     <a href="/mytribe/tasks/new">

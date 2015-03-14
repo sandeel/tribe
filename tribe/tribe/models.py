@@ -4,6 +4,7 @@ from django.contrib.auth.models import (
 )
 from django.core.urlresolvers import reverse
 from points.models import Approval
+from points.models import Category
 import datetime
 
 class TribeUserManager(BaseUserManager):
@@ -34,13 +35,17 @@ class TribeUserManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
-        
 
 class Tribe(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        super(Tribe, self).save(*args, **kwargs)
+        self.categories.add(Category.objects.create(tribe=self, name="Household", description="Jobs around the house."))
+        self.categories.add(Category.objects.create(tribe=self, name="Pets", description="The animals of the house."))
 
     @property
     def total_points(self):
@@ -75,7 +80,6 @@ class Tribe(models.Model):
             date = the_last_monday + datetime.timedelta(days=x)
             points_on_date = self.points_on_date(date)
             points.append(points_on_date)
-
 
         return points
 
