@@ -4,23 +4,66 @@
 
 
 
+<div class="row">
 
-<div class="row" style="text-align: center">
+  <div class="col-md-4">
+    <div name="buttons">
+    {% if user.is_leader %}
+        <a href="/mytribe/tasks/new">
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Task
+            </button>
+        </a>
+        <a href="/mytribe/tasks/categories">
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-music" aria-hidden="true"></span> Categories
+            </button>
+        </a>
+    {% endif %}
+    </div>
+  </div>
+
+  <div class="col-md-4">
+  </div>
+
+  <div class="col-md-4">
+  </div>
+
+
+</div>
+
+<hr />
+
+
+
+<div class="row">
 
   <div class="col-md-4">
     <h2>Available Tasks</h2>
         {% for task in object_list %}
             {% if not task.has_been_checked_in_on %}
-                <div class="panel panel-default">
+              <a href="/mytribe/tasks/{{ task.id }}">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <div class="panel-title">
+<div class="row">
+  <div class="col-md-3">
+                        <span style="font-weight: bold; font-size: 100%;">10</span>
+  </div>
+  <div class="col-md-6">
+                          {{ task.name }}
+  </div>
+  <div class="col-md-3">
+                          <span class="glyphicon glyphicon-hourglass" aria-hidden="true" style="float: right;"></span>
+  </div>
+</div>
+                      </div>
+                    </div>
                   <div class="panel-body">
-                    <a href="/mytribe/tasks/{{ task.id }}">
-                    <p>{{ task.name }}</p>
-                    </a>
-                  </div>
-                  <div class="panel-footer">
                   {{ task.description }}
                   </div>
                 </div>
+              </a>
             {% endif %}
         {% empty %}
             <p>No tasks yet.</p>
@@ -29,39 +72,59 @@
 
   <div class="col-md-4">
     <h2>Awaiting Approval</h2>
-        {% for task in object_list %}
-            {% if task.has_been_checked_in_on %}
-                    {% for checkin in task.checkins.all %}
-                        {% if not checkin.has_been_approved %}
-                                <a href="/mytribe/tasks/{{ task.id }}/checkins/">
-                                    {{ checkin.task.name }}<br />
-                                </a>
-                                {{ checkin.date }} <br />
-                        {% endif %}
-                    {% endfor %}
+      {% for task in object_list %}
+        {% if task.has_been_checked_in_on %}
+          {% for checkin in task.checkins.all %}
+            {% if not checkin.has_been_approved %}
+              <a href="/mytribe/tasks/{{ task.id }}">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                      <div class="panel-title">
+                          {{ task.name }}     <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true" style="float:right;"></span>
+                      </div>
+                    </div>
+                  <div class="panel-body">
+                    Checked in by {{ checkin.user.name }}, {{ checkin.date }}
+                  </div>
+                </div>
+              </a>
             {% endif %}
+          {% endfor %}
+        {% endif %}
         {% empty %}
             <p>No tasks yet.</p>
-        {% endfor %}
-        </ul>
+      {% endfor %}
   </div>
 
   <div class="col-md-4">
     <h2>Complete!</h2>
+      {% for task in object_list %}
+        {% if task.has_been_checked_in_on %}
+          {% for checkin in task.checkins.all %}
+            {% if checkin.has_been_approved %}
+              <a href="/mytribe/tasks/{{ task.id }}">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                      <div class="panel-title">
+                          {{ task.name }}     <span class="glyphicon glyphicon-ok" aria-hidden="true" style="float: right"></span>
+                      </div>
+                    </div>
+                  <div class="panel-body">
+                    Approved by {{ checkin.approval.approver.name }}
+                  </div>
+                </div>
+              </a>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        {% empty %}
+            <p>No tasks yet.</p>
+      {% endfor %}
   </div>
 </div>
 
 
 
 
-
-
-{% if user.is_leader %}
-    <a href="/mytribe/tasks/new">
-        <button type="button" class="btn btn-default">
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Task
-        </button>
-    </a>
-{% endif %}
 
 {% endblock %}

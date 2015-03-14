@@ -29,7 +29,7 @@ class TribeUserManager(BaseUserManager):
         """
         user = self.create(email,
             password=password,
-            name = name
+            name = "Superuser"
         )
         user.is_admin = True
         user.is_superuser = True
@@ -46,6 +46,7 @@ class Tribe(models.Model):
         super(Tribe, self).save(*args, **kwargs)
         self.categories.add(Category.objects.create(tribe=self, name="Household", description="Jobs around the house."))
         self.categories.add(Category.objects.create(tribe=self, name="Pets", description="The animals of the house."))
+        self.categories.add(Category.objects.create(tribe=self, name="School", description="School and homework."))
 
     @property
     def total_points(self):
