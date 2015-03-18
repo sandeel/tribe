@@ -1,5 +1,5 @@
 """
-Tun this script,
+To run this script,
 export DJANGO_SETTINGS_MODULE=yoursite.settings
 """
 import django
@@ -12,6 +12,22 @@ from tribe.models import Tribe
 from tribe.models import TribeUser
 from points.models import Task
 from points.models import Category
+
+from faker import Factory
+fake = Factory.create()
+
+# OR
+from faker import Faker
+fake = Faker()
+
+print(fake.name())
+# 'Lucy Cechtelar'
+
+fake.address()
+# "426 Jordy Lodge
+#  Cartwrightshire, SC 88120-6700"
+
+fake.text()
 
 """
 Clear the database

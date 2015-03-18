@@ -1,15 +1,15 @@
-<!-- Menu Toggle Script -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <script>
-$("#menu-toggle").click(function(e) {
-    e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
-});
-$("#header-menu-toggle").click(function(e) {
-    e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
+$(document).ready(function()
+{
+  $("[data-toggle=popover]").popover(
+  {
+     trigger: 'hover',
+     html: true,
+  });
 });
 </script>
-
 
 </body>
 </html>

@@ -202,3 +202,8 @@ tests for these)
 * Started to create a test family which gets created by a script (for test data)
 * Worked a lot on created test data. To do this I had to make tweaks to some models
 * Redesigning the tasks page
+
+
+# 2015-03-18
+* Researching Django Crispy Forms
+* Designed the login page

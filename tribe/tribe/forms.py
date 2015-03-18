@@ -84,3 +84,15 @@ class InvitedUserForm(forms.ModelForm):
     class Meta:
         model = InvitedUser
         fields = ['email',]
+
+
+class SignInForm(forms.Form):
+
+    def __init__(self, *args, **kwargs):
+        super(ExampleForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'signin'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+
+        self.helper.add_input(Submit('submit', 'Submit'))
