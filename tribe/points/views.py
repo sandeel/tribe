@@ -268,7 +268,8 @@ class RewardViewSet(viewsets.ModelViewSet):
 class PointsView(View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, "points/points.html", {
+        return render(request, "points/points.html", { 
+            'rewards' : Reward.objects.filter(tribe=self.request.user.tribe)
                     })
 
     """

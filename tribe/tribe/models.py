@@ -84,6 +84,18 @@ class Tribe(models.Model):
 
         return points
 
+    @property
+    def points_this_week(self):
+        return sum(self.points_for_week_so_far)
+
+    @property
+    def points_today(self):
+        today = datetime.date.today()
+
+        points = self.points_on_date(today)
+
+        return points
+
 
 class InvitedUser(models.Model):
 
