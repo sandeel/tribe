@@ -7,52 +7,52 @@ django.setup()
 
 import os
 import json
-
 from tribe.models import Tribe
 from tribe.models import TribeUser
 from points.models import Task
 from points.models import Category
-
+from points.models import Reward
 from faker import Factory
+
+# create a fake data generator
 fake = Factory.create()
 
-# OR
-from faker import Faker
-fake = Faker()
-
-print(fake.name())
-# 'Lucy Cechtelar'
-
-fake.address()
-# "426 Jordy Lodge
-#  Cartwrightshire, SC 88120-6700"
-
-fake.text()
-
-"""
-Clear the database
-"""
+#Clear the database
 os.system( "python manage.py flush" )
 
+"""
+Generate a fake one-word name
+"""
+def getNewName():
+    
+    while True:
+        name = fake.name().split()[0]
+        if not "." in name:
+            return name
+
 
 """
-Create at tribe and tribe members
+Create a tribe and tribe members
 """
-tribe = Tribe.objects.create(name="The Dinosaurs")
 
-dad = TribeUser.objects.create("otis.redding@eircom.net", "password", name="Otis")
+## Create a fake name for the tribe
+## get a random three word sentence and strip the full stop
+name = fake.sentence(nb_words=1)[:-1]
+tribe = Tribe.objects.create(name=name)
+
+dad = TribeUser.objects.create(email=fake.email(), password="password", name=getNewName())
 dad.add_to_tribe(tribe)
 
-mam = TribeUser.objects.create("cjepsen@gmail.com", "password", name="Carly Rae")
+mam = TribeUser.objects.create(email=fake.email(), password="password", name=getNewName())
 mam.add_to_tribe(tribe)
 
-kid1 = TribeUser.objects.create("alan@yahoo.com", "password", name="Al")
+kid1 = TribeUser.objects.create(email=fake.email(), password="password", name=getNewName())
 kid1.add_to_tribe(tribe)
 
-kid2 = TribeUser.objects.create("pearse@yahoo.com", "password", name="Pearse")
+kid2 = TribeUser.objects.create(email=fake.email(), password="password", name=getNewName())
 kid2.add_to_tribe(tribe)
 
-kid3 = TribeUser.objects.create("raymond@yahoo.com", "password", name="Ray")
+kid3 = TribeUser.objects.create(email=fake.email(), password="password", name=getNewName())
 kid3.add_to_tribe(tribe)
 
 
@@ -196,4 +196,15 @@ task9 = Task.objects.create(
 task9.assigned_users.add(kid1, kid2, kid3)
 
 
+# generate rewards for the tribe
+num_rewards = 40
 
+for x in range(0,num_rewards):
+
+    reward = Reward.objects.create(name = fake.sentence(nb_words=3),
+                                   description = fake.sentence(),
+                                   points_required = 100,
+                                   tribe = tribe)
+    reward.available_to.add(dad,mam,kid1,kid2,kid3)
+
+print("Login: ", dad.email)

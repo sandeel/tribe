@@ -2,7 +2,15 @@
 
 {% block content %}
 
-<h2>Rewards</h2>
+{% if user.is_leader %}
+  <a href="/mytribe/tasks/rewards/new/">
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Reward
+    </button>
+  </a>
+{% endif %}
+
+<hr />
 
 <div class="row">
   <div class="col-md-6">
@@ -19,14 +27,6 @@
 
   </div>
 
-  <div class="col-md-6">
-    {% if user.is_leader %}
-        <a href="/mytribe/tasks/rewards/new/">
-            <button type="button" class="btn btn-default">
-              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Reward
-            </button>
-        </a>
-    {% endif %}
    </div>
 
 

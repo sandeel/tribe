@@ -6,7 +6,7 @@
 {{ object.date }}
 {{ object.user }}
 
-{% if user.is_leader %}
+{% if user.is_leader and not object.has_been_approved %}
     <a href="/mytribe/tasks/{{object.id}}/update">
         <form method="post" action="">
         {% csrf_token %}

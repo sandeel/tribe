@@ -18,4 +18,20 @@
     </a>
 {% endif %}
 
+
+{% for checkin in object.checkins.all %}
+<a href="{{ checkin.get_absolute_url }}">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="panel-title">
+        {{ checkin.user.name }}
+      </div>
+    </div>
+    <div class="panel-body">
+        {{ checkin.date }}
+    </div>
+  </div>
+</a>
+{% endfor %}
+
 {% endblock %}

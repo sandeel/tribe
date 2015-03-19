@@ -106,6 +106,10 @@ class CheckIn(models.Model):
             return True
 
         return False
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('checkin_detail', args=[str(self.id)])
         
 
 class Reward(models.Model):

@@ -34,18 +34,16 @@
 
 <hr />
 
-
-
 <div class="row">
 
   <div class="col-md-4">
     <h2>Available Tasks</h2>
-        {% for task in object_list %}
-            {% if not task.has_been_checked_in_on %}
-              <a href="/mytribe/tasks/{{ task.id }}">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                      <div class="panel-title">
+    {% for task in object_list %}
+    {% if not task.has_been_checked_in_on and task.available_now %}
+    <a href="/mytribe/tasks/{{ task.id }}">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="panel-title">
 <div class="row">
   <div class="col-md-3">
                         <span style="font-weight: bold; font-size: 100%;">10</span>
