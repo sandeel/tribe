@@ -36,7 +36,11 @@ urlpatterns = patterns('',
 
     url(r'^mytribe/tasks/', include('points.urls')),
 
+    # tribe members
     url(r'^mytribe/(?P<pk>\d+)/$', views.TribeUserDetailView.as_view(), name='tribemembers'),
+    url(r'mytribe/(?P<pk>\d+)/update/$',
+        views.TribeUserUpdate.as_view(success_url="/mytribe/%(id)s/")
+       ),
 
     url(r'^accounts/register/$', views.register, name='register'),
     url(r'^accounts/login/$', login),

@@ -108,6 +108,13 @@ class TribeUserDetailView(DetailView):
     def get_queryset(self):
         return TribeUser.objects.filter(pk__in=self.request.user.tribe.members.values_list('id',flat=True))
 
+class TribeUserUpdate(UpdateView):
+    model = TribeUser
+    fields = ['name', 'email']
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TribeUserUpdate, self).dispatch(*args, **kwargs)
 
 class InvitedUserList(CreateView):
     model = InvitedUser

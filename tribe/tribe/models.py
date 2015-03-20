@@ -209,3 +209,6 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
             points += approval.checkin.points_awarded
 
         return points
+
+    def get_absolute_url(self):
+        return reverse('tribemembers', args=[str(self.id)])

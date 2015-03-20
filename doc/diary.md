@@ -214,3 +214,8 @@ tests for these)
 * Points page now shows points today, this week, and total points.
 * Still working on the script for making fake data. Much more useful now as makes use
 of a Python fake data generator which creates random users, tasks and rewards.
+
+
+# 2015-03-20
+* Working on the user's profile page.
+* Changes to form for editing user.
