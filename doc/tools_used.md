@@ -1,7 +1,7 @@
 Tools Used
 ==========
 
-Tod: Compare under
+Todo: Compare under
 
 * learning curve
 * satisfaction
@@ -29,3 +29,6 @@ Example use:
 
 
 ## [mobiletest.me](http://mobiletest.me/)
+
+
+## [Faker](https://github.com/joke2k/faker)

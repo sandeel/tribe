@@ -207,3 +207,10 @@ tests for these)
 # 2015-03-18
 * Researching Django Crispy Forms
 * Designed the login page
+
+
+# 2015-03-19
+* Working on the points page. Now shows the rewards and a users progress towards rewards.
+* Points page now shows points today, this week, and total points.
+* Still working on the script for making fake data. Much more useful now as makes use
+of a Python fake data generator which creates random users, tasks and rewards.
