@@ -219,3 +219,6 @@ of a Python fake data generator which creates random users, tasks and rewards.
 # 2015-03-20
 * Working on the user's profile page.
 * Changes to form for editing user.
+
+# 2015-03-22
+* Working on progress bars for rewards on the points page.

@@ -21,6 +21,7 @@ class RegistrationForm(forms.ModelForm):
         super(RegistrationForm, self).__init__(*args, **kwargs)
 
     email = forms.CharField(widget=forms.widgets.TextInput,label="Email")
+    name = forms.CharField(widget=forms.widgets.TextInput,label="Name")
     password1 = forms.CharField(widget=forms.widgets.PasswordInput,
                                 label="Password")
     password2 = forms.CharField(widget=forms.widgets.PasswordInput,
@@ -28,7 +29,7 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
-        fields = ['email', 'password1', 'password2']
+        fields = ['email', 'name', 'password1', 'password2']
 
     def clean(self):
         """

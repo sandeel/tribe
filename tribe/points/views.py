@@ -184,7 +184,7 @@ class RewardList(ListView):
     model = Reward
 
     def get_queryset(self):
-        return self.request.user.tribe.rewards.all()
+        return self.request.user.tribe.rewards.filter(tribe=self.request.user.tribe)
 
 class RewardDetail(DetailView):
     model = Reward
@@ -268,8 +268,14 @@ class RewardViewSet(viewsets.ModelViewSet):
 class PointsView(View):
 
     def get(self, request, *args, **kwargs):
+        percents = []
+        for reward in Reward.objects.filter(tribe=self.request.user.tribe).order_by('points_required'):
+            percent = int(((self.request.user.points / reward.points_required) * 100))
+            percents.append(percent)
+
         return render(request, "points/points.html", { 
-            'rewards' : Reward.objects.filter(tribe=self.request.user.tribe)
+            'rewards' : Reward.objects.filter(tribe=self.request.user.tribe).order_by('points_required'),
+            'percents' : percents,
                     })
 
     """

@@ -123,7 +123,8 @@ class Reward(models.Model):
                                         )
     points_required = models.IntegerField()
 
-class WonReward(models.Model):
+
+class AchievedReward(models.Model):
 
     reward = models.ForeignKey('tribe.Tribe', related_name = "wins")
     datetime=models.DateTimeField(auto_now=True)

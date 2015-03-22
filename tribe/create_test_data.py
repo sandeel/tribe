@@ -13,6 +13,7 @@ from points.models import Task
 from points.models import Category
 from points.models import Reward
 from faker import Factory
+import random
 
 # create a fake data generator
 fake = Factory.create()
@@ -25,10 +26,11 @@ Generate a fake one-word name
 """
 def getNewName():
     
-    while True:
+    name = fake.name().split()[0]
+    while not "." or "Miss" in name:
         name = fake.name().split()[0]
-        if not "." in name:
-            return name
+    
+    return name
 
 
 """
@@ -197,13 +199,15 @@ task9.assigned_users.add(kid1, kid2, kid3)
 
 
 # generate rewards for the tribe
-num_rewards = 40
+num_rewards = 10
 
 for x in range(0,num_rewards):
 
+    points_required = (10*(random.randint(0,10)))
+    print(points_required)
     reward = Reward.objects.create(name = fake.sentence(nb_words=3),
                                    description = fake.sentence(),
-                                   points_required = 100,
+                                   points_required=points_required,
                                    tribe = tribe)
     reward.available_to.add(dad,mam,kid1,kid2,kid3)
 
