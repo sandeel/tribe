@@ -270,7 +270,12 @@ class PointsView(View):
     def get(self, request, *args, **kwargs):
         percents = []
         for reward in Reward.objects.filter(tribe=self.request.user.tribe).order_by('points_required'):
-            percent = int(((self.request.user.points / reward.points_required) * 100))
+
+            if not reward.points_required == 0:
+                percent = int(((self.request.user.points / reward.points_required) * 100))
+            else:
+                percent = 0
+            
             percents.append(percent)
 
         return render(request, "points/points.html", { 

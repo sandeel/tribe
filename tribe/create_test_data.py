@@ -39,7 +39,7 @@ Create a tribe and tribe members
 
 ## Create a fake name for the tribe
 ## get a random three word sentence and strip the full stop
-name = fake.sentence(nb_words=1)[:-1]
+name = fake.sentence(nb_words=1)[:-1]+str(random.randint(0,1000))
 tribe = Tribe.objects.create(name=name)
 
 dad = TribeUser.objects.create(email=fake.email(), password="password", name=getNewName())
@@ -73,7 +73,7 @@ task1 = Task.objects.create(
     name = "Take out the bins",
     description = "Put the green and black bins out on the road.", 
     category = Category.objects.get(tribe=tribe, name="Household"),
-    points_reward = 10, 
+    points_reward = 20, 
     monday = True, 
     tuesday = False,
     wednesday = False,
@@ -89,7 +89,7 @@ task2 = Task.objects.create(
     name = "Take the dogs for a walk.",
     description = "At least 15 mins.", 
     category = Category.objects.get(tribe=tribe, name="Pets"),
-    points_reward = 10, 
+    points_reward = 40, 
     monday = True, 
     tuesday = True,
     wednesday = True,
@@ -105,7 +105,7 @@ task3 = Task.objects.create(
     name = "Put on a laundry wash.",
     description = "Empty the linen baskets from all bedrooms.", 
     category = Category.objects.get(tribe=tribe, name="Household"),
-    points_reward = 10, 
+    points_reward = 15, 
     monday = True, 
     tuesday = True,
     wednesday = True,
@@ -121,7 +121,7 @@ task4 = Task.objects.create(
     name = "Feed the dogs.",
     description = "One can of pedigree chum each.", 
     category = Category.objects.get(tribe=tribe, name="Pets"),
-    points_reward = 20, 
+    points_reward = 15, 
     monday = True, 
     tuesday = True,
     wednesday = True,
@@ -153,7 +153,7 @@ task7 = Task.objects.create(
     name = "Tidy bedroom.",
     description = "Take everything off floor, dirty clothes in laundry basket.", 
     category = Category.objects.get(tribe=tribe, name="Household"),
-    points_reward = 5, 
+    points_reward = 10, 
     monday = True, 
     tuesday = True,
     wednesday = True,
@@ -186,7 +186,7 @@ task9 = Task.objects.create(
     name = "Do homework",
     description = "Every subject. Check homework journal.",
     category = Category.objects.get(tribe=tribe, name="School"),
-    points_reward = 5, 
+    points_reward = 30, 
     monday = True, 
     tuesday = True,
     wednesday = True,
@@ -203,8 +203,7 @@ num_rewards = 10
 
 for x in range(0,num_rewards):
 
-    points_required = (10*(random.randint(0,10)))
-    print(points_required)
+    points_required = (10*(random.randint(1,50)))
     reward = Reward.objects.create(name = fake.sentence(nb_words=3),
                                    description = fake.sentence(),
                                    points_required=points_required,

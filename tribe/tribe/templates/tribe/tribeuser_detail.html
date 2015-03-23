@@ -73,5 +73,19 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Rewards Achieved
+      </div>
+      <div class="panel-body">
+        {% for reward in object.achieved_rewards.all %}
+        <p>{{ reward.reward.name }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

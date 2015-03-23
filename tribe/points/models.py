@@ -126,7 +126,7 @@ class Reward(models.Model):
 
 class AchievedReward(models.Model):
 
-    reward = models.ForeignKey('tribe.Tribe', related_name = "wins")
+    reward = models.ForeignKey('points.Reward', related_name = "wins")
     datetime=models.DateTimeField(auto_now=True)
-    user = models.ForeignKey('tribe.TribeUser', related_name="rewards_won")
+    user = models.ForeignKey('tribe.TribeUser', related_name="achieved_rewards")
 

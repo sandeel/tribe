@@ -4,6 +4,7 @@ from points.models import Task
 from points.models import CheckIn
 from points.models import Reward
 from points.models import Approval
+from points.models import AchievedReward
 import datetime
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -43,6 +44,10 @@ class ApprovalSerializer(serializers.ModelSerializer):
         checkin = validated_data['checkin']
         checkin.approval = approval
         checkin.save()
+
+        for reward in Reward.objects.filter(tribe=checkin.user.tribe):
+            if checkin.user.tribe.points_this_week > reward.points_required:
+                achieved_reward = AchievedReward.objects.create(reward=reward, user=checkin.user)
 
         return approval
 
