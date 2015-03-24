@@ -44,7 +44,6 @@ urlpatterns = patterns('',
 
 
     # CheckIns
-
     
     url(r'checkins/(?P<pk>\d+)/$',
         views.CheckInDetail.as_view(),

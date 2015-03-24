@@ -130,3 +130,6 @@ class AchievedReward(models.Model):
     datetime=models.DateTimeField(auto_now=True)
     user = models.ForeignKey('tribe.TribeUser', related_name="achieved_rewards")
 
+class RewardCashIn(models.Model):
+    achievedReward = models.ForeignKey('points.AchievedReward', related_name='cashins')
+    datetime=models.DateTimeField(auto_now=True)
