@@ -55,3 +55,14 @@ then allowed free access to a private account.
 I was then able to switch on or off repositories from my Github account.
 
 ![Activating repositories in Travis-CI](screenshots/travis-repos.png)
+
+Travis-CI helpfully then sent me emails stating when my build had failed and
+when it was fixed.
+
+The build can be watched in real-time if you log into your Travis account and
+then push to your Github repository.
+
+![Real-time build on Travis server](screenshots/travis-build.png)
+
+I was also able to put a "light" on my repository's Github page which turned 
+green when build was passing and red when build failing.

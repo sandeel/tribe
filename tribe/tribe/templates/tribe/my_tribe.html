@@ -4,12 +4,20 @@
 
 <div class="row">
 
-    <h1 style="text-align: center">{{ user.tribe.name }}</h2>
+    <h1>{{ user.tribe.name }}</h2>
 
-    <div class="col-md-3">
-    </div>
+{% if user.is_leader %}
+      <a href="/mytribe/update"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Edit your tribe</button></a>
+      <a href="/mytribe/invite_tribe_members"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Invite new members</button></a>
+</div>
 
-    <div class="col-md-3">
+<hr />
+
+
+{% endif %}
+
+
+    <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-body">
             {% for u in user.tribe.members.all %}
@@ -17,6 +25,9 @@
                 <div class="panel panel-default">
                   <div class="panel-body" style="font-size: 40px">
                     {% if u.name %}{{u.name}}{% else %}{{ u.email }}{%endif%}
+                    {% if u.image %}
+                    <img src="/{{ u.image.url }}" style="width: 33%; float: right">
+                    {% endif %}
                   </div>
                 </div>
             </a>
@@ -24,20 +35,9 @@
           </div>
         </div>
     </div>
-    <div class="col-md-3">
-    </div>
+
 
     {% if user.is_leader %}
-
-
-<div class="btn-group btn-group-justified" role="group" aria-label="...">
-  <div class="btn-group" role="group">
-    <a href="/mytribe/update"><button type="button" style="height: 100px; font-size: 40px;" class="btn btn-default"><span class="glyphicon glyphicon-cog" aria-hidden="true" style="font-size:50px"></span> Edit</button></a>
-  </div>
-  <div class="btn-group" role="group">
-    <a href="/mytribe/invite_tribe_members"><button style="height: 100px; font-size: 40px;" type="button" class="btn btn-default"><span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size:50px"></span> Invite</button></a>
-  </div>
-</div>
 
 
 

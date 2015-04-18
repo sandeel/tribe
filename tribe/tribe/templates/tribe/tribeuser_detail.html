@@ -6,7 +6,7 @@
   <div class="col-md-4">
     <h2>{{ object.name }}</h2>
     <div name="buttons">
-    {% if user.password == object.password %}
+    {% if user.password == object.password or user.is_leader %}
         <a href="{{ object.get_absolute_url }}update/">
             <button type="button" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Edit my profile" class="btn btn-default">
               <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
