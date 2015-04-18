@@ -6,7 +6,7 @@
 {{ object.date }}
 {{ object.user }}
 {% load staticfiles %}
-<img src="{% static "tribe/photos/checkins/2015-02-24-193632_1366x768_scrot.png" %}" style="width: 80%">
+<img src="/{{ object.image.url }}" style="width: 80%">
 
 {% if user.is_leader and not object.has_been_approved %}
     <a href="/mytribe/tasks/{{object.id}}/update">

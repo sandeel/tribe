@@ -101,7 +101,7 @@ class CheckIn(models.Model):
     date = models.DateTimeField()
     points_awarded = models.IntegerField()
     approval = models.OneToOneField(Approval, null=True)
-    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+    image = models.ImageField(upload_to="tribe/static/tribe/photos/checkins", blank=True, null=True)
 
     @property
     def has_been_approved(self):

@@ -229,5 +229,10 @@ of a Python fake data generator which creates random users, tasks and rewards.
 * Achieved rewards now show on the user's homepage
 * Changes to the test data generator
 
-#2015-04-16
+# 2015-04-16
 * uploaded showcase information
+
+# 2015-04-18
+* Worked on getting tests working with Travis-CI
+* Added user photo support
+* Redesigned profile page to allow for photos
