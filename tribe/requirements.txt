@@ -1,4 +1,4 @@
-django
+django==1.7.1
 httpie
 django_crispy_forms
 djangorestframework
