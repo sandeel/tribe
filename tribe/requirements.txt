@@ -1,5 +1,5 @@
 django==1.7.1
 httpie
 django_crispy_forms
-djangorestframework
+djangorestframework==3.0.1
 pillow==2.7.0
