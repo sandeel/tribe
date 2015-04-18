@@ -1,7 +1,7 @@
 Tribe
 ====
 
-Travis CI [![Build Status](https://travis-ci.org/sandeel/tribe.svg?branch=master)](https://travis-ci.org/sandeel/tribe)
+[![Build Status](https://magnum.travis-ci.com/sandeel/tribe.svg?token=NjS4aGh98b349SYPZ4LQ&branch=master)](https://magnum.travis-ci.com/sandeel/tribe)
 
 Family-management application.
 
