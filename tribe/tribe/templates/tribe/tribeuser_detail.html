@@ -2,30 +2,35 @@
 
 {% block content %}
 
-<h2>{{ object.name }}</h2>
-
 <div class="row">
   <div class="col-md-4">
+    <h2>{{ object.name }}</h2>
     <div name="buttons">
     {% if user.password == object.password %}
         <a href="{{ object.get_absolute_url }}update/">
             <button type="button" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Edit my profile" class="btn btn-default">
-              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Edit
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
             </button>
         </a>
     {% endif %}
     </div>
   </div>
-
   <div class="col-md-4">
   </div>
-
   <div class="col-md-4">
   </div>
 </div>
+
 <hr />
 
 <div class="row">
+    {% if object.image %}
+    <div class="col-md-4">
+      <img src="/{{ object.image.url }}" style="width: 100%">
+    </div>
+    {% endif %}
+
+
   <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -36,6 +41,13 @@
       </div>
     </div>
   </div>
+
+  <div class="col-md-4">
+  </div>
+</div>
+<hr />
+
+<div class="row">
   <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-heading">

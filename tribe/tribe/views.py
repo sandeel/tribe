@@ -110,7 +110,8 @@ class TribeUserDetailView(DetailView):
 
 class TribeUserUpdate(UpdateView):
     model = TribeUser
-    fields = ['name', 'email']
+    fields = ['name', 'email', 'image']
+    template_name_suffix = '_update_form'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):

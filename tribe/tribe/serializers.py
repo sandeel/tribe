@@ -8,14 +8,14 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('id', 'email', 'password', 'name', 'is_leader')
+        fields = ('id', 'email', 'password', 'name', 'is_leader', 'image')
         extra_kwargs = {'password': {'write_only': True}}
 
 class TribeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tribe
-        fields = ('id', 'name', 'members', 'leaders', 'invited_users')
+        fields = ('id', 'name', 'members', 'leaders', 'invited_users', 'image')
         extra_kwargs = {'members': {'read_only': True},
                         'leaders': {'read_only': True},
                         'invited_users': {'read_only': True}}

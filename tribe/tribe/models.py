@@ -109,6 +109,8 @@ class InvitedUser(models.Model):
         super(InvitedUser, self).save(*args, **kwargs)
         # now email the new user
 
+def get_image_path(instance, filename):
+    return os.path.join('static', 'photos', 'users', filename)
 
 class TribeUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
@@ -126,6 +128,8 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
     leader_of = models.ForeignKey(Tribe, null=True, related_name='leaders')
 
     USERNAME_FIELD = 'email'
+
+    image = models.ImageField(upload_to="tribe/static/tribe/photos/user_profiles", blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.pk:

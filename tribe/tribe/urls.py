@@ -11,6 +11,8 @@ from points.views import TaskViewSet
 from points.views import CheckInViewSet
 from points.views import ApprovalViewSet
 from points.views import RewardViewSet
+from django.conf import settings
+from django.conf.urls.static import static
 
 admin.autodiscover()
 
@@ -56,3 +58,5 @@ urlpatterns = patterns('',
     url(r'^api-auth/', include('rest_framework.urls',
                                 namespace='rest_framework')),
 )
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
