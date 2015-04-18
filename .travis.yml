@@ -4,5 +4,5 @@ python:
 install:
   - pip install -r tribe/requirements.txt
 script:
-  - cd python
+  - cd tribe
   - python manage.py test
