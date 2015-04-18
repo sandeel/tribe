@@ -2,4 +2,4 @@ django==1.7.1
 httpie
 django_crispy_forms
 djangorestframework
-pillow
+pillow==2.7.0
