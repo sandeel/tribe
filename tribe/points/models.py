@@ -1,5 +1,6 @@
 import datetime
 from django.db import models
+import os
 
 
 
@@ -91,6 +92,8 @@ class Approval(models.Model):
     approver = models.ForeignKey('tribe.TribeUser', related_name = "approvals")
     date_approved = models.DateField(auto_now=True)
 
+def get_image_path(instance, filename):
+    return os.path.join('static', 'photos', 'checkins', filename)
 
 class CheckIn(models.Model):
     user = models.ForeignKey('tribe.TribeUser', related_name="checkins")
@@ -98,6 +101,7 @@ class CheckIn(models.Model):
     date = models.DateTimeField()
     points_awarded = models.IntegerField()
     approval = models.OneToOneField(Approval, null=True)
+    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
 
     @property
     def has_been_approved(self):

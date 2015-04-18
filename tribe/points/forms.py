@@ -24,7 +24,7 @@ class CheckInForm(forms.ModelForm):
 
     class Meta:
         model = CheckIn
-        fields = []
+        fields = ['image']
 
 class ApprovalForm(forms.ModelForm):
 

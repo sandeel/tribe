@@ -228,3 +228,6 @@ of a Python fake data generator which creates random users, tasks and rewards.
 * Points page now shows complete when reward achieved.
 * Achieved rewards now show on the user's homepage
 * Changes to the test data generator
+
+#2015-04-16
+* uploaded showcase information

@@ -21,7 +21,8 @@ class CheckInSerializer(serializers.ModelSerializer):
                                user = self.context['request'].user,
                                task = validated_data['task'],
                                date = datetime.datetime.today(),
-                               points_awarded = validated_data['task'].points_reward
+                               points_awarded = validated_data['task'].points_reward,
+                               image = validated_data['image'],
         )
 
 
@@ -29,10 +30,10 @@ class CheckInSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CheckIn
-        fields = ('id', 'user', 'task', 'date', 'points_awarded')
+        fields = ('id', 'user', 'task', 'date', 'points_awarded', 'image')
         extra_kwargs = {'user': {'read_only': True},
                         'date': {'read_only': True},
-                        'points_awarded': {'read_only': True}
+                        'points_awarded': {'read_only': True},
         }
 
 class ApprovalSerializer(serializers.ModelSerializer):
