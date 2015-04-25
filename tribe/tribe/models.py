@@ -189,7 +189,10 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
         return self.id in self.tribe.leaders.all().values_list('id',flat=True)
 
     def add_to_tribe(self, new_tribe):
+        old_tribe = self.tribe
         new_tribe.members.add(self)
+        if old_tribe.members.count() == 0:
+            old_tribe.delete()
 
     def promote_to_leader(self):
         if self.tribe == None:

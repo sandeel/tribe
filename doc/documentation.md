@@ -114,3 +114,7 @@ amount because I was only a one-person team, it still had some benefits and didn
 take too much time to set up. It was also of benefit to learn this skill as I 
 can see how continuous integration would be extremely useful in large teams who
 are working together on a single codebase.
+
+
+"I'm working on these rewards"
+"Rewards owed"

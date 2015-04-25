@@ -199,7 +199,38 @@ task9.assigned_users.add(kid1, kid2, kid3)
 
 
 # generate rewards for the tribe
-num_rewards = 10
+
+reward = Reward.objects.create(name = "€5 pocket money",
+                               description="Cash",
+                               points_required=50,
+                               tribe = tribe)
+reward.available_to.add(dad,mam,kid1,kid2,kid3)
+
+reward = Reward.objects.create(name = "€10 pocket money",
+                               description="Cash",
+                               points_required=100,
+                               tribe = tribe)
+reward.available_to.add(dad,mam,kid1,kid2,kid3)
+
+reward = Reward.objects.create(name = "Two hours of PlayStation",
+                               description="Taken all in one go",
+                               points_required=200,
+                               tribe = tribe)
+reward.available_to.add(dad,mam,kid1,kid2,kid3)
+
+reward = Reward.objects.create(name = "Take-away",
+                               description="",
+                               points_required=300,
+                               tribe = tribe)
+reward.available_to.add(dad,mam,kid1,kid2,kid3)
+
+reward = Reward.objects.create(name = "Bottle of wine",
+                               description="",
+                               points_required=150,
+                               tribe = tribe)
+reward.available_to.add(dad,mam,kid1,kid2,kid3)
+
+num_rewards = 5
 
 for x in range(0,num_rewards):
 
