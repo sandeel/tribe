@@ -2,14 +2,21 @@
 
 {% block content %}
 
+<div class="row">
+  <div class="col-md-4"></div>
+  <a href="/">
+    <div class="col-md-4 text-center">
+      <h2>Tribe</h2>
+
+      <hr>
+  </a>
+
 {% load crispy_forms_tags %}
 
-<div class="row row-centered">
-                <div class="col-md-4 col-centered"></div>
-                <div class="col-md-4 col-centered">
-                    <h1> sign up to tribe </h2>
+      <div class="row" style="margin: 10%;">
+        <h3>Sign up</h3>
+      </div>
                     {% crispy form %}
-                </div>
                 <div class="col-md-4 col-centered"></div>
 </div>
 
