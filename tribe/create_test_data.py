@@ -45,9 +45,13 @@ name = fake.sentence(nb_words=1)[:-1]+str(random.randint(0,1000))
 tribe = Tribe.objects.create(name=name)
 
 dad = TribeUser.objects.create(email=fake.email(), password="password", name=getNewName())
+dad.image = "tribe/static/tribe/photos/user_profiles/dad.jpg"
+dad.save()
 dad.add_to_tribe(tribe)
 
 mam = TribeUser.objects.create(email=fake.email(), password="password", name=getNewName())
+mam.image = "tribe/static/tribe/photos/user_profiles/mam.jpg"
+mam.save()
 mam.add_to_tribe(tribe)
 
 kid1 = TribeUser.objects.create(email=fake.email(), password="password", name=getNewName())
