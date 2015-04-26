@@ -1,8 +1,10 @@
-"""
-To run this script,
-export DJANGO_SETTINGS_MODULE=yoursite.settings
-"""
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
 import django
+import os
+
+os.environ['DJANGO_SETTINGS_MODULE'] = "tribe.settings"
+
 django.setup()
 
 import os
@@ -27,7 +29,7 @@ Generate a fake one-word name
 def getNewName():
     
     name = fake.name().split()[0]
-    while not "." or "Miss" in name:
+    while not "." or "Miss" or "Dr" in name:
         name = fake.name().split()[0]
     
     return name

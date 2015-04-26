@@ -236,3 +236,11 @@ of a Python fake data generator which creates random users, tasks and rewards.
 * Worked on getting tests working with Travis-CI
 * Added user photo support
 * Redesigned profile page to allow for photos
+
+# 2015-04-25
+* Styled the sign-up page
+* Added to the script for creating test data
+* Changes to Tribe management
+
+# 2015-04-26
+* 
