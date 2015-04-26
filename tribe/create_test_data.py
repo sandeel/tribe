@@ -29,7 +29,7 @@ Generate a fake one-word name
 def getNewName():
     
     name = fake.name().split()[0]
-    while not "." or "Miss" or "Dr" in name:
+    while any(title in name for title in ('.', 'Miss', 'Dr')):
         name = fake.name().split()[0]
     
     return name
