@@ -36,28 +36,38 @@
     <h2>Available Tasks</h2>
     {% for task in object_list %}
     {% if not task.has_been_checked_in_on and task.available_now %}
-    <a href="/mytribe/tasks/{{ task.id }}">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <div class="panel-title">
+  <a href="/mytribe/tasks/{{ task.id }}">
 <div class="row">
   <div class="col-md-3">
                         <span style="font-weight: bold; font-size: 100%;">10</span>
   </div>
   <div class="col-md-6">
-                          {{ task.name }}
+      {{ task.name }}
   </div>
   <div class="col-md-3">
                           <span class="glyphicon glyphicon-hourglass" aria-hidden="true" style="float: right;"></span>
   </div>
 </div>
+  </a>
                       </div>
                     </div>
                   <div class="panel-body">
                   {{ task.description }}
                   </div>
+                  <div class="panel-footer">
+                      Available to:
+                      {% if task.assigned_users.all %}
+                      {% for u in task.assigned_users.all %}
+                      <a href="/mytribe/{{u.id}}">{{u.name}}</a>
+                      {% endfor %}
+                      {% else %}
+                      Everyone
+                      {% endif %}
+                  </div>
                 </div>
-              </a>
             {% endif %}
         {% empty %}
             <p>No tasks yet.</p>
