@@ -2,7 +2,11 @@
 
 {% block content %}
 
-<h2>Edit Reward</h2>
+{% if object %}
+<h2>{{ object.name }}</h2>
+{% else %}
+<h2>New Reward</h2>
+{% endif %}
 
 {% load crispy_forms_tags %}
 
