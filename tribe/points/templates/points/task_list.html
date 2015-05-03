@@ -76,7 +76,7 @@
 
   <div class="col-md-4">
     <h2>Awaiting Approval</h2>
-      {% for task in object_list %}
+      {% for task in all_tasks %}
         {% if task.has_been_checked_in_on %}
           {% for checkin in task.checkins.all %}
             {% if not checkin.has_been_approved %}

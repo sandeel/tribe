@@ -102,6 +102,10 @@ class TaskList(ListView):
         available_now = [x for x in available_tasks if x.available_now]
         return available_now
 
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        context['all_tasks'] = Task.objects.filter(tribe=self.request.user.tribe)
+        return context
 
 # Categories
 class CategoryList(ListView):
