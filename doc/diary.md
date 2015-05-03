@@ -242,5 +242,9 @@ of a Python fake data generator which creates random users, tasks and rewards.
 * Added to the script for creating test data
 * Changes to Tribe management
 
-# 2015-04-26
+# 2015-05-02
+* Changed some styling
+* Changes to the points page
+
+# 2015-05-03
 * 

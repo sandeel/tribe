@@ -56,7 +56,14 @@ def register(request):
             new_user = form.save()
             new_user = authenticate(email=form.cleaned_data['email'], password=form.cleaned_data['password1'])
             login(request, new_user)
-            return HttpResponseRedirect("/create_tribe/")
+
+            # if the user is added to an existing tribe
+            # don't prompt them to name the tribe
+            if (new_user.tribe.members.count() > 1):
+                return HttpResponseRedirect("/mytribe/")
+            else:
+                return HttpResponseRedirect("/create_tribe/")
+
     else:
         form = RegistrationForm()
     return render(request, "registration/register.html", {
