@@ -185,7 +185,7 @@ class TribeManager(BaseUserManager):
 
 class Tribe(models.Model):
     objects = TribeManager()
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255, unique=False)
 
     def __str__(self):
         return self.name
@@ -291,6 +291,7 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
             else:
                 tribe_name = (self.name + "'s tribe")
                 self.tribe = Tribe.objects.create(name=tribe_name)
+                self.leader_of = self.tribe
             
         super(TribeUser, self).save(*args, **kwargs)
 
