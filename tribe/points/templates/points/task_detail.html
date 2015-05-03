@@ -18,6 +18,8 @@
     </a>
 {% endif %}
 
+{% if object.checkins %}
+<h2>Check-ins</h2>
 
 {% for checkin in object.checkins.all %}
 <a href="{{ checkin.get_absolute_url }}">
@@ -33,5 +35,7 @@
   </div>
 </a>
 {% endfor %}
+
+{% endif %}
 
 {% endblock %}
