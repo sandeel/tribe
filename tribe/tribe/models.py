@@ -36,7 +36,34 @@ class TribeUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+class TribeManager(BaseUserManager):
+
+    def create(self, name="My Tribe"):
+
+        tribe = self.model(
+            name=name,
+        )
+
+        tribe.save()
+
+        # create some default categories
+        tribe.categories.create(tribe=tribe,
+                                name="Household",
+                                description="Jobs around the house.")
+        tribe.categories.create(tribe=tribe,
+                                name="Pets",
+                                description="The animals of the house.")
+        tribe.categories.create(tribe=tribe,
+                                name="School",
+                                description="School and homework.")
+        tribe.categories.create(tribe=tribe,
+                                name="Sports and fitness",
+                                description="All sports",)
+
+        return tribe
+
 class Tribe(models.Model):
+    objects = TribeManager()
     name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
@@ -44,9 +71,6 @@ class Tribe(models.Model):
 
     def save(self, *args, **kwargs):
         super(Tribe, self).save(*args, **kwargs)
-        self.categories.add(Category.objects.create(tribe=self, name="Household", description="Jobs around the house."))
-        self.categories.add(Category.objects.create(tribe=self, name="Pets", description="The animals of the house."))
-        self.categories.add(Category.objects.create(tribe=self, name="School", description="School and homework."))
 
     @property
     def total_points(self):
