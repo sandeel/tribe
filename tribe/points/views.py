@@ -97,11 +97,10 @@ class TaskList(ListView):
 
 
     def get_queryset(self):
-        tasks = Task.objects.all()
+        tasks = Task.objects.filter(tribe=self.request.user.tribe)
         available_tasks = [x for x in tasks if x.available_to(self.request.user)]
-        return available_tasks
-        # filtered_by_available = (x for x in tasks if x.available_now)
-        # return filtered_by_available
+        available_now = [x for x in available_tasks if x.available_now]
+        return available_now
 
 
 # Categories

@@ -74,10 +74,9 @@ def create_tribe(request):
     if request.method == 'POST':
         form = CreateTribeForm(request.POST)
         if form.is_valid():
-            new_tribe = form.save()
-            new_tribe.members.add(request.user)
-            new_tribe.leaders.add(request.user)
-            new_tribe.save()
+            name = form.cleaned_data['name']
+            request.user.tribe.name = name
+            request.user.tribe.save()
             return HttpResponseRedirect("/mytribe")
     else:
         form = CreateTribeForm()

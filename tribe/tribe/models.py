@@ -282,7 +282,7 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
             #not in the database yet. Otherwise it would
             #have pk
 
-            # handle adding to a tribe
+            # handle adding to a tribe if invited
             invited_emails = InvitedUser.objects.values_list('email', flat=True)
             if (self.email in invited_emails):
                 invitedUser = InvitedUser.objects.get(email=self.email)

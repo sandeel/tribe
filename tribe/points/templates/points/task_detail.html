@@ -2,14 +2,9 @@
 
 {% block content %}
 
-<h1>{{ object.name }}</h1>
-{{ object.description }}
+<h1>task: {{ object.name }}</h1>
 
-{% if object.available_now %}
-{% load crispy_forms_tags %}
-{% crispy form %}
-{% endif %}
-
+<div name="buttons">
 {% if user.is_leader %}
     <a href="/mytribe/tasks/{{object.id}}/update">
         <button type="button" class="btn btn-default">
@@ -17,13 +12,23 @@
         </button>
     </a>
 {% endif %}
+</div>
+
+<hr />
+
+{{ object.description }}
+
+{% if object.available_now %}
+{% load crispy_forms_tags %}
+{% crispy form %}
+{% endif %}
 
 {% if object.checkins %}
 <h2>Check-ins</h2>
 
 {% for checkin in object.checkins.all %}
 <a href="{{ checkin.get_absolute_url }}">
-  <div class="panel panel-primary">
+  <div class="panel panel-default">
     <div class="panel-heading">
       <div class="panel-title">
         {{ checkin.user.name }}
