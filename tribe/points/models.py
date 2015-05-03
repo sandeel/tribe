@@ -49,6 +49,17 @@ class Task(models.Model):
     def available_now(self):
         return self.checkIfAvailable(datetime.datetime.today())
 
+    def available_to(self, user):
+        # if no assigned users assume available to all
+        if (not self.assigned_users.exists()):
+            return True
+
+        # if in assigned users it's available
+        if (self.assigned_users.filter(id=user.id).exists()):
+            return True
+
+        return False
+
     def checkIfAvailable(self,datetime):
 
         if CheckIn.objects.filter(task=self):
@@ -61,7 +72,6 @@ class Task(models.Model):
             return True
 
         # below happens if no date_available set
-
         day_of_week_of_date=datetime.weekday()
         
         days = {

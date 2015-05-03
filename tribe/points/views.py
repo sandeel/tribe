@@ -97,9 +97,9 @@ class TaskList(ListView):
 
 
     def get_queryset(self):
-        id = self.request.user.id
-        tasks = Task.objects.filter(assigned_users__id=id)
-        return tasks
+        tasks = Task.objects.all()
+        available_tasks = [x for x in tasks if x.available_to(self.request.user)]
+        return available_tasks
         # filtered_by_available = (x for x in tasks if x.available_now)
         # return filtered_by_available
 
