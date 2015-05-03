@@ -39,19 +39,20 @@
     <div class="panel panel-primary">
       <div class="panel-heading">
         <div class="panel-title">
-  <a href="/mytribe/tasks/{{ task.id }}">
-<div class="row">
-  <div class="col-md-3">
-                        <span style="font-weight: bold; font-size: 100%;">10</span>
-  </div>
-  <div class="col-md-6">
-      {{ task.name }}
-  </div>
-  <div class="col-md-3">
-                          <span class="glyphicon glyphicon-hourglass" aria-hidden="true" style="float: right;"></span>
-  </div>
-</div>
-  </a>
+          <a href="/mytribe/tasks/{{ task.id }}">
+            <div class="row">
+              <div class="col-md-3">
+                                    <span style="font-weight: bold; font-size: 100%;">10</span>
+              </div>
+              <div class="col-md-6">
+                  {{ task.name }}
+              </div>
+              <div class="col-md-3">
+                                      <span class="glyphicon glyphicon-hourglass" aria-hidden="true" style="float: right;"></span>
+              </div>
+            </div>
+          </a>
+
                       </div>
                     </div>
                   <div class="panel-body">
@@ -102,7 +103,7 @@
 
   <div class="col-md-4">
     <h2>Complete!</h2>
-      {% for task in object_list %}
+      {% for task in all_tasks %}
         {% if task.has_been_checked_in_on %}
           {% for checkin in task.checkins.all %}
             {% if checkin.has_been_approved %}
