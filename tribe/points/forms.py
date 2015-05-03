@@ -5,6 +5,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from crispy_forms.layout import Layout
 from crispy_forms.layout import Hidden
+from crispy_forms.layout import Field
 
 class CheckInForm(forms.ModelForm):
 
@@ -47,3 +48,36 @@ class ApprovalForm(forms.ModelForm):
 
     class Meta:
         model = CheckIn
+
+class TaskForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(TaskForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+
+        self.helper.form_id = 'id-exampleForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = ''
+
+        self.helper['time_available_from'].wrap(Field, placeholder="00:00:00")
+        self.helper['time_available_to'].wrap(Field, placeholder="00:00:00")
+
+        self.helper.add_input(Submit('submit', 'Submit'))
+
+    class Meta:
+        model = Task
+        fields = ('id', 'name', 'description', 'category',
+                  'points_reward', 'assigned_users',
+                  'date_available',
+                  'time_available_from',
+                  'time_available_to',
+                  'monday',
+                  'tuesday',
+                  'wednesday',
+                  'thursday',
+                  'friday',
+                  'saturday',
+                  'sunday')
+

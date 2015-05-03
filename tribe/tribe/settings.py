@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'points',
     'rest_framework',
     'crispy_forms',
-    #'guardian'
+    'datetimewidget',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -21,6 +21,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import redirect
 from points.forms import CheckInForm
 from points.forms import ApprovalForm
+from points.forms import TaskForm
 from rest_framework import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -30,19 +31,7 @@ from django.shortcuts import render
 
 class TaskCreate(CreateView):
     model = Task
-
-    fields = ('id', 'name', 'description', 'category',
-              'points_reward', 'assigned_users',
-              'date_available',
-              'time_available_from',
-              'time_available_to',
-              'monday',
-              'tuesday',
-              'wednesday',
-              'thursday',
-              'friday',
-              'saturday',
-              'sunday')
+    form_class = TaskForm
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -82,6 +71,7 @@ class TaskDetail(DetailView, FormView):
 
 class TaskUpdate(UpdateView):
     model = Task
+    form_class = TaskForm
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):

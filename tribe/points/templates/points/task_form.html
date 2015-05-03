@@ -4,13 +4,6 @@
 <h2>Create new task</h2>
 
 {% load crispy_forms_tags %}
-
-<div id="wrapper">
-<form action="" method="post" name="form" id="form">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <input type="submit" value="Update" />
-</form>
-</div>
+{% crispy form %}
 
 {% endblock %}
