@@ -59,28 +59,34 @@ class TribeManager(BaseUserManager):
         tribe.categories.create(tribe=tribe,
                                 name="Sports and fitness",
                                 description="All sports",)
+        tribe.categories.create(tribe=tribe,
+                                name="Tribe",
+                                description="Related to admin of the tribe",)
 
         # create some default tasks
         tribe.tasks.create(
             tribe = tribe,
-            name = "Take out the bins",
-            description = "Put the green and black bins out on the road.", 
-            category = Category.objects.get(tribe=tribe, name="Household"),
+            name = "Invite your tribe members.",
+            description = "Go to the tribe page and invite your tribe members \
+                           by entering their email addresses",
+            category = Category.objects.get(tribe=tribe, name="Tribe"),
             points_reward = 20, 
-            monday = True, 
+            monday = False, 
             tuesday = False,
             wednesday = False,
             thursday = False,
             friday = False,
             saturday = False,
-            sunday = True,
+            sunday = False,
+            date_available_to = two_weeks_from_now,
         )
 
         tribe.tasks.create(
             tribe = tribe,
-            name = "Take the dogs for a walk.",
-            description = "At least 15 mins.", 
-            category = Category.objects.get(tribe=tribe, name="Pets"),
+            name = "Profile photos for tribe members.",
+            description = "Upload photos for each tribe member via their profile \
+                           pages.",
+            category = Category.objects.get(tribe=tribe, name="Tribe"),
             points_reward = 40, 
             monday = True, 
             tuesday = True,

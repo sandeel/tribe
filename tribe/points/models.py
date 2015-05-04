@@ -44,6 +44,7 @@ class Task(models.Model):
 
     #Available date
     date_available = models.DateField(null=True, blank=True)
+    date_available_to = models.DateField(null=True, blank=True)
 
     @property
     def available_now(self):
@@ -66,7 +67,12 @@ class Task(models.Model):
             return False
 
         if self.date_available:
-            if self.date_available != datetime:
+            if self.date_available_to:
+                if self.date_available < datetime.date() <= self.date_available_to:
+                    return True
+                else:
+                    return False
+            elif self.date_available != datetime.date():
                 return False
             ## check time
             return True

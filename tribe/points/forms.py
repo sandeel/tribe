@@ -78,6 +78,7 @@ class TaskForm(forms.ModelForm):
                     'time_available_from',
                     'time_available_to',
                     'date_available',
+                    'date_available_to',
                 ),
             ),
             ButtonHolder(
@@ -96,6 +97,7 @@ class TaskForm(forms.ModelForm):
         fields = ('id', 'name', 'description', 'category',
                   'points_reward', 'assigned_users',
                   'date_available',
+                  'date_available_to',
                   'time_available_from',
                   'time_available_to',
                   'monday',
