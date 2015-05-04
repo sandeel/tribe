@@ -119,11 +119,7 @@ class RewardForm(forms.ModelForm):
 
         self.helper = FormHelper()
 
-        self.helper.layout = Layout(
-            ButtonHolder(
-                Submit('submit', 'Submit'),
-            )
-        )
+        self.helper.add_input(Submit('approve', 'Approve'))
 
 
         super(RewardForm, self).__init__(*args, **kwargs)
