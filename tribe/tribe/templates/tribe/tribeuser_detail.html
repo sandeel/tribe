@@ -25,13 +25,13 @@
 
 <div class="row">
     {% if object.image %}
-    <div class="col-md-4">
+    <div class="col-md-6">
       <img src="/{{ object.image.url }}" style="width: 100%">
     </div>
     {% endif %}
 
 
-  <div class="col-md-4">
+  <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
         Email
@@ -48,7 +48,7 @@
 <hr />
 
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
         Points this week
@@ -58,7 +58,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
         Total Points
@@ -71,31 +71,38 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Rewards
+        Rewards Wanted
       </div>
       <div class="panel-body">
         {% for reward in object.available_rewards.all %}
-        <p>{{ reward.name }}</p>
+          <div class="well" style="text-align: center;">
+          <a href="/mytribe/tasks/rewards/{{ reward.id }}">
+            {{ reward.name }}
+          </a>
+          <p>
+            {{ user.points }} /
+            {{ reward.points_required }}
+          </p>
+          </div>
         {% endfor %}
       </div>
     </div>
   </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Rewards Achieved
+        Rewards Earned
       </div>
-      <div class="panel-body">
-        {% for reward in object.achieved_rewards.all %}
-        <p>{{ reward.reward.name }}</p>
-        {% endfor %}
-      </div>
+        <div class="panel-body">
+          {% for reward in object.achieved_rewards.all %}
+          <a href="/mytribe/tasks/rewards/{{ reward.id }}">
+            <p>{{ reward.reward.name }}</p>
+          </a>
+          {% endfor %}
+        </div>
     </div>
   </div>
 </div>
