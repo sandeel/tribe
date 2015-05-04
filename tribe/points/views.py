@@ -47,6 +47,7 @@ class TaskCreate(CreateView):
 
     def get_context_data(self, **kwargs):
             context = super(TaskCreate, self).get_context_data(**kwargs)
+            context['form'].fields['category'].queryset = Category.objects.filter(tribe=self.request.user.tribe)
             context['form'].fields['assigned_users'].queryset = TribeUser.objects.filter(tribe=self.request.user.tribe)
             return context
 

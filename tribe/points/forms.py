@@ -56,7 +56,7 @@ class TaskForm(forms.ModelForm):
 
         self.helper.layout = Layout(
             Fieldset(
-                'first arg is the legend of the fieldset',
+                'create a new task',
                 'name',
                 'description',
                 'category',
