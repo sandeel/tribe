@@ -64,127 +64,28 @@ class TribeManager(BaseUserManager):
                                 description="Related to admin of the tribe",)
 
         # create some default tasks
+        two_weeks_from_now = (datetime.datetime.today() + datetime.timedelta(days=14))
+
         tribe.tasks.create(
             tribe = tribe,
-            name = "Invite your tribe members.",
+            name = "Invite your tribe",
             description = "Go to the tribe page and invite your tribe members \
                            by entering their email addresses",
             category = Category.objects.get(tribe=tribe, name="Tribe"),
             points_reward = 20, 
-            monday = False, 
-            tuesday = False,
-            wednesday = False,
-            thursday = False,
-            friday = False,
-            saturday = False,
-            sunday = False,
+            date_available= datetime.datetime.today(),
             date_available_to = two_weeks_from_now,
         )
 
         tribe.tasks.create(
             tribe = tribe,
-            name = "Profile photos for tribe members.",
+            name = "Profile photos",
             description = "Upload photos for each tribe member via their profile \
                            pages.",
             category = Category.objects.get(tribe=tribe, name="Tribe"),
             points_reward = 40, 
-            monday = True, 
-            tuesday = True,
-            wednesday = True,
-            thursday = True,
-            friday = True,
-            saturday = True,
-            sunday = True,
-        )
-
-        tribe.tasks.create(
-            tribe = tribe,
-            name = "Put on a laundry wash.",
-            description = "Empty the linen baskets from all bedrooms.", 
-            category = Category.objects.get(tribe=tribe, name="Household"),
-            points_reward = 15, 
-            monday = True, 
-            tuesday = True,
-            wednesday = True,
-            thursday = True,
-            friday = True,
-            saturday = True,
-            sunday = True,
-        )
-
-        tribe.tasks.create(
-            tribe = tribe,
-            name = "Feed the dogs.",
-            description = "One can of pedigree chum each.", 
-            category = Category.objects.get(tribe=tribe, name="Pets"),
-            points_reward = 15, 
-            monday = True, 
-            tuesday = True,
-            wednesday = True,
-            thursday = True,
-            friday = True,
-            saturday = True,
-            sunday = True,
-        )
-
-        tribe.tasks.create(
-            tribe = tribe,
-            name = "Make bed.",
-            description = "Make own bed.", 
-            category = Category.objects.get(tribe=tribe, name="Household"),
-            points_reward = 5, 
-            monday = True, 
-            tuesday = True,
-            wednesday = True,
-            thursday = True,
-            friday = True,
-            saturday = True,
-            sunday = True,
-        )
-
-        tribe.tasks.create(
-            tribe = tribe,
-            name = "Tidy bedroom.",
-            description = "Take everything off floor, dirty clothes in laundry basket.", 
-            category = Category.objects.get(tribe=tribe, name="Household"),
-            points_reward = 10, 
-            monday = True, 
-            tuesday = True,
-            wednesday = True,
-            thursday = True,
-            friday = True,
-            saturday = True,
-            sunday = True,
-        )
-
-        tribe.tasks.create(
-            tribe = tribe,
-            name = "Brush teeth",
-            description = "Brush teeth with toothpaste in bathroom.",
-            category = Category.objects.get(tribe=tribe, name="Household"),
-            points_reward = 5, 
-            monday = True, 
-            tuesday = True,
-            wednesday = True,
-            thursday = True,
-            friday = True,
-            saturday = True,
-            sunday = True,
-        )
-
-        tribe.tasks.create(
-            tribe = tribe,
-            name = "Do homework",
-            description = "Every subject. Check homework journal.",
-            category = Category.objects.get(tribe=tribe, name="School"),
-            points_reward = 30, 
-            monday = True, 
-            tuesday = True,
-            wednesday = True,
-            thursday = True,
-            friday = True,
-            saturday = True,
-            sunday = True,
+            date_available= datetime.datetime.today(),
+            date_available_to = two_weeks_from_now,
         )
 
         return tribe

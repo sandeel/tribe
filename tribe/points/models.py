@@ -68,7 +68,7 @@ class Task(models.Model):
 
         if self.date_available:
             if self.date_available_to:
-                if self.date_available < datetime.date() <= self.date_available_to:
+                if self.date_available <= datetime.date() <= self.date_available_to:
                     return True
                 else:
                     return False
@@ -102,6 +102,12 @@ class Task(models.Model):
             return True
 
         return False
+
+    @property
+    def days_remaining(self):
+        if self.date_available_to:
+            td = self.date_available_to - datetime.datetime.now().date()
+            return td
 
 
 class Approval(models.Model):

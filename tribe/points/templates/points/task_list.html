@@ -59,13 +59,17 @@
                   {{ task.description }}
                   </div>
                   <div class="panel-footer">
-                      Available to:
+                      <p><b>Available to:</b>
                       {% if task.assigned_users.all %}
                       {% for u in task.assigned_users.all %}
                       <a href="/mytribe/{{u.id}}">{{u.name}}</a>
                       {% endfor %}
                       {% else %}
                       Everyone
+                      {% endif %}
+                      </p>
+                      {% if task.days_remaining %}
+                      <p><b>Days remainining:</b> {{ task.days_remaining.days }}</p>
                       {% endif %}
                   </div>
                 </div>
