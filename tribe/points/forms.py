@@ -2,10 +2,9 @@ from django import forms
 from points.models import CheckIn
 from points.models import Task
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
-from crispy_forms.layout import Layout
 from crispy_forms.layout import Hidden
 from crispy_forms.layout import Field
+from crispy_forms.layout import Layout, Fieldset, MultiField, ButtonHolder, Submit
 
 class CheckInForm(forms.ModelForm):
 
@@ -52,19 +51,45 @@ class ApprovalForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-        super(TaskForm, self).__init__(*args, **kwargs)
 
-        self.helper = FormHelper(self)
+        self.helper = FormHelper()
 
-        self.helper.form_id = 'id-exampleForm'
-        self.helper.form_class = 'blueForms'
-        self.helper.form_method = 'post'
-        self.helper.form_action = ''
+        self.helper.layout = Layout(
+            Fieldset(
+                'first arg is the legend of the fieldset',
+                'name',
+                'description',
+                'category',
+                'points_reward',
+                Fieldset(
+                    'Tribe members available to',
+                    'assigned_users',
+                ),
+                Fieldset(
+                    'When available',
+                    'Days available',
+                    'monday',
+                    'tuesday',
+                    'wednesday',
+                    'thursday',
+                    'friday',
+                    'saturday',
+                    'sunday',
+                    'time_available_from',
+                    'time_available_to',
+                    'date_available',
+                ),
+            ),
+            ButtonHolder(
+                Submit('submit', 'Submit'),
+            )
+        )
 
         self.helper['time_available_from'].wrap(Field, placeholder="00:00:00")
         self.helper['time_available_to'].wrap(Field, placeholder="00:00:00")
+        self.helper['date_available'].wrap(Field, placeholder="YYYY-MM-DD")
 
-        self.helper.add_input(Submit('submit', 'Submit'))
+        super(TaskForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Task
