@@ -22,6 +22,7 @@ from django.shortcuts import redirect
 from points.forms import CheckInForm
 from points.forms import ApprovalForm
 from points.forms import TaskForm
+from points.forms import RewardForm
 from rest_framework import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -166,6 +167,7 @@ class CategoryUpdate(UpdateView):
 # Rewards
 class RewardCreate(CreateView):
     model = Reward
+    form_class = RewardForm
 
     fields = [
                 'name',
@@ -175,10 +177,14 @@ class RewardCreate(CreateView):
              ]
 
     def post(self, request, *args, **kwargs):
-
         RewardViewSet.as_view({'post': 'create',})(self.request)
         return redirect('/mytribe/tasks/rewards/')
 
+    def get_context_data(self, **kwargs):
+            context = super(RewardCreate, self).get_context_data(**kwargs)
+            context['form'].fields['available_to'].queryset = TribeUser.objects.filter(tribe=self.request.user.tribe)
+            return context
+    
 class RewardList(ListView):
     model = Reward
 

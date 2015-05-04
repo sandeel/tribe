@@ -1,6 +1,8 @@
 from django import forms
 from points.models import CheckIn
+from tribe.models import TribeUser
 from points.models import Task
+from points.models import Reward
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Hidden
 from crispy_forms.layout import Field
@@ -86,12 +88,14 @@ class TaskForm(forms.ModelForm):
             )
         )
 
+
         self.helper['time_available_from'].wrap(Field, placeholder="00:00:00")
         self.helper['time_available_to'].wrap(Field, placeholder="00:00:00")
         self.helper['date_available'].wrap(Field, placeholder="yyyy-mm-dd")
         self.helper['date_available_to'].wrap(Field, placeholder="yyyy-mm-dd")
 
         super(TaskForm, self).__init__(*args, **kwargs)
+
 
     class Meta:
         model = Task
@@ -108,4 +112,25 @@ class TaskForm(forms.ModelForm):
                   'friday',
                   'saturday',
                   'sunday')
+
+class RewardForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+
+        self.helper = FormHelper()
+
+        self.helper.layout = Layout(
+            ButtonHolder(
+                Submit('submit', 'Submit'),
+            )
+        )
+
+
+        super(RewardForm, self).__init__(*args, **kwargs)
+
+
+    class Meta:
+        model = Reward
+        fields = ('id', 'name', 'description','available_to',
+                  'points_required')
 
