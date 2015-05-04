@@ -102,6 +102,11 @@ class TaskList(ListView):
 class CategoryList(ListView):
     model = Category
 
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        context['object_list'] = Category.objects.filter(tribe=self.request.user.tribe)
+        return context
+
     """
     Prevent unauthorized access
     """
