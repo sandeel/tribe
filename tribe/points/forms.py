@@ -88,7 +88,8 @@ class TaskForm(forms.ModelForm):
 
         self.helper['time_available_from'].wrap(Field, placeholder="00:00:00")
         self.helper['time_available_to'].wrap(Field, placeholder="00:00:00")
-        self.helper['date_available'].wrap(Field, placeholder="YYYY-MM-DD")
+        self.helper['date_available'].wrap(Field, placeholder="yyyy-mm-dd")
+        self.helper['date_available_to'].wrap(Field, placeholder="yyyy-mm-dd")
 
         super(TaskForm, self).__init__(*args, **kwargs)
 

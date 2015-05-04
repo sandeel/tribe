@@ -88,6 +88,17 @@ class TribeManager(BaseUserManager):
             date_available_to = two_weeks_from_now,
         )
 
+        tribe.tasks.create(
+            tribe = tribe,
+            name = "Approve check-in",
+            description = "After checking in in a task, approve the check-in \
+                           to score points.",
+            category = Category.objects.get(tribe=tribe, name="Tribe"),
+            points_reward = 60, 
+            date_available= datetime.datetime.today(),
+            date_available_to = two_weeks_from_now,
+        )
+
         return tribe
 
 class Tribe(models.Model):
