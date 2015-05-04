@@ -14,17 +14,16 @@
 
 <div class="row">
   <div class="col-md-6">
-
-    <ul>
-    {% for reward in object_list %}
-        <li>
-           <a href="{{ reward.id }}">
-                <h3>{{ reward.name }}</h3>
-            </a>
+      <ul class="list-group">
+        {% for reward in object_list %}
+        <li class="list-group-item">
+        <span class="badge">{{ reward.points_required }} points</span>
+          <a href="{{ reward.id }}">
+                {{ reward.name }}
+          </a>
         </li>
-    {% endfor %}
-    </ul>
-
+        {% endfor %}
+      </ul>
   </div>
 
    </div>
