@@ -163,7 +163,7 @@ class Tribe(models.Model):
 class InvitedUser(models.Model):
 
     def __str(self):
-        return email
+        return self.email
 
     email = models.EmailField(unique=True)
     tribe = models.ForeignKey(Tribe, related_name='invited_users')
@@ -194,6 +194,9 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
 
     image = models.ImageField(upload_to="tribe/static/tribe/photos/user_profiles", blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
     def save(self, *args, **kwargs):
         if not self.pk:
             #This code only happens if the objects is
@@ -220,9 +223,6 @@ class TribeUser(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         # The user is identified by their email address
-        return self.email
-
-    def __str__(self):
         return self.email
 
     def has_perm(self, perm, obj=None):
