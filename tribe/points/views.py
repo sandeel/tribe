@@ -204,6 +204,11 @@ class RewardUpdate(UpdateView):
                 'points_required',
              ]
 
+    def get_context_data(self, **kwargs):
+        context = super(RewardUpdate, self).get_context_data(**kwargs)
+        context['form'].fields['available_to'].queryset = TribeUser.objects.filter(tribe=self.request.user.tribe)
+        return context
+
 
 # CheckIns
 class CheckInDetail(DetailView):
