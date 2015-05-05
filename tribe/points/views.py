@@ -200,7 +200,11 @@ class RewardCreate(CreateView):
                 'points_required',
              ]
 
-    def post(self, request, *args, **kwargs):
+    def form_valid(self, request, *args, **kwargs):
+        """
+        If the form is **valid** send the data to the API
+        and redirect to the rewards list
+        """
         RewardViewSet.as_view({'post': 'create',})(self.request)
         return redirect('/mytribe/tasks/rewards/')
 

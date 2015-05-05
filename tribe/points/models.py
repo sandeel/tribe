@@ -68,9 +68,6 @@ class Task(models.Model):
         if CheckIn.objects.filter(task=self):
             return False
 
-        print(date)
-        print(self.date_available_to)
-
         if self.date_available:
             if self.date_available_to:
                 if self.date_available <= date <= self.date_available_to:
@@ -151,6 +148,7 @@ class Reward(models.Model):
     available_to = models.ManyToManyField(
                                         'tribe.TribeUser',
                                         related_name="available_rewards",
+                                        blank=True,
                                         )
     points_required = models.IntegerField()
 
