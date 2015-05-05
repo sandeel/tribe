@@ -31,13 +31,13 @@ class Task(models.Model):
                                         )
 
     #Available days
-    monday = models.BooleanField(default=False)
-    tuesday = models.BooleanField(default=False)
-    wednesday = models.BooleanField(default=False)
-    thursday = models.BooleanField(default=False)
-    friday = models.BooleanField(default=False)
-    saturday = models.BooleanField(default=False)
-    sunday = models.BooleanField(default=False)
+    monday = models.BooleanField(default=True)
+    tuesday = models.BooleanField(default=True)
+    wednesday = models.BooleanField(default=True)
+    thursday = models.BooleanField(default=True)
+    friday = models.BooleanField(default=True)
+    saturday = models.BooleanField(default=True)
+    sunday = models.BooleanField(default=True)
 
     #Available from/to
     time_available_from = models.TimeField(null=True, blank=True)
