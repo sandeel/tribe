@@ -224,6 +224,7 @@ class RewardDetail(DetailView):
 
 class RewardUpdate(UpdateView):
     model = Reward
+    form_class = RewardForm
 
     fields = [
                 'name',
