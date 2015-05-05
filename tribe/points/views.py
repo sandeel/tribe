@@ -1,5 +1,6 @@
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
@@ -92,6 +93,14 @@ class TaskUpdate(UpdateView):
             context['form'].fields['category'].queryset = Category.objects.filter(tribe=self.request.user.tribe)
             context['form'].fields['assigned_users'].queryset = TribeUser.objects.filter(tribe=self.request.user.tribe)
             return context
+
+class TaskDelete(DeleteView):
+    model = Task
+    success_url = '/mytribe/tasks'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TaskDelete, self).dispatch(*args, **kwargs)
 
 class TaskList(ListView):
     model = Task

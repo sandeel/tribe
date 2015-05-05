@@ -69,5 +69,8 @@ urlpatterns = patterns('',
         views.TaskUpdate.as_view(success_url="/mytribe/tasks/%(id)s/")
        ),
 
+    url(r'(?P<pk>\d+)/delete/$',
+        views.TaskDelete.as_view()
+       ),
 
 )
