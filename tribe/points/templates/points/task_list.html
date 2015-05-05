@@ -37,29 +37,40 @@
 
   <div class="col-md-4">
     <h2>Available...</h2>
-    {% for task in object_list %}
-    {% if not task.has_been_checked_in_on and task.available_now %}
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <div class="panel-title">
-          <a href="/mytribe/tasks/{{ task.id }}">
-            <div class="row">
-              <div class="col-md-3">
-                  <span style="font-weight: bold; font-size: 120%;">{{ task.points_reward }}</span>
-              </div>
-              <div class="col-md-6">
-                  {{ task.name }}
-              </div>
-              <div class="col-md-3">
-                                      <span class="glyphicon glyphicon-hourglass" aria-hidden="true" style="float: right;"></span>
-              </div>
-            </div>
-          </a>
-
-                      </div>
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        {% for category in categories.all %}
+          <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingone">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ category.id }}" aria-expanded="true" aria-controls="collapse{{ category.id }}">
+                {{ category.name }}
+              </a>
+            </h4>
+          </div>
+            <div id="collapse{{ category.id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body" style="padding: 0">
+          {% for task in object_list %}
+          {% if task.category == category and not task.has_been_checked_in_on and task.available_now %}
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <div class="panel-title">
+                      <a href="/mytribe/tasks/{{ task.id }}">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <span style="font-weight: bold; font-size: 120%;">{{ task.points_reward }}</span>
+                          </div>
+                          <div class="col-md-6">
+                            {{ task.name }}
+                          </div>
+                          <div class="col-md-3">
+                            <span class="glyphicon glyphicon-hourglass" aria-hidden="true" style="float: right;"></span>
+                          </div>
+                        </div>
+                      </a>
                     </div>
+                  </div>
                   <div class="panel-body">
-                  {{ task.description }}
+                    {{ task.description }}
                   </div>
                   <div class="panel-footer">
                       <p><b>Available to:</b>
@@ -70,16 +81,21 @@
                       {% else %}
                       Everyone
                       {% endif %}
-                      </p>
-                      {% if task.days_remaining %}
-                      <p><b>Days remainining:</b> {{ task.days_remaining.days }}</p>
-                      {% endif %}
+                        </p>
+                        {% if task.days_remaining %}
+                        <p><b>Days remainining:</b> {{ task.days_remaining.days }}</p>
+                        {% endif %}
                   </div>
                 </div>
             {% endif %}
-        {% empty %}
+            {% empty %}
             <p>No tasks yet.</p>
-        {% endfor %}
+            {% endfor %}
+              </div>
+            </div>
+        </div>
+      {% endfor %}
+    </div>
   </div>
 
   <div class="col-md-4">

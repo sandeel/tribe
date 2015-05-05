@@ -120,6 +120,7 @@ class TaskList(ListView):
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
         context['all_tasks'] = Task.objects.filter(tribe=self.request.user.tribe)
+        context['categories'] = tribe=self.request.user.tribe.categories
         return context
 
 # Categories
