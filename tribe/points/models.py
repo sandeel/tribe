@@ -27,6 +27,7 @@ class Task(models.Model):
     assigned_users = models.ManyToManyField(
                                         'tribe.TribeUser',
                                         related_name="tasks",
+                                        blank=True,
                                         )
 
     #Available days
