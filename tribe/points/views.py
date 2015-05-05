@@ -79,6 +79,14 @@ class TaskUpdate(UpdateView):
     def dispatch(self, *args, **kwargs):
         return super(TaskUpdate, self).dispatch(*args, **kwargs)
 
+    def form_valid(self, form):
+        """
+        If the form is **valid** send the data to the API
+        and redirect to the tasks list
+        """
+        TaskViewSet.as_view(actions={'post': 'update',})(self.request, pk=self.object.pk)
+        return redirect('/mytribe/tasks/')
+
     def get_context_data(self, **kwargs):
             context = super(TaskUpdate, self).get_context_data(**kwargs)
             context['form'].fields['category'].queryset = Category.objects.filter(tribe=self.request.user.tribe)

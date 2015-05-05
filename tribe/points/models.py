@@ -49,7 +49,7 @@ class Task(models.Model):
 
     @property
     def available_now(self):
-        return self.checkIfAvailable(datetime.datetime.today())
+        return self.checkIfAvailable(datetime.datetime.today().date())
 
     def available_to(self, user):
         # if no assigned users assume available to all
@@ -62,24 +62,28 @@ class Task(models.Model):
 
         return False
 
-    def checkIfAvailable(self,datetime):
+    def checkIfAvailable(self,date):
 
+        # if already completed
         if CheckIn.objects.filter(task=self):
             return False
 
+        print(date)
+        print(self.date_available_to)
+
         if self.date_available:
             if self.date_available_to:
-                if self.date_available <= datetime.date() <= self.date_available_to:
+                if self.date_available <= date <= self.date_available_to:
                     return True
                 else:
                     return False
-            elif self.date_available != datetime.date():
+            elif self.date_available != date:
                 return False
             ## check time
             return True
 
         # below happens if no date_available set
-        day_of_week_of_date=datetime.weekday()
+        day_of_week_of_date=date.weekday()
         
         days = {
             0: self.monday,

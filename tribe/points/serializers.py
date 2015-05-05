@@ -89,6 +89,9 @@ class TaskSerializer(serializers.ModelSerializer):
                                friday = validated_data['friday'],
                                saturday = validated_data['saturday'],
                                sunday = validated_data['sunday'],
+
+                               date_available = validated_data['date_available'],
+                               date_available_to = validated_data['date_available_to'],
         )
 
         task.assigned_users = validated_data['assigned_users']
@@ -100,6 +103,7 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'description', 'category',
                   'points_reward', 'assigned_users',
                   'date_available',
+                  'date_available_to',
                   'time_available_from',
                   'time_available_to',
                   'monday',
