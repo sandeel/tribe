@@ -6,7 +6,8 @@ from points.models import Reward
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Hidden
 from crispy_forms.layout import Field
-from crispy_forms.layout import Layout, Fieldset, MultiField, ButtonHolder, Submit
+from crispy_forms.layout import Layout, Fieldset, MultiField, ButtonHolder, Submit, HTML, Div
+from crispy_forms.bootstrap import InlineField
 
 class CheckInForm(forms.ModelForm):
 
@@ -58,37 +59,72 @@ class TaskForm(forms.ModelForm):
 
         self.helper.layout = Layout(
             Fieldset(
-                'create a new task',
+                'task details',
                 'name',
                 'description',
                 'category',
                 'points_reward',
-                Fieldset(
-                    'Tribe members available to',
-                    'assigned_users',
+                HTML("""
+                    <div class="panel panel-default">
+                      <div class="panel-heading"><strong>Available every</strong></div>
+                      <div class="panel-body">
+                """),
+                Div(
+                    Div('monday',css_class='col-md-3',),
+                    Div('tuesday',css_class='col-md-3',),
+                    Div('wednesday',css_class='col-md-3',),
+                    Div('thursday',css_class='col-md-3',),
+                    css_class='row',
                 ),
-                Fieldset(
-                    'When available',
-                    'Days available',
-                    'monday',
-                    'tuesday',
-                    'wednesday',
-                    'thursday',
-                    'friday',
-                    'saturday',
-                    'sunday',
-                    'time_available_from',
-                    'time_available_to',
-                    'date_available',
-                    'date_available_to',
+                Div(
+                    Div('friday',css_class='col-md-3',),
+                    Div('saturday',css_class='col-md-3',),
+                    Div('sunday',css_class='col-md-3',),
+                    css_class='row',
                 ),
+                HTML("""
+                      </div>
+                    </div>
+                """),
             ),
-            ButtonHolder(
-                Submit('submit', 'Submit'),
+            Fieldset(
+                'Availability',
+                HTML("""
+                    <div class="alert alert-info" role="alert">
+                      Leave this blank for tasks available to your whole tribe.
+                    </div>
+                """),
+                'assigned_users',
+            ),
+            Fieldset(
+                'Time',
+                HTML("""
+                    <div class="alert alert-info" role="alert">
+                      Enter these if task can only be completed between certain times.
+                    </div>
+                """),
+                'time_available_from',
+                'time_available_to',
+            ),
+            Fieldset(
+                'Date',
+                HTML("""
+                    <div class="alert alert-info" role="alert">
+                      Only enter these if task is a once-off
+                    </div>
+                """),
+                'date_available',
+                'date_available_to',
+            ),
+            Fieldset(
+                '',
+                ButtonHolder(
+                    Submit('submit', 'Submit',),
+                ),
             )
         )
 
-
+        self.helper['points_reward'].wrap(Field, placeholder="100")
         self.helper['time_available_from'].wrap(Field, placeholder="00:00:00")
         self.helper['time_available_to'].wrap(Field, placeholder="00:00:00")
         self.helper['date_available'].wrap(Field, placeholder="yyyy-mm-dd")

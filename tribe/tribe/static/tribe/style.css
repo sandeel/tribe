@@ -9,6 +9,14 @@ html, body {
     height: 100%;
 }
 
+fieldset {
+    margin: 40px;
+    }
+fieldset legend {
+}
+fieldset div {
+}
+
 h1 {
     color: black;
     font-size: 500%;

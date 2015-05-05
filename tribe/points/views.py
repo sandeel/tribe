@@ -79,6 +79,12 @@ class TaskUpdate(UpdateView):
     def dispatch(self, *args, **kwargs):
         return super(TaskUpdate, self).dispatch(*args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+            context = super(TaskUpdate, self).get_context_data(**kwargs)
+            context['form'].fields['category'].queryset = Category.objects.filter(tribe=self.request.user.tribe)
+            context['form'].fields['assigned_users'].queryset = TribeUser.objects.filter(tribe=self.request.user.tribe)
+            return context
+
 class TaskList(ListView):
     model = Task
     template_name = "points/task_list.html"
