@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<h1>task: {{ object.name }}</h1>
+<h2>task: {{ object.name }}</h2>
 
-<div name="buttons">
+<div class="bg-info">
 {% if user.is_leader %}
     <a href="/mytribe/tasks/{{object.id}}/update">
         <button type="button" class="btn btn-default">
