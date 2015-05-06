@@ -2,40 +2,43 @@
 
 {% block content %}
 
-<div class="row">
-
-    <h1>{{ user.tribe.name }}</h2>
+    <h1>{{ user.tribe.name }}</h1>
 
 {% if user.is_leader %}
+<div class="bg-info">
       <a href="/mytribe/update"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Edit your tribe</button></a>
       <a href="/mytribe/invite_tribe_members"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Invite new members</button></a>
 </div>
 
-<hr />
 
 
 {% endif %}
 
+<hr />
 
-    <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-body">
+<table class="table">
+      <caption>Tribe members</caption>
+      <tbody>
+
             {% for u in user.tribe.members.all %}
+        <tr>
+          <td>
             <a href='/mytribe/{{ u.id }}/'>
-                <div class="panel panel-default">
-                  <div class="panel-body" style="font-size: 40px">
-                    {% if u.name %}{{u.name}}{% else %}{{ u.email }}{%endif%}
-                    {% if u.image %}
-                    <img src="/{{ u.image.url }}" style="width: 33%; float: right">
-                    {% endif %}
-                  </div>
-                </div>
+              <strong>{% if u.name %}{{u.name}}{% else %}{{ u.email }}{%endif%}</strong>
             </a>
+          </td>
+                    <td>
+                    {% if u.image %}
+            <a href='/mytribe/{{ u.id }}/'>
+                    <img src="/{{ u.image.url }}" style="width: 33%; float: right">
+            </a>
+                    {% endif %}
+                    </td>
+        </tr>
             {% endfor %}
-          </div>
-        </div>
-    </div>
 
+      </tbody>
+    </table>
 
     {% if user.is_leader %}
 

@@ -9,6 +9,10 @@ html, body {
     height: 100%;
 }
 
+.bg-info {
+  padding: 15px;
+}
+
 fieldset {
     margin: 40px;
     }
