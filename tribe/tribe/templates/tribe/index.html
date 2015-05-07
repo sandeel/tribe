@@ -26,37 +26,40 @@
 
     </div>
 
+    <div class="row">
         <hr class="featurette-divider">
-        <!-- First Featurette -->
-        <div class="featurette" id="about">
-            <img class="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/500x500">
-            <h2 class="featurette-heading">This First Heading
-                <span class="text-muted">Will Catch Your Eye</span>
 
+        {% load staticfiles %}
+
+        <!-- First Featurette -->
+        <div class="featurette" id="about" style="height: 500px">
+            <img class="featurette-image img-circle img-responsive pull-right" src="{% static "tribe/featurette_2.png" %}">
+            <h2 class="featurette-heading">Efficient families
+                <span class="text-muted">Look no further</span>
             </h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <p class="lead">Tribe makes getting things done fun.</p>
         </div>
 
         <hr class="featurette-divider">
 
         <!-- Second Featurette -->
-        <div class="featurette" id="services">
-            <img class="featurette-image img-circle img-responsive pull-left" src="http://placehold.it/500x500">
-            <h2 class="featurette-heading">The Second Heading
-                <span class="text-muted">Is Pretty Cool Too.</span>
+        <div class="featurette" id="services" style="height: 500px">
+            <img class="featurette-image img-circle img-responsive pull-left" src="{% static "tribe/featurette_1.png" %}">
+            <h2 class="featurette-heading">Spend time together
+                <span class="text-muted">And get rewarded for it!</span>
             </h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <p class="lead">Intuitive tasks and points system.</p>
         </div>
 
         <hr class="featurette-divider">
 
         <!-- Third Featurette -->
-        <div class="featurette" id="contact">
-            <img class="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/500x500">
-            <h2 class="featurette-heading">The Third Heading
-                <span class="text-muted">Will Seal the Deal.</span>
+        <div class="featurette" id="contact" style="height: 500px">
+            <img class="featurette-image img-circle img-responsive pull-right" src="{% static "tribe/featurette_3.png" %}">
+            <h2 class="featurette-heading">Total control
+                <span class="text-muted">of your data.</span>
             </h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <p class="lead">REST API gives total freedom of how you use your data.</p>
         </div>
 
         <hr class="featurette-divider">
@@ -65,10 +68,12 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; x11105089 2015</p>
                 </div>
             </div>
         </footer>
+
+    </div> <!-- row -->
 
     </div>
     <!-- /.container -->
