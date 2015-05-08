@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='tribeuser',
             name='image',
-            field=models.ImageField(null=True, upload_to=tribe.models.get_image_path, blank=True),
+            field=models.ImageField(null=True, upload_to="", blank=True),
             preserve_default=True,
         ),
     ]
