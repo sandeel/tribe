@@ -52,6 +52,7 @@ class TaskTests(TestCase):
 
         todays_date = timezone.now().date()
         task = Task()
+        task.date_available = (todays_date - timezone.timedelta(days=7))
 
         assert(not task.checkIfAvailable(todays_date))
 
@@ -64,6 +65,13 @@ class TaskTests(TestCase):
 
         task = Task()
 
+        task.monday=False
+        task.tuesday=False
+        task.wednesday=False
+        task.thursday=False
+        task.friday=False
+        task.saturday=False
+        task.sunday=False
         assert(not task.checkIfAvailable(todays_date))
 
         task.monday=True
@@ -73,7 +81,6 @@ class TaskTests(TestCase):
         task.friday=True
         task.saturday=True
         task.sunday=True
-
         assert(task.checkIfAvailable(todays_date))
 
     def test_has_been_checked_in_on(self):
