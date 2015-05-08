@@ -1,4 +1,5 @@
-# Overview
+Overview
+========
 
 Tribe is an application for efficient families.
 
@@ -27,9 +28,11 @@ Encourage the family to spend time together and co-operate.
 Give a sense of satisfaction and joint achievement and add a fun element to day-to-day tasks.
 
 
+\pagebreak
 
 
-# Requirements spec
+Requirements Specification
+=================
 
 ## Overview of the application
 
@@ -82,196 +85,149 @@ Tribe provides several categories by default:
 * Learning and School
 
 
+\pagebreak
+
+
+## Use Case diagram
+
+**Tribe Leader**: This is usually a parent but can be any tribe member (eg. babysitter)  
+**Tribe Member**: Any member of the family/tribe who has signed up  
+**Admin**: The administrator of a Tribe instance (server, database administrator etc.)
+
+![Use Case diagram from https://www.draw.io/](use_case_diagram.png)
+
+
+\pagebreak
 
 ## User Stories
 
-
-### Roles
-
-**Tribe Leader**: This is usually a parent but can be any tribe member (eg. babysitter)
-
-**Tribe Member**: Any member of the family/tribe who has signed up
-
+**As a new user I want to read information about Tribe as I am thinking about signing up**
 
 ***
 
 
-**As a new user I want to sign up to Tribe because I want to get my family to do some work.**
+**User Story: As a new user I want to sign up to Tribe so that I can organise my family or because I have been invited to an existing Tribe**
 
-The user enters
+Data required:
 
-* email
+* email address
+* name
 * family name
 * password
 
 
-***
+**User Story: As a Tribe Leader I want to add my family members to the tribe because I want to have my whole family set up using Tribe**
+
+Data required:
+
+* email address
 
 
-**As a tribe leader I want to add my family members to the tribe because I want to have my whole family set up using Tribe**
-
-Data entered
-
-* name
-* email
-* password
-
-
-***
-
-
-**As a tribe member I want to sign in so I can use features of Tribe**
-
-User needs to enter
+**User Story: As a Tribe Member I want to sign in so I can use features of Tribe**
 
 * email
 * password
 
 
-***
 
-
-**As a tribe member I want to edit my profile because I want to add details about myself and choose a picture.**
+**As a Tribe Member I want to edit my profile because I want to add details about myself and choose a picture.**
 
 * name
-* picture (upload or choose an icon)
+* image
 
 
 ***
 
 
-**As a tribe leader I want to add a task because I have thought of a new task that needs doing.**
-
-The tribe leader enters
+**As a Tribe Leader I want to add, edit, or delete a task because I have thought of a new task that needs to be done or one that needs to be changed**
 
 * task name
 * description
 * task category
-* location
-* recurring strategy (including once-off)
 * number of points rewarded for completing the task
+* availability details
+* assigned Tribe Members
+
+
+***
+
+**As a Tribe Member I want to see a list of tasks currently avalable to me because I want to earn points**
+
+* task details
+* points reward
+
+***
+
+**As a Tribe Member I want to mark a task as done because I have completed a task and want to earn points for it.**
 
 
 ***
 
 
-**As a tribe leader I want to edit a task which has already been created because an element of the task has changed or was entered incorrectly.**
+**As a Tribe Member I want to see the number of points my tribe has accumulated this week because I want to see how close we are to winning a reward.**
 
-All elements of a task are editable via a form.
+
+***
+
+**As a Tribe Member I want to see the number of points my tribe has accumulated overall for motivation**
 
 
 ***
 
 
-**As a tribe leader I want to delete a task because I've decided this task should no longer be in the system or it doesn't need doing anymore.**
-
-The user should be asked to confirm they want to delete the task completely.
+**As a Tribe Member I want to see how many points the tribe has accumulated on a per-day basis because I want to see which days we are better on**
 
 
 ***
 
 
-**As a tribe member I want to see the number of points my tribe has accumulated this week because I want to see how close we are to winning a reward.**
+**As a Tribe Leader I want to create, edit or delete a reward which can be won by Tribe Members because I want to create incentives**
 
-The points are displayed on a graph showing how close tribe is to the next reward and what the reward is for each family member.
+* reward name
+* image
+* optional description
+
+
+***
+
+**As a Tribe Leader I want to create a new Category or edit existing Categories because I want points to control how points are tracked.**
+
+* name
+* optional description
 
 
 ***
 
 
-**As a tribe member I want to see a graph of how many points the tribe has accumulated on a per-week and category basis so far because I want to see if we are making an improvement or disprovement**
+**As a Tribe Member I want to view my or another Tribe Member's profile because I want to see how they are doing and see what Rewards they have gained**
 
-Points are displayed on a graph showing weekly totals. Task categories can be toggled on and off.
-
-
-***
-
-
-**As a tribe leader I want to create, edit or delete a reward which can be won by tribe members because I want to select this as a reward for a tribe member at a points level**
-
-Details entered are
-
-* Reward name
-* Icon image (upload or select from a selection)
-* Optional description
+* name
+* stats on points and tasks
+* rewards gained
 
 
 ***
 
 
-**As a tribe leader I want to set the rewards for a given week for each level because I want to decide what each tribe member will receive when the points are achieved.**
-
-The rewards for each tribe member at a specific level are entered.
+**As a Tribe Member or Tribe Leader I want to be able to do all of the above using the REST API to allow for new clients and flexibility**
 
 
 ***
 
 
-**As a tribe member I want to mark a task as done because I have completed a task and want to earn points for it.**
-
-This means the task has been done in real life and is ready for checking by a tribe leader.
+**As an Admin of Tribe I want to be able to modify any of the above entities using an administration interface**
 
 
 ***
 
+\pagebreak
 
-**As a tribe leader I want to create a new task category or edit existing categories because I want points to control how points are tracked.**
+## Entity Relationship diagram
 
-* Category name
-* Optional description
-* Colour
-* Icon (upload or select)
+![Entity Relationship diagram crated using Graphviz http://www.graphviz.org/](entity_relationship_diagram.png)
 
 
-***
-
-
-**As a tribe member I want to view the current rewards levels because I want to see how many points are needed for each.**
-
-
-***
-
-
-**As a tribe leader I want to edit the current reward levels so that they are appropriate to the level of points the family can earn.**
-
-Each level required points are editable.
-
-
-***
-
-
-**As a tribe leader I want to create or edit an achievement to encourage the family to win more points.**
-
-Data entered:
-
-* Achievement name
-* Task(s) related to the achievement
-* Pattern required to achieve (eg. "10 in a row")
-* Points awarded when this achievement is earned
-
-
-***
-
-
-**As a tribe member I want to view my or another tribe member's profile because I want to see how they are doing and see what achievements they have gained**
-
-Profile page shows
-
-* Tribe member's name
-* Stats on points and tasks
-* Achievements gained
-
-
-***
-
-
-**As a tribe leader I want to see what rewards are owed to a tribe member in real life and mark them as complete once they have been awarded in real life**
-
-The rewards which are owed to which tribe member are visible and marked as pending or complete (meaning the reward has been physically given to the tribe member).
-
-## REST API
-...
-
+\pagebreak
 
 
 # Technical Report
