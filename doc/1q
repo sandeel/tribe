@@ -451,7 +451,7 @@ Then to run the development server for testing:
 * Researched the HTTPie tool https://github.com/jakubroztocil/httpie as a means of testing my REST API
 
 
-### Sprint 1: Users and Tribes (28th Dec 2014 - 11th Jan 2015)
+### Sprint 1 "Users and Tribes" (28th Dec 2014 - 11th Jan 2015)
 
 
 2014-12-28
@@ -505,7 +505,7 @@ Then to run the development server for testing:
 
 
 
-### Sprint 2: Tasks and Categories (12th Jan 2015 - 25th Jan 2015)
+## Sprint 2 (12th Jan 2015 - 25th Jan 2015)
 
 
 2015-01-12
@@ -550,8 +550,7 @@ Then to run the development server for testing:
 * Started refactoring the code so that the forms use the app's own API
 
 
-
-### Sprint 3: Task Completion (26th Jan 2015 - 08th Feb 2015)
+## Sprint 3 (26th Jan 2015 - 08th Feb 2015)
 
 2015-01-26
 
@@ -602,7 +601,7 @@ Then to run the development server for testing:
 * Added a collapsible navigation sidebar to the site. Ensured it also works on mobile
 
 
-### Sprint 4: Points System (10th February - 22nd February 2015)
+## Sprint 4 "Points" (10th February - 22nd February 2015)
 
 2015-02-17
 
@@ -611,7 +610,7 @@ tests for these)
 * Created a display for these points on a per-day basis on the points page
 
 
-### Sprint 5 "Rewards"
+## Sprint 5 "Rewards"
 
 2015-02-24
 * Created a model for a reward

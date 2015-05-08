@@ -451,7 +451,7 @@ Then to run the development server for testing:
 * Researched the HTTPie tool https://github.com/jakubroztocil/httpie as a means of testing my REST API
 
 
-### Sprint 1: Users and Tribes (28th Dec 2014 - 11th Jan 2015)
+### Sprint 1 "Users and Tribes"
 
 
 2014-12-28
@@ -505,113 +505,95 @@ Then to run the development server for testing:
 
 
 
-### Sprint 2: Tasks and Categories (12th Jan 2015 - 25th Jan 2015)
+## Sprint 2 (12th Jan 2015 - 25th Jan 2015)
 
 
 2015-01-12
-
-* Added models for Tasks and Categories.
-* Added a view for Task
-
-
-2015-01-14
-
-* Working on the models/database tables for Task
-* Form for new Task
+* Added models for TaskTemplates and Categories.
+* Added a view for viewing Task templates
 
 
 2015-01-14
+* Working on the models/database tables for TaskTemplates
+* Form for new TaskTemplate
 
-* Forms for editing Tasks and viewing details.
+2015-01-14
+* Forms for editing TaskTemplates and viewing details.
 
 
 2015-01-20
-
 * Added models, forms, views etc. for Categories
-* Added some more user stories to Taiga.io project
+* Added some more user stories to [Taiga.io](https://www.taiga.io) project
 * Got most of the user stories laid out in sprints in Taiga.io
 
-
 2015-01-21
-
-* Created an API serializer for Categories
+* Created a serializer for Categories
 * Created API endpoint for creating and viewing categories
 * Wrote tests for creating Categories via API
 
 
 2015-01-22
-
 * Created a serializer for Task
-* Created API endpoints for Task
+* Created API endpoints for task.
+* Need to write tests for this next
 
 
 2015-01-25
-
-* Started refactoring the code so that the forms use the app's own API
-
+* Today I started refactoring the code so that the forms use the app's own API
 
 
-### Sprint 3: Task Completion (26th Jan 2015 - 08th Feb 2015)
+
+## Sprint 3 (26th Jan 2015 - 08th Feb 2015)
 
 2015-01-26
-
-* Created CheckIn class.
+* Created CheckIn class. There will now be no TaskTemplate, instead the Task will be a monolithic object which has available times and a CheckIn will refer to an instance of marking a task as done. This is to give more flexibility to different types of tasks eg. family dinners.
 
 
 2015-01-28
-
 * Added a "Check In" button to tasks which creates an instance of a check in for a user on that task and awards points. This uses the API in the background.
 
 
 2015-01-31
-
 * Created an approvals system for tribe leaders to approve tasks
-* Started working on some test/example data
-
+* Started working on some test data
 
 2015-02-01
-
-* Wrote several more tests
-
+* Wrote lots of tests today
 
 2015-02-02
-
-* Wrote more tests
-* Investigating and reading about Apache Cordova for mobile app
+* wrote more tests
+* Investigating and reading about Apache Cordova
 * Started working on the mobile app.
-* Researching Ngrok to publicly host the site for the app to communicate with.
+* Using ngrok to publicly host the site for the app to communicate with.
 
 
 2015-02-03
-
 * Working more on the mobile app and working on styling to ensure site looks ok on both mobile and desktop
 * Added basic points calculation for users (done by counting up the points awarded for each checkin which has been approved)
 
-
 2015-02-04
-
 * Redesigned home page and user interface (prototype design for finished product). Started CSS style sheet for site.
 * Changed permissions for some views eg. Task list.
 
 
 2015-02-05
-
 * Investigated continuous integration service Travis CI.
 * Created account with travis and config file to tell it how to test my code
 * Builds passing. Added small button to my project's github page to indicated if builds are passing or not.
 * Added a collapsible navigation sidebar to the site. Ensured it also works on mobile
 
 
-### Sprint 4: Points System (10th February - 22nd February 2015)
+## Sprint 4 "Points"
+10th February - 22nd February 2015
+
 
 2015-02-17
-
 * Created calculation methods for total points for a Tribe. (still need to write
 tests for these)
 * Created a display for these points on a per-day basis on the points page
 
 
-### Sprint 5 "Rewards"
+## Sprint 5 "Rewards"
 
 2015-02-24
 * Created a model for a reward
