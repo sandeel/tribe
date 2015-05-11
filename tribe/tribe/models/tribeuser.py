@@ -1,10 +1,12 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import (
     AbstractBaseUser, PermissionsMixin
 )
 from tribe.models.tribeusermanager import TribeUserManager
 from tribe.models.tribe import Tribe
 from tribe.models.inviteduser import InvitedUser
+from points.models import Approval
 
 class TribeUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(

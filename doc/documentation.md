@@ -5,12 +5,12 @@ Tribe is an application for efficient families.
 
 Each member of the family uses Tribe. Family members complete daily tasks to earn points which unlock rewards. 
 
-## The Problem Tribe solves
+## The Problem
 * Kids need motivation to do homework and do tasks like cleaning their bedrooms
 * Families are busy and find it hard to keep track of what other family members are doing and when
 * Family members spend their days in different locations
 
-## Aims of Tribe
+## Aims
 
 **Motivation**
 Create motivation for family members to work together on completing day-to-day tasks.
@@ -238,15 +238,194 @@ Data required:
 
 \pagebreak
 
+# User Manual
+
+## Web interface
+
+### Registration
+
+![The home page](screenshots/register_1.png)
+
+When first accessing the web interface, the user will be presented with the home
+page. Scrolling down here will give an overview of the application so the user
+can decide if they want to sign up.
+
+![Promotional information on the home page](screenshots/register_4.png)
+
+To register as a new user, click the register button. This will present the
+registration page.
+
+![Register button](screenshots/register_5.png)
+
+Fill in the required information on the registration page. You will need to 
+enter an email address, name and password.
+
+![Registration page](screenshots/register_2.png)
+
+If any of the information is invalid
+the user interface will alert you and not allow you to progress.
+
+![Invalid data entered](screenshots/register_6.png)
+
+You will then be prompted to enter the name of your "tribe" (family or group).
+
+![Naming your tribe](screenshots/register_3.png)
+
+You will then be shown the Tribe page with a list of Tribe members.
+
+![Tribe page](screenshots/tribe-overview.png)
+
+
+#### Inviting new Tribe Members
+
+Click the "Invite new members" button.
+
+
+Enter the email addresses of family members here. They will be displayed as pending under Invitees. When they register an account they are added to your Tribe and removed from Invitees.
+
+![Inviting new Tribe Members](screenshots/inviting.png)
+
+#### User Profiles
+
+To view details about a Tribe Member click their name or image on the Tribe page.
+
+![A Tribe Member Profile](screenshots/profile.png)
+
+To edit a profile, click on the Edit button.
+
+![Editing a Profile](screenshots/edit-profile.png)
+
+
+
+
+## Mobile App
+## REST API
+
+
+
 
 # Technical Report
+
+## Python
+
+Tribe was developed in the Python language. I found that the Python language had good documentation available online such as this comprehensive tutorial: http://learnpythonthehardway.org/. I found that syntax for Python was quite similiar to Java which I had studied on my course.
+
+## Django
+
+Django was the MVC web framework which I used. I found Django was similiar to Ruby in Rails which I had also studied.
+
+Django provides an ORM - Object Relational Mapper, which is used to store Python objects (models) in the database. A sample model from my project looks like as follows:
+
+
+    class Task(models.Model):
+
+        def __str__(self):
+            return self.name
+
+        name = models.CharField(max_length=200)
+        category = models.ForeignKey(Category)
+        tribe = models.ForeignKey('tribe.Tribe', related_name="tasks", null=True)
+        description = models.CharField(max_length=200)
+        points_reward = models.IntegerField()
+        assigned_users = models.ManyToManyField(
+                                            'tribe.TribeUser',
+                                            related_name="tasks",
+                                            blank=True,
+                                            )
+
+        #Available days
+        monday = models.BooleanField(default=True)
+        tuesday = models.BooleanField(default=True)
+        wednesday = models.BooleanField(default=True)
+        thursday = models.BooleanField(default=True)
+        friday = models.BooleanField(default=True)
+        saturday = models.BooleanField(default=True)
+        sunday = models.BooleanField(default=True)
+
+        #Available from/to
+        time_available_from = models.TimeField(null=True, blank=True)
+        time_available_to = models.TimeField(null=True, blank=True)
+
+        #Available date
+        date_available = models.DateField(null=True, blank=True)
+        date_available_to = models.DateField(null=True, blank=True)
+
+        @property
+        def available_now(self):
+            return self.checkIfAvailable(datetime.datetime.today().date())
+
+        def available_to(self, user):
+            # if no assigned users assume available to all
+            if (not self.assigned_users.exists()):
+                return True
+
+            # if in assigned users it's available
+            if (self.assigned_users.filter(id=user.id).exists()):
+                return True
+
+            return False
+
+        def checkIfAvailable(self,date):
+
+            # if already completed
+            if CheckIn.objects.filter(task=self):
+                return False
+
+            if self.date_available:
+                if self.date_available_to:
+                    if self.date_available <= date <= self.date_available_to:
+                        return True
+                    else:
+                        return False
+                elif self.date_available != date:
+                    return False
+                ## check time
+                return True
+
+            # below happens if no date_available set
+            day_of_week_of_date=date.weekday()
+            
+            days = {
+                0: self.monday,
+                1: self.tuesday,
+                2: self.wednesday,
+                3: self.thursday,
+                4: self.friday,
+                5: self.saturday,
+                6: self.sunday,
+            }
+
+            if days[day_of_week_of_date] == True:
+                return True
+
+            return False
+
+        @property
+        def has_been_checked_in_on(self):
+
+            if self.checkins.all():
+                return True
+
+            return False
+
+        @property
+        def days_remaining(self):
+            if self.date_available_to:
+                td = self.date_available_to - datetime.datetime.now().date()
+                return td
+                
+The Fields are mapped to rows in the database and metadata such as `max_length` can be added.
 
 ## Source Control
 **Git** was used for source/version control. This allowed me to keep track of changes and roll back if necessary.
 
 **Github** (https://github.com/) was used to store my Git repository. Github offers
-up to five free private repositories to students through the Student Developer Pack.. I was able to sign up to the
+up to five free private repositories to students through the Student Developer Pack. I was able to sign up to the
 programme using my NCI email address: https://education.github.com/pack
+
+Most students will be familiar with Github however during the course if this project I learned about some extra features it has in terms of graphing and statistics. One that I found interesting was the Punch Card which shows on what days you push the most commits. As I'm a part-time student the majority of my commits were weekends and evenings.
+
+![Github Punch Card for my project](screenshots/github_punchcard.png)
 
 ## AGILE/SCRUM
 I used an Agile development process to manage my project. After my requirements document was completed I divided the User Stories into Sprints. I then mapped out each Sprint using online Scrumboard Taiga.io (https://taiga.io/).
@@ -407,20 +586,17 @@ are working together on a single codebase.
 
 ## Deployment
 
------ why was do chosen
+To deploy my application to cloud hosting I considered both Amazon EC2 and Digital Ocean. I had used both of these services on previous projects.
 
-I needed to install git to clone my repository. This was done using Ubuntu's
-apt-get package manager:
+Amazon EC2 provides a lot more flexibility than Digital Ocean. However it is also overwhelming as there are a lot of settings per server. EC2's billing is also slightly confusing as it is pay-per-use.
+
+Digital Ocean offers a more simplified billing system and also has a simple set-up process. I decided to go with Digital Ocean for this reason and because I was happy with the service on previous projects.
+
+I deployed to my Digital Ocean droplet using Git.
 
     apt-get update
     apt-get install git
-    
-I then cloned my repository:
-
     git clone https://github.com/sandeel/tribe.git
-
-And changed into the directory for the Django project
-
     cd tribe/tribe
 
 To install the python libraries needed, I first had to install Python's package
@@ -432,7 +608,7 @@ And some Python development libraries:
 
     apt-get install python-dev
 
-The requirements are stored in a text file called requirements.txt. PIP can parse
+I stored all additional requirements for the project in a text file called requirements.txt. PIP can parse
 through this file and install all the dependencies:
 
     pip install -r requirements.txt
@@ -440,6 +616,8 @@ through this file and install all the dependencies:
 Then to run the development server for testing:
 
     python manage.py runserver 0.0.0.0:8000
+    
+My project is available at the url http://46.101.10.24/
 
 
 ## Timeline
@@ -771,47 +949,5 @@ of a Python fake data generator which creates random users, tasks and rewards.
 * Finalising documentation
 * Trying out designs for the poster
 
-
-
-# User Manual
-
-## Web interface
-
-### Registration
-
-![The home page](screenshots/register_1.png)
-
-When first accessing the web interface, the user will be presented with the home
-page. Scrolling down here will give an overview of the application so the user
-can decide if they want to sign up.
-
-![Promotional information on the home page](screenshots/register_4.png)
-
-To register as a new user, click the register button. This will present the
-registration page.
-
-![Register button](screenshots/register_5.png)
-
-Fill in the required information on the registration page. You will need to 
-enter an email address, name and password.
-
-![Registration page](screenshots/register_2.png)
-
-If any of the information is invalid
-the user interface will alert you and not allow you to progress.
-
-![Invalid data entered](screenshots/register_6.png)
-
-You will then be prompted to enter the name of your "tribe" (family or group).
-
-![Naming your tribe](screenshots/register_3.png)
-
-
-
-
-
-
-## Mobile App
-## REST API
 
 
