@@ -34,11 +34,13 @@ Give a sense of satisfaction and joint achievement and add a fun element to day-
 Requirements Specification
 =================
 
-## Overview of the application
+## Overview
 
-Each member of the family who is signed up to Tribe becomes a "tribe member".
+### Roles
 
-A parent, (or both parents, or even an older child or child minder) becomes the "tribe leader".
+Each member of the family who is signed up to Tribe becomes a "Tribe Member".
+
+A parent, (or both parents, or an older child or child minder) becomes the "Tribe Leader".
 
 ### Tasks
 
@@ -51,22 +53,31 @@ Tribe members complete tasks, and mark them as "done" using either the web inter
 
 ### Points
 
-A Tribe Leader confirms that the task has been done and the points are awarded to the Tribe as a whole.
+A Tribe Leader confirms that the task has been done and the points are awarded to the Tribe.
 
-The accumulated points are visible to all tribe members.
+The accumulated points are visible to all Tribe Members.
 
 
 ### Rewards
 
-If the tribe scores enough points in a given week, rewards are unlocked. Rewards are in "levels" eg., the Level 1 rewards might be unlocked after 100 points, Level 2 after 200, and so on.
+If the Tribe scores enough points in a given week, Rewards are achieved.
 
-Rewards are set by a tribe leader, and are specific to tribe members. For example, for parents the Level 1 reward might be a bottle of wine or cinema trip. For the older kids, the equivalent reward might be pocket money or phone top-up. For the youngest kid, it might be sweets. It is up to the tribe leader to ensure the rewards are roughly equal in value. All tribe members can view what rewards (for both themselves and other tribe members) are available for each level on a given week.
+Rewards are set by a Tribe Leader, and are specific to Tribe Members. For example, for parents a reward might be a bottle of wine or cinema trip. For the older kids, the equivalent reward might be pocket money or phone top-up. For the youngest kid, it might be sweets.  All Tribe members can view what Rewards (for both themselves and other Tribe Members) are available.
 
 Tribe has a selection of default rewards to choose from, however the Tribe leaders have the option to customise the rewards.
 
-Sample rewards for kids are
+Sample rewards are
 
-* amounts of pocket money (a multiplier system is available to award appropriate levels of pocket money based on the kids' ages)
+* Breakfast in bed
+* 1 hour Playstation                                                                                                                                                                          
+* Trip to cinema
+* Game of Golf with Dad
+* Shopping with Mum
+* Day off chores
+* Swimming
+* Trip to Zoo
+* museum visit 
+* amounts of pocket money
 * phone top-up credit
 * presents (eg. a toy, new phone)
 
@@ -82,20 +93,13 @@ Tribe provides several categories by default:
 * Diet
 * Fitness
 * Pets
-* Learning and School
-
+* School
 
 \pagebreak
 
+## Entity Relationship diagram
 
-## Use Case diagram
-
-**Tribe Leader**: This is usually a parent but can be any tribe member (eg. babysitter)  
-**Tribe Member**: Any member of the family/tribe who has signed up  
-**Admin**: The administrator of a Tribe instance (server, database administrator etc.)
-
-![Use Case diagram from https://www.draw.io/](use_case_diagram.png)
-
+![Entity Relationship diagram crated using Graphviz http://www.graphviz.org/](entity_relationship_diagram.png)
 
 \pagebreak
 
@@ -222,9 +226,14 @@ Data required:
 
 \pagebreak
 
-## Entity Relationship diagram
 
-![Entity Relationship diagram crated using Graphviz http://www.graphviz.org/](entity_relationship_diagram.png)
+## Use Case diagram
+
+**Tribe Leader**: This is usually a parent but can be any tribe member (eg. babysitter)  
+**Tribe Member**: Any member of the family/tribe who has signed up  
+**Admin**: The administrator of a Tribe instance (server, database administrator etc.)
+
+![Use Case diagram from https://www.draw.io/](use_case_diagram.png)
 
 
 \pagebreak
@@ -233,28 +242,104 @@ Data required:
 # Technical Report
 
 ## Source Control
+**Git** was used for source/version control. This allowed me to keep track of changes and roll back if necessary.
 
-## Agile
-### Taiga.io
+**Github** (https://github.com/) was used to store my Git repository. Github offers
+up to five free private repositories to students through the Student Developer Pack.. I was able to sign up to the
+programme using my NCI email address: https://education.github.com/pack
+
+## AGILE/SCRUM
+I used an Agile development process to manage my project. After my requirements document was completed I divided the User Stories into Sprints. I then mapped out each Sprint using online Scrumboard Taiga.io (https://taiga.io/).
+
+In my opinion using an AGILE development process was very beneficial. It allowed me to keep track of what elements still needed to be coded and also that I kept on track to complete the project on time. I found Taiga.io was very user friendly and allowed me to visualise my progress and also to quickly add or amend tasks ang User Stories. I would highly recommend Taiga to other students who are using SCRUM.
+
+![Taiga.io Scrumboard](screenshots/taiga.png)
 
 ## Testing
-### My tests
-...
+### Unit Tests
+
+I wrote Unit Tests for each of my classes. After changing a signficant part of the codebase I ran the unit tests to see if anything had been broken.
+
+Unit tests comprised of a significant amount of code and were time-consuming to write, however I think they were of benefit in the long run. As the application became more complex the tests ensured that individual elements still functioned correctly.
+
+An example of unit tests testing individual methods of a class:
+    
+    def test_check_if_available_by_date(self):
+        """
+        Ensure Tasks only available on date set
+        """
+        task = Task()
+
+        todays_date = timezone.now().date()
+        some_day_last_week = (todays_date - timezone.timedelta(days=7))
+
+        task.date_available = some_day_last_week
+        assert(not task.checkIfAvailable(todays_date))
+
+        task.date_available=todays_date
+        assert(task.checkIfAvailable(todays_date))
+
+    def test_check_if_available_by_day_of_week(self):
+        """
+        Ensure Tasks only available on the days of week set
+        """
+        task = Task()
+
+        todays_date = timezone.now().date()
+
+        task.monday=False
+        task.tuesday=False
+        task.wednesday=False
+        task.thursday=False
+        task.friday=False
+        task.saturday=False
+        task.sunday=False
+        assert(not task.checkIfAvailable(todays_date))
+
+        task.monday=True
+        task.tuesday=True
+        task.wednesday=True
+        task.thursday=True
+        task.friday=True
+        task.saturday=True
+        task.sunday=True
+        assert(task.checkIfAvailable(todays_date))
+        
+I also wrote tests to ensure my REST API was returning the expected data. Example:
+    
+    def test_create_task_via_api(self):
+        """
+        Ensure we can create a new task object via API
+        """
+        url = reverse('task-list')
+        self.client.login(email=self.user.email, password='password')
+        response = self.client.post(url, self.data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        """
+        Ensure redirects to login when not authenticated
+        """
+        self.client.logout()
+        response = self.client.post(url, self.data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+
 
 ### Continuous Integration
 
-Travis CI was used.
+As well as manually running my Unit Tests, I also researched Continuous Integration. Continuous Integration refers to a system of automatically running tests aftir code is committed to ensure the build has not been broken.
 
-https://travis-ci.com/
-
-Travis CI is a web service which links to a Github account to provide continuous
+Travis CI (https://travis-ci.com/) was used for Continuous Integration on my project. Travis CI is a web service which links to a Github account to provide continuous
 integration. Travis CI is notified when your Github repository is updated and
 then clones the repository and runs the instructions in the .travis.yml file
 to download the required dependencies and run the tests for
-your application.
+your application. If the build fails the service will notify you via email. It will also email you when the build moves frim being broken to being fixed.
 
-I followed the following steps to set up Travis CI and activate continuous
-integration with my project's repository.
+![Travis CI build broken notification](screenshots/travis_email.png)
+
+Using Travis CI to activate continuous
+integration with my project's repository was not time-consuming and was user-friendly. I would highly recommend this service to other students.
 
 I created a .travis.yml file in my repository's base directory. The travis.yml
 had the following content:
@@ -558,7 +643,8 @@ Then to run the development server for testing:
 * Added a collapsible navigation sidebar to the site. Ensured it also works on mobile
 
 
-### Sprint 4: Points System (10th February - 22nd February 2015)
+### Sprint 4: Points System
+10th February - 22nd February 2015
 
 2015-02-17
 
@@ -570,26 +656,31 @@ tests for these)
 ### Sprint 5 "Rewards"
 
 2015-02-24
-* Created a model for a reward
-* Created serializer for a reward
-* Created views for adding rewards
+
+* Created a model for a Reward
+* Created serializer for a Reward
+* Created views for adding Rewards
 
 2015-02-26
+
 * Created views for editing rewards
 * Researching drawing graphs in HTML5
 * Researching the native Progress element in HTML5
 * Added a basic progress bar for weekly points using bootstrap for the styles
 
 2015-03-10
+
 * Revamped the UI
 
 
 2015-03-11
+
 * Working on rewards and points required for rewards
 * rewards can now be assigned to users
 
 
 2015-03-14
+
 * Changes to the user model. New users now need a Name
 * Added tests to ensure new users have names and get a default tribe created
 * Researched testing JSON responses
@@ -599,11 +690,13 @@ tests for these)
 
 
 2015-03-18
+
 * Researching Django Crispy Forms
 * Designed the login page
 
 
 2015-03-19
+
 * Working on the points page. Now shows the rewards and a users progress towards rewards.
 * Points page now shows points today, this week, and total points.
 * Still working on the script for making fake data. Much more useful now as makes use
@@ -611,52 +704,72 @@ of a Python fake data generator which creates random users, tasks and rewards.
 
 
 2015-03-20
+
 * Working on the user's profile page.
 * Changes to form for editing user.
 
+
 2015-03-22
+
 * Working on progress bars for rewards on the points page.
 
 2015-03-23
+
 * More work on the models for Rewards and Achieved rewards.
 * Points page now shows complete when reward achieved.
 * Achieved rewards now show on the user's homepage
 * Changes to the test data generator
 
 2015-04-16
+
 * uploaded showcase information
 
 2015-04-18
+
 * Worked on getting tests working with Travis-CI
 * Added user photo support
 * Redesigned profile page to allow for photos
 
 2015-04-25
+
 * Styled the sign-up page
 * Added to the script for creating test data
 * Changes to Tribe management
 
 2015-05-02
+
 * Changed some styling
 * Changes to the points page
 
 2015-05-03
-* 
+
+* Working on the look of the site
+* Working on documentation
 
 
 2015-05-05
+
 * Redesigned the tasks page
 * Split tasks out into categories
 * Implemented bootstrap accordion
 
+
 2015-05-06
+
 * Redesigning a lot of the interface
 * Modifying the stylesheets to add colour
 * Working on the documentation
 
 2015-05-07
+
 * Added the promotional text to the homepage
 
+
+2015-05-11
+
+* Testing the mobile interface
+* Finalising documentation
+* Trying out designs for the poster
 
 
 

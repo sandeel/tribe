@@ -49,21 +49,27 @@ class TaskTests(TestCase):
         task = self.task.save()
 
     def test_check_if_available_by_date(self):
+        """
+        Ensure Tasks only available on date set
+        """
+        task = Task()
 
         todays_date = timezone.now().date()
-        task = Task()
-        task.date_available = (todays_date - timezone.timedelta(days=7))
+        some_day_last_week = (todays_date - timezone.timedelta(days=7))
 
+        task.date_available = some_day_last_week
         assert(not task.checkIfAvailable(todays_date))
 
         task.date_available=todays_date
         assert(task.checkIfAvailable(todays_date))
 
     def test_check_if_available_by_day_of_week(self):
-        
-        todays_date = timezone.now().date()
-
+        """
+        Ensure Tasks only available on the days of week set
+        """
         task = Task()
+
+        todays_date = timezone.now().date()
 
         task.monday=False
         task.tuesday=False
