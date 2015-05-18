@@ -1,5 +1,7 @@
 from django.db import models
 from tribe.models.tribemanager import TribeManager
+import datetime
+from points.models import *
 
 class Tribe(models.Model):
     objects = TribeManager()
