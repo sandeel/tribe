@@ -3,3 +3,4 @@ httpie
 django_crispy_forms
 djangorestframework==3.0.1
 pillow==2.7.0
+django-extensions
