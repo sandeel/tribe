@@ -124,7 +124,7 @@ class CheckIn(models.Model):
     task = models.ForeignKey(Task, related_name="checkins")
     date = models.DateTimeField()
     points_awarded = models.IntegerField()
-    approval = models.OneToOneField(Approval, null=True)
+    approval = models.OneToOneField(Approval, null=True, blank=True)
     image = models.ImageField(upload_to="tribe/static/tribe/photos/checkins", blank=True, null=True)
 
     @property

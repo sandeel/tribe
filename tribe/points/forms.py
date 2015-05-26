@@ -22,7 +22,7 @@ class CheckInForm(forms.ModelForm):
             Hidden('task','{{ object.id }}')
         )
 
-        self.helper.add_input(Submit('checkin', 'Check In'))
+        self.helper.add_input(Submit('checkin', 'Complete!'))
         super(CheckInForm, self).__init__(*args, **kwargs)
 
     class Meta:
